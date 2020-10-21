@@ -1,0 +1,2026 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>SQL Server Problemy, Zapytania, Rozwiązania</title>
+    <meta charset="utf-8" />
+    <meta http-equiv="x-ua-compatible" content="ie=edge" />
+    <meta name="viewport" content="width=device-width" />
+    <link href="https://fonts.googleapis.com/css?family=Fira+Sans:400,900&amp;subset=latin-ext" rel="stylesheet" />
+    <!-- Shower Theme -->
+    <link rel="stylesheet" href="vendors/shower-ribbon/styles/screen-16x9.css" />
+    <link rel="stylesheet" href="vendors/shower-CezaryWalenciuk/styles/main.css" />
+    <!-- Prism.js -->
+    <link rel="stylesheet" href="vendors/prism/prism.css" />
+    <link rel="stylesheet" href="vendors/prism/custom-prism.css" />
+    <link rel="stylesheet" href="codegrid.css" />
+</head>
+<body class="shower list">
+    <header class="caption">
+        <h1>SQL Server Szybki trening</h1>
+        <p></p>
+    </header>
+
+    <section class="slide front-page">
+
+        <div class="details">
+            <!-- 1. Avatar -->
+
+
+            <h2>Cezary Walenciuk</h2>
+
+            <!-- 3. Presentation title -->
+            <h2 class="bigbig"><strong style="font-size: 35px;  line-height: 1.3;">
+
+                    <span class="titlec1">SQL Server Problemy, Zapytania, Rozwiązania</span>
+                    <span class=""></span></strong></h2>
+
+
+
+            <!-- 5. Contact the speaker -->
+            <h2><a href="https://twitter.com/WalenciukC">@walenciukC</a></h2>
+        </div>
+        <div>
+
+
+            <!-- 2. Speaker -->
+
+        </div>
+        <div class="imag">
+            <img src="images/my-avatar.jpg" alt="Speaker">
+        </div>
+    </section>
+
+    <section class="slide creamB smaller  compact ">
+        <ol>
+
+            <li class="next">Na rozluźnienie jeszcze raz o SELECT</li>
+            <li class="next">Window function i słowo kluczowe OVER</li>
+        </ol>
+    </section>
+
+    <section class="slide creamB">
+        <span class="shout colors"><span>6. Zaawansowana Zapytania SELECT
+        </span></span>
+    </section>
+
+    <section class="slide prism over bhgry">
+        <div class="grid-container">
+            <div class="HeaderTitle"> 
+                <h2 class="headerCODE">6-1 Pobierz mi pierwsze 10 rekordów unikatowych</h2>
+            </div>
+            <div class="PlaceCodeHere">
+                <pre style="font-size: 45px;overflow: hidden;  " class="language-sql">
+                    <code style="line-height: 45px !important;">
+                        SELECT DISTINCT TOP (10) HireDate
+                        FROM HumanResources.Employee
+                        ORDER BY HireDate;
+                    </code>
+                </pre>
+            </div>
+            <div class="AnswerCode">
+                <div class="pytanie">
+                    <h3></h3>
+                </div>
+                <div class="odpowiedz">
+                    
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="slide prism over bhgry">
+        <div class="grid-container">
+            <div class="HeaderTitle"> 
+                <h2 class="headerCODE">6-1 </h2>
+            </div>
+            <div class="PlaceCodeHere">
+                <pre style="font-size: 45px;overflow: hidden;  " class="language-sql">
+                    <code style="line-height: 45px !important;">
+                        SELECT TOP (5) HireDate
+                        FROM HumanResources.Employee
+                        GROUP BY HireDate
+                        ORDER BY HireDate DESC;
+                    </code>
+                </pre>
+            </div>
+            <div class="AnswerCode">
+                <div class="pytanie">
+                    <h3></h3>
+                </div>
+                <div class="odpowiedz">
+                    
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="slide prism over bhgry">
+        <div class="grid-container">
+            <div class="HeaderTitle"> 
+                <h2 class="headerCODE">6-1 Zwracanie pierwszych N wartości</h2>
+            </div>
+            <div class="PlaceCodeHere">
+                <pre style="font-size: 31px;overflow: hidden;  " class="language-sql">
+                    <code style="line-height: 40px !important;">
+                        SELECT TOP (5) HireDate
+                        FROM HumanResources.Employee
+                        GROUP BY HireDate
+                        ORDER BY HireDate DESC;
+                    </code>
+                </pre>
+            </div>
+            <div class="AnswerCode">
+                <div class="pytanie">
+                    <h3></h3>
+                </div>
+                <div class="odpowiedz">
+                    
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="slide prism over bhgry">
+        <div class="grid-container">
+            <div class="HeaderTitle"> 
+                <h2 class="headerCODE">6-2 Zmiana nazwy kolumny w wyniku</h2>
+            </div>
+            <div class="PlaceCodeHere">
+                <pre style="font-size: 31px;overflow: hidden;  " class="language-sql">
+                    <code style="line-height: 40px !important;">
+                        SELECT ss.name AS SchemaName,
+                        TableName = st.name,
+                        st.object_id ObjectId
+                        FROM sys.schemas AS ss
+                        JOIN sys.tables st
+                        ON ss.schema_id = st.schema_id
+                        ORDER BY SchemaName, TableName;
+                    </code>
+                </pre>
+            </div>
+            <div class="AnswerCode">
+                <div class="pytanie">
+                    <h3></h3>
+                </div>
+                <div class="odpowiedz">
+                    
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="slide prism over bhgry">
+        <div class="grid-container">
+            <div class="HeaderTitle"> 
+                <h2 class="headerCODE">6-3 Wyświetlenie danych ze zmiennych</h2>
+            </div>
+            <div class="PlaceCodeHere">
+                <pre style="font-size: 31px;overflow: hidden;  " class="language-sql">
+                    <code style="line-height: 40px !important;">
+                        DECLARE @FirstHireDate DATE,
+                        @LastHireDate DATE;
+                        SELECT @FirstHireDate = MIN(HireDate),
+                        @LastHireDate = MAX(HireDate)
+                        FROM HumanResources.Employee;
+                        SELECT @FirstHireDate AS FirstHireDate,
+                        @LastHireDate AS LastHireDate;
+                    </code>
+                </pre>
+            </div>
+            <div class="AnswerCode">
+                <div class="pytanie">
+                    <h3></h3>
+                </div>
+                <div class="odpowiedz">
+                    
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="slide" style="background-color:black">
+        <figure>
+            <img class="cover" src="pictures/select-01.PNG" alt="blog">
+            <figcaption class="white">Copyright © Cezary Walenciuk</figcaption>
+        </figure>
+    </section>
+    <section class="slide prism over bhgry">
+        <div class="grid-container">
+            <div class="HeaderTitle"> 
+                <h2 class="headerCODE">6-5 Tworzenie nowej tabeli z wyniku zapytania</h2>
+            </div>
+            <div class="PlaceCodeHere">
+                <pre style="font-size: 31px;overflow: hidden;  " class="language-sql">
+                    <code style="line-height: 40px !important;">
+                        IF OBJECT_ID('dbo.mySales') 
+                        IS NOT NULL DROP TABLE dbo.mySales;
+
+                        SELECT *
+                        INTO dbo.mySales
+                        FROM Sales.SalesOrderDetail
+                        WHERE ModifiedDate = '2011-06-01T00:00:00.000';
+
+                        SELECT COUNT(*) AS QtyOfRows
+                        FROM dbo.mySales;
+                    </code>
+                </pre>
+            </div>
+            <div class="AnswerCode">
+                <div class="pytanie">
+                    <h3></h3>
+                </div>
+                <div class="odpowiedz">
+                    
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="slide creamB   compact ">
+        <h2>Limity</h2>
+        <ol class="nonumbers">
+            <li class="next">Nie możesz tworzyć nowych tabel w innej instancji serwera</li>
+            <li class="next">Nie możesz tworzyć tak zmiennej tabeli</li>
+            <li class="next">Tylko dane i columny są skopiowane. Indexy,Triggery,Klucze obce nie są skopiowane</li>
+        </ol>
+    </section>
+    <section class="slide creamB   compact ">
+        <h2>Limity</h2>
+        <ol class="nonumbers">
+            <li class="next">Użycie ORDER BY nie gwarantuje skopiowania w tej kolejności</li>
+            <li class="next">Kolumna Computed nie będzie skopiowana jako taka kolumna</li>
+        </ol>
+    </section>
+    <section class="slide prism over bhgry">
+        <div class="grid-container">
+            <div class="HeaderTitle"> 
+                <h2 class="headerCODE">6-6 Filtrowanie rezultatu z podzapytania</h2>
+            </div>
+            <div class="PlaceCodeHere">
+                <pre style="font-size: 35px;overflow: hidden;  " class="language-sql">
+                    <code style="line-height: 44px !important;">
+                        SELECT s.PurchaseOrderNumber
+                        FROM Sales.SalesOrderHeader s
+                        WHERE EXISTS ( SELECT SalesOrderID
+                        FROM Sales.SalesOrderDetail
+                        WHERE UnitPrice BETWEEN 1900 AND 2000
+                        AND SalesOrderID = s.SalesOrderID )
+                        ORDER BY s.PurchaseOrderNumber;
+                    </code>
+                </pre>
+            </div>
+            <div class="AnswerCode">
+                <div class="pytanie">
+                    <h3></h3>
+                </div>
+                <div class="odpowiedz">
+                    
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="slide prism over bhgry">
+        <div class="grid-container">
+            <div class="HeaderTitle"> 
+                <h2 class="headerCODE">6-6-2 Filtrowanie rezultatu z podzapytania</h2>
+            </div>
+            <div class="PlaceCodeHere">
+                <pre style="font-size: 35px;overflow: hidden;  " class="language-sql">
+                    <code style="line-height: 44px !important;">
+                        SELECT DISTINCT sh.PurchaseOrderNumber
+                        FROM Sales.SalesOrderHeader AS sh
+                        JOIN Sales.SalesOrderDetail AS sd
+                        ON sh.SalesOrderID = sd.SalesOrderID
+                        WHERE sd.UnitPrice BETWEEN 1900 AND 2000;
+                    </code>
+                </pre>
+            </div>
+            <div class="AnswerCode">
+                <div class="pytanie">
+                    <h3></h3>
+                </div>
+                <div class="odpowiedz">
+                    
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="slide prism over bhgry">
+        <div class="grid-container">
+            <div class="HeaderTitle"> 
+                <h2 class="headerCODE">6-7 Wybieranie rezultatów z innego zapytania</h2>
+            </div>
+            <div class="PlaceCodeHere">
+                <pre style="font-size: 34px;overflow: hidden;  " class="language-sql">
+                    <code style="line-height: 35px !important;">
+                        SELECT DISTINCT
+                        s.PurchaseOrderNumber
+                        FROM Sales.SalesOrderHeader s
+                        JOIN (SELECT SalesOrderID
+                        FROM Sales.SalesOrderDetail
+                        WHERE UnitPrice BETWEEN 1900 AND 2000
+                        ) dt
+                        ON s.SalesOrderID = dt.SalesOrderID
+                        ORDER BY s.PurchaseOrderNumber;
+                    </code>
+                </pre>
+            </div>
+            <div class="AnswerCode">
+                <div class="pytanie">
+                    <h3></h3>
+                </div>
+                <div class="odpowiedz">
+                    
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="slide prism over bhgry">
+        <div class="grid-container">
+            <div class="HeaderTitle"> 
+                <h2 class="headerCODE">6-8 Wysłanie rekordów do funkcji</h2>
+            </div>
+            <div class="PlaceCodeHere">
+                <pre style="font-size: 19px;overflow: hidden;  " class="language-sql">
+                    <code style="line-height: 19px !important;">
+                        IF OBJECT_ID('dbo.fn_WorkOrderRouting') IS NOT NULL DROP FUNCTION dbo.fn_WorkOrderRouting;
+                        GO
+                        CREATE FUNCTION dbo.fn_WorkOrderRouting (@WorkOrderID INT)
+                            RETURNS TABLE
+                            AS
+                            RETURN
+                            SELECT WorkOrderID,
+                            ProductID,
+                            OperationSequence,
+                            LocationID
+                            FROM Production.WorkOrderRouting
+                            WHERE WorkOrderID = @WorkOrderID;
+                        GO
+
+                        SELECT TOP (5)
+                        w.WorkOrderID,
+                        w.OrderQty,
+                        r.ProductID,
+                        r.OperationSequence
+                        FROM Production.WorkOrder w
+                        CROSS APPLY dbo.fn_WorkOrderRouting(w.WorkOrderID) AS r
+                        ORDER BY w.WorkOrderID,
+                        w.OrderQty,
+                        r.ProductID;
+                    </code>
+                </pre>
+            </div>
+            <div class="AnswerCode">
+                <div class="pytanie">
+                    <h3></h3>
+                </div>
+                <div class="odpowiedz">
+                    
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="slide prism over bhgry">
+        <div class="grid-container">
+            <div class="HeaderTitle"> 
+                <h2 class="headerCODE">6-8 Wysłanie rekordów do funkcji</h2>
+            </div>
+            <div class="PlaceCodeHere">
+                <pre style="font-size: 26px;overflow: hidden;  " class="language-sql">
+                    <code style="line-height: 26px !important;">
+                        INSERT INTO Production.WorkOrder
+                            (ProductID,
+                            OrderQty,
+                            ScrappedQty,
+                            StartDate,
+                            EndDate,
+                            DueDate,
+                            ScrapReasonID,
+                            ModifiedDate)
+                        VALUES (1,
+                        1,
+                        1,
+                        GETDATE(),
+                        GETDATE(),
+                        GETDATE(),
+                        1,
+                        GETDATE());
+                    </code>
+                </pre>
+            </div>
+            <div class="AnswerCode">
+                <div class="pytanie">
+                    <h3></h3>
+                </div>
+                <div class="odpowiedz">
+                    
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="slide prism over bhgry">
+        <div class="grid-container">
+            <div class="HeaderTitle"> 
+                <h2 class="headerCODE">6-8 Wysłanie rekordów do funkcji</h2>
+            </div>
+            <div class="PlaceCodeHere">
+                <pre style="font-size: 26px;overflow: hidden;  " class="language-sql">
+                    <code style="line-height: 29px !important;">
+                        SELECT w.WorkOrderID,
+                        w.OrderQty,
+                        r.ProductID,
+                        r.OperationSequence
+                        FROM Production.WorkOrder AS w
+                        CROSS APPLY dbo.fn_WorkOrderRouting(w.WorkOrderID) AS r
+                        WHERE w.WorkOrderID IN (SELECT MAX(WorkOrderID)
+                        FROM Production.WorkOrder);
+                    </code>
+                </pre>
+            </div>
+            <div class="AnswerCode">
+                <div class="pytanie">
+                    <h3></h3>
+                </div>
+                <div class="odpowiedz">
+                    
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="slide prism over bhgry">
+        <div class="grid-container">
+            <div class="HeaderTitle"> 
+                <h2 class="headerCODE">6-8 Wysłanie rekordów do funkcji</h2>
+            </div>
+            <div class="PlaceCodeHere">
+                <pre style="font-size: 31px;overflow: hidden;  " class="language-sql">
+                    <code style="line-height: 40px !important;">
+                        SELECT w.WorkOrderID,
+                        w.OrderQty,
+                        r.ProductID,
+                        r.OperationSequence
+                        FROM Production.WorkOrder AS w
+                        OUTER APPLY dbo.fn_WorkOrderRouting(w.WorkOrderID) AS r
+                        WHERE w.WorkOrderID IN (SELECT MAX(WorkOrderID)
+                        FROM Production.WorkOrder);
+                    </code>
+                </pre>
+            </div>
+            <div class="AnswerCode">
+                <div class="pytanie">
+                    <h3></h3>
+                </div>
+                <div class="odpowiedz">
+                    
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="slide prism over bhgry">
+        <div class="grid-container">
+            <div class="HeaderTitle"> 
+                <h2 class="headerCODE">6-8 Wysłanie rekordów do funkcji</h2>
+            </div>
+            <div class="PlaceCodeHere">
+                <pre style="font-size: 31px;overflow: hidden;  " class="language-sql">
+                    <code style="line-height: 40px !important;">
+                        SELECT TOP (5)
+                        w.WorkOrderID,
+                        w.OrderQty,
+                        r.ProductID,
+                        r.OperationSequence
+                        FROM Production.WorkOrder w
+                        CROSS APPLY (SELECT WorkOrderID,
+                        ProductID,
+                        OperationSequence,
+                        LocationID
+                        FROM Production.WorkOrderRouting
+                        WHERE WorkOrderID = w.WorkOrderId
+                        ) AS r
+                        ORDER BY w.WorkOrderID,
+                        w.OrderQty,
+                        r.ProductID;
+                    </code>
+                </pre>
+            </div>
+            <div class="AnswerCode">
+                <div class="pytanie">
+                    <h3></h3>
+                </div>
+                <div class="odpowiedz">
+                    
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="slide prism over bhgry">
+        <div class="grid-container">
+            <div class="HeaderTitle"> 
+                <h2 class="headerCODE">6-9 Zwrócenie losowych wierszy z tabeli</h2>
+            </div>
+            <div class="PlaceCodeHere">
+                <pre style="font-size: 31px;overflow: hidden;  " class="language-sql">
+                    <code style="line-height: 40px !important;">
+                        SELECT FirstName,
+                        LastName
+                        FROM Person.Person
+                        TABLESAMPLE SYSTEM (2 PERCENT);
+                    </code>
+                </pre>
+            </div>
+            <div class="AnswerCode">
+                <div class="pytanie">
+                    <h3></h3>
+                </div>
+                <div class="odpowiedz">
+                    
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="slide prism over bhgry">
+        <div class="grid-container">
+            <div class="HeaderTitle"> 
+                <h2 class="headerCODE">6-10 Zmiana wierszy na kolumny</h2>
+            </div>
+            <div class="PlaceCodeHere">
+                <pre style="font-size: 31px;overflow: hidden;  " class="language-sql">
+                    <code style="line-height: 40px !important;">
+                        SELECT s.Name AS ShiftName,
+                        h.BusinessEntityID,
+                        d.Name AS DepartmentName
+                        FROM HumanResources.EmployeeDepartmentHistory h
+                        INNER JOIN HumanResources.Department d
+                        ON h.DepartmentID = d.DepartmentID
+                        INNER JOIN HumanResources.Shift s
+                        ON h.ShiftID = s.ShiftID
+                        WHERE EndDate IS NULL
+                        AND d.Name IN ('Production', 'Engineering', 'Marketing')
+                        ORDER BY ShiftName;
+                    </code>
+                </pre>
+            </div>
+            <div class="AnswerCode">
+                <div class="pytanie">
+                    <h3></h3>
+                </div>
+                <div class="odpowiedz">
+                    
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="slide prism over bhgry">
+        <div class="grid-container">
+            <div class="HeaderTitle"> 
+                <h2 class="headerCODE">6-10-1 Zmiana wierszy na kolumny</h2>
+            </div>
+            <div class="PlaceCodeHere">
+                <pre style="font-size: 31px;overflow: hidden;  " class="language-sql">
+                    <code style="line-height: 40px !important;">
+                        SELECT ShiftName,
+                        Production,
+                        Engineering,
+                        Marketing
+                        FROM (SELECT s.Name AS ShiftName,
+                        h.BusinessEntityID,
+                        d.Name AS DepartmentName
+                        FROM HumanResources.EmployeeDepartmentHistory h
+                        INNER JOIN HumanResources.Department d
+                        ON h.DepartmentID = d.DepartmentID
+                        INNER JOIN HumanResources.Shift s
+                        ON h.ShiftID = s.ShiftID
+                        WHERE EndDate IS NULL
+                        AND d.Name IN ('Production', 'Engineering', 'Marketing')
+                        ) AS a
+                        PIVOT
+                        (
+                        COUNT(BusinessEntityID)
+                        FOR DepartmentName IN ([Production], [Engineering], [Marketing])
+                        ) AS b
+                        ORDER BY ShiftName;
+                    </code>
+                </pre>
+            </div>
+            <div class="AnswerCode">
+                <div class="pytanie">
+                    <h3></h3>
+                </div>
+                <div class="odpowiedz">
+                    
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="slide prism over bhgry">
+        <div class="grid-container">
+            <div class="HeaderTitle"> 
+                <h2 class="headerCODE">6-10-2 Zmiana wierszy na kolumny</h2>
+            </div>
+            <div class="PlaceCodeHere">
+                <pre style="font-size: 31px;overflow: hidden;  " class="language-sql">
+                    <code style="line-height: 40px !important;">
+                        FROM table_source
+                        PIVOT ( aggregate_function ( value_column )
+                        FOR pivot_column
+                        IN ( [column_list])
+                        ) table_alias
+                    </code>
+                </pre>
+            </div>
+            <div class="AnswerCode">
+                <div class="pytanie">
+                    <h3></h3>
+                </div>
+                <div class="odpowiedz">
+                    
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="slide creamB  compact">
+        <h2>Argumenty Pivot</h2>
+        <ol class="nonumbers">
+            <li class="next">table_source:</li>
+            <li class="next">aggregate_function:</li>
+        </ol>
+    </section>
+    <section class="slide creamB  compact">
+        <h2>Argumenty Pivot</h2>
+        <ol class="nonumbers">
+            <li class="next">value_column:</li>
+            <li class="next">pivot_column:</li>
+        </ol>
+    </section>
+    <section class="slide creamB  compact">
+        <h2>Argumenty Pivot</h2>
+        <ol class="nonumbers">
+            <li class="next">column_list:</li>
+            <li class="next">table_alias:</li>
+        </ol>
+    </section>
+    <section class="slide prism over bhgry">
+        <div class="grid-container">
+            <div class="HeaderTitle"> 
+                <h2 class="headerCODE">6-10-3 Zmiana wierszy na kolumny</h2>
+            </div>
+            <div class="PlaceCodeHere">
+                <pre style="font-size: 31px;overflow: hidden;  " class="language-sql">
+                    <code style="line-height: 40px !important;">
+                        SELECT s.Name AS ShiftName,
+                        SUM(CASE WHEN d.Name = 'Production' THEN 1 ELSE 0 END) AS Production,
+                        SUM(CASE WHEN d.Name = 'Engineering' THEN 1 ELSE 0 END) AS Engineering,
+                        SUM(CASE WHEN d.Name = 'Marketing' THEN 1 ELSE 0 END) AS Marketing
+                        FROM HumanResources.EmployeeDepartmentHistory h
+                        INNER JOIN HumanResources.Department d
+                        ON h.DepartmentID = d.DepartmentID
+                        INNER JOIN HumanResources.Shift s
+                        ON h.ShiftID = s.ShiftID
+                        WHERE h.EndDate IS NULL
+                        AND d.Name IN ('Production', 'Engineering', 'Marketing')
+                        GROUP BY s.Name;
+                    </code>
+                </pre>
+            </div>
+            <div class="AnswerCode">
+                <div class="pytanie">
+                    <h3></h3>
+                </div>
+                <div class="odpowiedz">
+                    
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="slide prism over bhgry">
+        <div class="grid-container">
+            <div class="HeaderTitle"> 
+                <h2 class="headerCODE">6-11 Zmiana kolumn na wiersze</h2>
+            </div>
+            <div class="PlaceCodeHere">
+                <pre style="font-size: 31px;overflow: hidden;  " class="language-sql">
+                    <code style="line-height: 40px !important;">
+                        IF OBJECT_ID('tempdb.dbo.#Contact') IS NOT NULL DROP TABLE #Contact;
+                        CREATE TABLE #Contact
+                        (
+                        EmployeeID INT NOT NULL,
+                        PhoneNumber1 BIGINT,
+                        PhoneNumber2 BIGINT,
+                        PhoneNumber3 BIGINT
+                        )
+                        GO
+                        INSERT #Contact
+                        (EmployeeID, PhoneNumber1, PhoneNumber2, PhoneNumber3)
+                        VALUES (1, 2718353881, 3385531980, 5324571342),
+                        (2, 6007163571, 6875099415, 7756620787),
+                        (3, 9439250939, NULL, NULL);
+                        SELECT EmployeeID,
+                        PhoneType,
+                        PhoneValue
+                        FROM #Contact c
+                        UNPIVOT
+                        (
+                        PhoneValue
+                        FOR PhoneType IN ([PhoneNumber1], [PhoneNumber2], [PhoneNumber3])
+                        ) AS p;
+                    </code>
+                </pre>
+            </div>
+            <div class="AnswerCode">
+                <div class="pytanie">
+                    <h3></h3>
+                </div>
+                <div class="odpowiedz">
+                    
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="slide prism over bhgry">
+        <div class="grid-container">
+            <div class="HeaderTitle"> 
+                <h2 class="headerCODE">6-11-2 Zmiana kolumn na wiersze</h2>
+            </div>
+            <div class="PlaceCodeHere">
+                <pre style="font-size: 31px;overflow: hidden;  " class="language-sql">
+                    <code style="line-height: 40px !important;">
+                        SELECT EmployeeID,
+                        'PhoneNumber1' AS PhoneType,
+                        c.PhoneNumber1 AS PhoneValue
+                        FROM #Contact c
+                        WHERE c.PhoneNumber1 IS NOT NULL
+                        UNION ALL
+                        SELECT EmployeeID,
+                        'PhoneNumber2' AS PhoneType,
+                        c.PhoneNumber2 AS PhoneValue
+                        FROM #Contact c
+                        WHERE c.PhoneNumber2 IS NOT NULL
+                        UNION ALL
+                        SELECT EmployeeID,
+                        'PhoneNumber3' AS PhoneType,
+                        c.PhoneNumber3 AS PhoneValue
+                        FROM #Contact c
+                        WHERE c.PhoneNumber3 IS NOT NULL
+                        ORDER BY EmployeeID, PhoneType;
+                    </code>
+                </pre>
+            </div>
+            <div class="AnswerCode">
+                <div class="pytanie">
+                    <h3></h3>
+                </div>
+                <div class="odpowiedz">
+                    
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="slide prism over bhgry">
+        <div class="grid-container">
+            <div class="HeaderTitle"> 
+                <h2 class="headerCODE">6-12 Używanie zapytań ponownie</h2>
+            </div>
+            <div class="PlaceCodeHere">
+                <pre style="font-size: 31px;overflow: hidden;  " class="language-sql">
+                    <code style="line-height: 40px !important;">
+                        WITH cte AS
+                        (
+                        SELECT SalesOrderID
+                        FROM Sales.SalesOrderDetail
+                        WHERE UnitPrice BETWEEN 1900 AND 2000
+                        )
+                        SELECT s.PurchaseOrderNumber
+                        FROM Sales.SalesOrderHeader s
+                        WHERE EXISTS (SELECT SalesOrderID
+                        FROM cte
+                        WHERE SalesOrderID = s.SalesOrderID );
+                    </code>
+                </pre>
+            </div>
+            <div class="AnswerCode">
+                <div class="pytanie">
+                    <h3></h3>
+                </div>
+                <div class="odpowiedz">
+                    
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="slide prism over bhgry">
+        <div class="grid-container">
+            <div class="HeaderTitle"> 
+                <h2 class="headerCODE">6-12 Używanie zapytań ponownie</h2>
+            </div>
+            <div class="PlaceCodeHere">
+                <pre style="font-size: 31px;overflow: hidden;  " class="language-sql">
+                    <code style="line-height: 40px !important;">
+                        WITH cte AS
+                        (
+                            SELECT SalesOrderID
+                            FROM Sales.SalesOrderDetail
+                            WHERE UnitPrice BETWEEN 1900 AND 2000
+                        )
+                        SELECT s.PurchaseOrderNumber
+                        FROM Sales.SalesOrderHeader s
+                        WHERE EXISTS (SELECT SalesOrderID
+                        FROM cte
+                        WHERE SalesOrderID = s.SalesOrderID );
+                    </code>
+                </pre>
+            </div>
+            <div class="AnswerCode">
+                <div class="pytanie">
+                    <h3></h3>
+                </div>
+                <div class="odpowiedz">
+                    
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="slide prism over bhgry">
+        <div class="grid-container">
+            <div class="HeaderTitle"> 
+                <h2 class="headerCODE">6-12-1 Używanie zapytań ponownie</h2>
+            </div>
+            <div class="PlaceCodeHere">
+                <pre style="font-size: 31px;overflow: hidden;  " class="language-sql">
+                    <code style="line-height: 40px !important;">
+                        WITH expression_name [ ( column_name [ ,...n ] ) ] AS ( CTE_query_definition ) [ ,...n ]
+                    </code>
+                </pre>
+            </div>
+            <div class="AnswerCode">
+                <div class="pytanie">
+                    <h3></h3>
+                </div>
+                <div class="odpowiedz">
+                    
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="slide creamB  compact">
+        <h2>Argumenty CTE</h2>
+        <ol class="nonumbers">
+            <li class="next">expression_name: Nazwa wyrażenia common table expression</li>
+            <li class="next">column_name[(n,a)]: Unikalne nazwy kolumn. Nie  muszę ich podawać</li>
+        </ol>
+    </section>
+    <section class="slide creamB  compact">
+        <h2>Argumenty CTE</h2>
+        <ol class="nonumbers">
+            <li class="next">CTE_query_definition: Zapytanie SELECT, które definuje common table expression</li>
+        </ol>
+    </section>
+    <section class="slide prism over bhgry">
+        <div class="grid-container">
+            <div class="HeaderTitle"> 
+                <h2 class="headerCODE">6-12-2 Używanie zapytań ponownie</h2>
+            </div>
+            <div class="PlaceCodeHere">
+                <pre style="font-size: 11px;overflow: hidden;  " class="language-sql">
+                    <code style="line-height: 10px !important;">
+                        SET STATISTICS IO ON;
+
+                        WITH VendorSearch(RowNumber, VendorName, AccountNumber) AS
+                        (
+                            SELECT ROW_NUMBER() OVER (ORDER BY Name) RowNum,
+                            Name,
+                            AccountNumber
+                            FROM Purchasing.Vendor
+                        )
+                        SELECT *
+                        FROM VendorSearch;
+
+                        WITH VendorSearch(RowNumber, VendorName, AccountNumber) AS
+                        (
+                            SELECT ROW_NUMBER() OVER (ORDER BY Name) RowNum,
+                            Name,
+                            AccountNumber
+                            FROM Purchasing.Vendor
+                        )
+
+                        SELECT RowNumber,
+                        VendorName,
+                        AccountNumber
+                        FROM VendorSearch
+                        WHERE RowNumber BETWEEN 1 AND 5
+                        UNION
+                        SELECT RowNumber,
+                        VendorName,
+                        AccountNumber
+                        FROM VendorSearch
+                        WHERE RowNumber BETWEEN 100 AND 104;
+
+                        SET STATISTICS IO OFF;
+                    </code>
+                </pre>
+            </div>
+            <div class="AnswerCode">
+                <div class="pytanie">
+                    <h3></h3>
+                </div>
+                <div class="odpowiedz">
+                    
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="slide prism over bhgry">
+        <div class="grid-container">
+            <div class="HeaderTitle"> 
+                <h2 class="headerCODE">6-12-2 Używanie zapytań ponownie</h2>
+            </div>
+            <div class="PlaceCodeHere">
+                <pre style="font-size: 31px;overflow: hidden;  " class="language-sql">
+                    <code style="line-height: 40px !important;">
+                        WITH CTE(N) AS
+                        (
+                            SELECT TOP (5) object_id
+                            FROM sys.objects
+                        )
+                        SELECT N FROM CTE;
+                    </code>
+                </pre>
+            </div>
+            <div class="AnswerCode">
+                <div class="pytanie">
+                    <h3></h3>
+                </div>
+                <div class="odpowiedz">
+                    
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="slide prism over bhgry">
+        <div class="grid-container">
+            <div class="HeaderTitle"> 
+                <h2 class="headerCODE">6-13-1 Zapytania na tabelkach rekurecyjnych</h2>
+            </div>
+            <div class="PlaceCodeHere">
+                <pre style="font-size: 31px;overflow: hidden;  " class="language-sql">
+                    <code style="line-height: 40px !important;">
+                        IF OBJECT_ID('tempdb.dbo.#Company') IS NOT NULL DROP TABLE #Company;
+                        CREATE TABLE #Company
+                        (
+                            CompanyID INT NOT NULL
+                            PRIMARY KEY,
+                            ParentCompanyID INT NULL,
+                            CompanyName VARCHAR(25) NOT NULL
+                        );
+
+                        INSERT #Company
+                        (CompanyID, ParentCompanyID, CompanyName)
+                        VALUES (1, NULL, 'Mega-Corp'),
+                        (2, 1, 'Mediamus-Corp'),
+                        (3, 1, 'KindaBigus-Corp'),
+                        (4, 3, 'GettinSmaller-Corp'),
+                        (5, 4, 'Smallest-Corp'),
+                        (6, 5, 'Puny-Corp'),
+                        (7, 5, 'Small2-Corp');
+                    </code>
+                </pre>
+            </div>
+            <div class="AnswerCode">
+                <div class="pytanie">
+                    <h3></h3>
+                </div>
+                <div class="odpowiedz">
+                    
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="slide prism over bhgry">
+        <div class="grid-container">
+            <div class="HeaderTitle"> 
+                <h2 class="headerCODE">6-13-2 Zapytania na tabelkach rekurecyjnych</h2>
+            </div>
+            <div class="PlaceCodeHere">
+                <pre style="font-size: 31px;overflow: hidden;  " class="language-sql">
+                    <code style="line-height: 40px !important;">
+                        WITH CompanyTree(ParentCompanyID, CompanyID, CompanyName, CompanyLevel) AS
+                        (
+                            -- Anchor Member
+                            SELECT ParentCompanyID,
+                            CompanyID,
+                            CompanyName,
+                            0 AS CompanyLevel
+                            FROM #Company
+                            WHERE ParentCompanyID IS NULL
+                            UNION ALL
+                            -- Recursive Member
+                            SELECT c.ParentCompanyID,
+                            c.CompanyID,
+                            c.CompanyName,
+                            p.CompanyLevel + 1
+                            FROM #Company c
+                            INNER JOIN CompanyTree p
+                            ON c.ParentCompanyID = p.CompanyID
+                        )
+                        SELECT ParentCompanyID,
+                        CompanyID,
+                        CompanyName,
+                        CompanyLevel
+                        FROM CompanyTree;
+                    </code>
+                </pre>
+            </div>
+            <div class="AnswerCode">
+                <div class="pytanie">
+                    <h3></h3>
+                </div>
+                <div class="odpowiedz">
+                    
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section class="slide prism over bhgry">
+        <div class="grid-container">
+            <div class="HeaderTitle"> 
+                <h2 class="headerCODE">6-14 Zapytania z gotowymi wynikami</h2>
+            </div>
+            <div class="PlaceCodeHere">
+                <pre style="font-size: 31px;overflow: hidden;  " class="language-sql">
+                    <code style="line-height: 40px !important;">
+                        SELECT *
+                        FROM (VALUES ('George', 'Washington'),
+                        ('Thomas', 'Jefferson'),
+                        ('John', 'Adams'),
+                        ('James', 'Madison'),
+                        ('James', 'Monroe'),
+                        ('John Quincy', 'Adams'),
+                        ('Andrew', 'Jackson'),
+                        ('Martin', 'Van Buren'),
+                        ('William', 'Harrison'),
+                        ('John', 'Tyler')
+                        ) dtPresidents(FirstName, LastName);
+                    </code>
+                </pre>
+            </div>
+            <div class="AnswerCode">
+                <div class="pytanie">
+                    <h3></h3>
+                </div>
+                <div class="odpowiedz">
+                    
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+
+    <section class="slide creamB">
+        <span class="shout colors"><span>6. Window function i słowo kluczowe OVER
+        </span></span>
+    </section>
+    <section class="slide creamB">
+        <span class="shout colors"><span>Window Function pozwala twojemu zapytaniu SQL spojrzeć na podzbiór wierszy,
+            które są zwracane przez zapytanie zanim funkcja zadziała na te wiersze
+        </span></span>
+    </section>
+    <section class="slide creamB">
+        <span class="shout colors"><span>W ten sposób funcje pozwalają tobie określeć odpowiednią kolejność danych, które mają trafić do pewnej operacji<span>
+        </span></span>
+    </section>
+    <section class="slide prism over bhgry">
+        <div class="grid-container">
+            <div class="HeaderTitle"> 
+                <h2 class="headerCODE">6-0 PRZYKŁAD</h2>
+            </div>
+            <div class="PlaceCodeHere">
+                <pre style="font-size: 31px;overflow: hidden;  " class="language-sql">
+                    <code style="line-height: 40px !important;">
+                        SELECT duration_seconds,
+                        SUM(duration_seconds) OVER (ORDER BY start_time) 
+                        AS running_total
+                        FROM dc_bikeshare_q1_2012
+                    </code>
+                </pre>
+            </div>
+            <div class="AnswerCode">
+                <div class="pytanie">
+                    <h3></h3>
+                </div>
+                <div class="odpowiedz">
+                    
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section class="slide creamB">
+        <span class="shout colors"><span>Lepsze to niż : self-join czy iterację po pętli
+        </span></span>
+    </section>
+    <section class="slide creamB">
+        <span class="shout colors"><span>Czyli Windows Function pozwala tobie kontrolować kolejność danych które mają trafić do funkcji
+        </span></span>
+    </section>
+    <section class="slide creamB  compact">
+        <h2>Jakie operację mogą być wykonane ze słowem OVER</h2>
+        <ol class="nonumbers">
+            <li class="next">AVG, CHECKSUM-AGG, COUNT, COUNT_BIG, MAX, MIN, STDEV, STDEVP</li>
+            <li class="next">SUM, VAR, VARP</li>
+        </ol>
+    </section>
+    <section class="slide creamB  compact">
+        <h2>Ranking functions : Funkcje rankingowe</h2>
+        <ol class="nonumbers">
+            <li class="next">ROW_NUMBER: </li>
+        </ol>
+    </section>
+    <section class="slide creamB  compact">
+        <h2>Ranking functions : Funkcje rankingowe</h2>
+        <ol class="nonumbers">
+            <li class="next">RANK</li>
+        </ol>
+    </section>
+    <section class="slide creamB  compact">
+        <h2>Ranking functions : Funkcje rankingowe</h2>
+        <ol class="nonumbers">
+            <li class="next">DENSE_RANK</li>
+        </ol>
+    </section>
+    <section class="slide creamB  compact">
+        <h2>Ranking functions : Funkcje rankingowe</h2>
+        <ol class="nonumbers">
+            <li class="next">NTILE</li>
+        </ol>
+    </section>
+    <section class="slide creamB  compact">
+        <h2>Analytic functions : Funkcje analityczne</h2>
+        <ol class="nonumbers">
+            <li class="next">CUME_DIST : </li>
+            <li class="next">FIRST_VALUE</li>
+            <li class="next">LAG</li>
+        </ol>
+    </section>
+    <section class="slide creamB  compact">
+        <h2>Analytic functions : Funkcje analityczne</h2>
+        <ol class="nonumbers">
+            <li class="next">LAST_VALUE</li>
+            <li class="next">LEAD</li>
+            <li class="next">PERCENTILE_CONT</li>
+        </ol>
+    </section>
+    <section class="slide creamB  compact">
+        <h2>Analytic functions : Funkcje analityczne</h2>
+        <ol class="nonumbers">
+            <li class="next">PERCENTILE_DISC</li>
+            <li class="next">PERCENT_RANK</li>
+        </ol>
+    </section>
+    <section class="slide creamB  compact">
+        <h2>Funkcje analityczne, a Offset functions</h2>
+        <ol class="nonumbers">
+            <li class="next">LAG, LEAD, FIRST_VALUE, i LAST_VALUE</li>
+        </ol>
+    </section>
+    <section class="slide prism over bhgry">
+        <div class="grid-container">
+            <div class="HeaderTitle"> 
+                <h2 class="headerCODE">7-0 Przykład</h2>
+            </div>
+            <div class="PlaceCodeHere">
+                <pre style="font-size: 31px;overflow: hidden;  " class="language-sql">
+                    <code style="line-height: 40px !important;">
+                        OVER (
+                            [ &#x3C;PARTITION BY clause&#x3E; ]
+                            [ &#x3C;ORDER BY clause&#x3E; ]
+                            [ &#x3C;ROW or RANGE clause&#x3E; ]
+                        )
+                    </code>
+                </pre>
+            </div>
+            <div class="AnswerCode">
+                <div class="pytanie">
+                    <h3></h3>
+                </div>
+                <div class="odpowiedz">
+                    
+                </div>
+            </div>
+        </div>
+    </section>
+</section>
+    <section class="slide creamB">
+        <span class="shout colors"><span>
+            PARTITION BY
+        </span></span>
+    </section>
+    <section class="slide creamB">
+        <span class="shout colors"><span>
+            ROWS | RANGE
+        </span></span>
+    </section>
+    <section class="slide prism over bhgry">
+        <div class="grid-container">
+            <div class="HeaderTitle"> 
+                <h2 class="headerCODE">7-1 Kalkulacje na podstawie kolejności wierszy</h2>
+            </div>
+            <div class="PlaceCodeHere">
+                <pre style="font-size: 21px;overflow: hidden;  " class="language-sql">
+                    <code style="line-height: 21px !important;">
+
+                        CREATE TABLE #Transactions
+                        (
+                        AccountId INTEGER,
+                        TranDate DATE,
+                        TranAmt NUMERIC(8, 2)
+                        );
+                        INSERT INTO #Transactions
+                        SELECT *
+                        FROM ( VALUES 
+                        ( 1, '2011-01-01', 500),
+                        ( 1, '2011-01-15', 50),
+                        ( 1, '2011-01-22', 250),
+                        ( 1, '2011-01-24', 75),
+                        ( 1, '2011-01-26', 125),
+                        ( 1, '2011-01-26', 175),
+                        ( 2, '2011-01-01', 500),
+                        ( 2, '2011-01-15', 50),
+                        ( 2, '2011-01-22', 25),
+                        ( 3, '2011-01-22', 5000),
+                        ( 3, '2011-01-27', 550),
+                        ( 3, '2011-01-27', 95 ),
+                        ( 3, '2011-01-30', 2500)
+                        ) dt (AccountId, TranDate, TranAmt);
+                    </code>
+                </pre>
+            </div>
+            <div class="AnswerCode">
+                <div class="pytanie">
+                    <h3></h3>
+                </div>
+                <div class="odpowiedz">
+                    
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="slide prism over bhgry">
+        <div class="grid-container">
+            <div class="HeaderTitle"> 
+                <h2 class="headerCODE">7-1-1 Kalkulacje na podstawie kolejności wierszy</h2>
+            </div>
+            <div class="PlaceCodeHere">
+                <pre style="font-size: 31px;overflow: hidden;  " class="language-sql">
+                    <code style="line-height: 40px !important;">
+                        SELECT AccountId,
+                        TranDate,
+                        TranAmt,
+                        -- running total of all transactions
+                        RunTotalAmt = SUM(TranAmt) 
+                        OVER (PARTITION BY AccountId ORDER BY TranDate)
+                        FROM #Transactions AS t
+                        ORDER BY AccountId,
+                        TranDate;
+                    </code>
+                </pre>
+            </div>
+            <div class="AnswerCode">
+                <div class="pytanie">
+                    <h3></h3>
+                </div>
+                <div class="odpowiedz">
+                    
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="slide prism over bhgry">
+        <div class="grid-container">
+            <div class="HeaderTitle"> 
+                <h2 class="headerCODE">7-1 Kalkulacje na podstawie kolejności wierszy</h2>
+            </div>
+            <div class="PlaceCodeHere">
+                <pre style="font-size: 24px;overflow: hidden;  " class="language-sql">
+                    <code style="line-height: 28px !important;">
+                        SELECT AccountId,
+                        TranDate,
+                        TranAmt,
+                        -- running total of all transactions
+                        RunTotalAmt = SUM(TranAmt) OVER (PARTITION BY AccountId ORDER BY TranDate),
+                        -- "Proper" running total by row position
+                        RunTotalAmt2 = SUM(TranAmt) OVER (PARTITION BY AccountId
+                        ORDER BY TranDate
+                        ROWS UNBOUNDED PRECEDING)
+                        FROM #Transactions AS t
+                        ORDER BY AccountId,
+                        TranDate;
+                    </code>
+                </pre>
+            </div>
+            <div class="AnswerCode">
+                <div class="pytanie">
+                    <h3></h3>
+                </div>
+                <div class="odpowiedz">
+                    
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="slide prism over bhgry">
+        <div class="grid-container">
+            <div class="HeaderTitle"> 
+                <h2 class="headerCODE">7-3 Kalkulacje na podstawie procentu całości</h2>
+            </div>
+            <div class="PlaceCodeHere">
+                <pre style="font-size: 24px;overflow: hidden;  " class="language-sql">
+                    <code style="line-height: 40px !important;">
+                        SELECT AccountId,
+                        TranDate,
+                        TranAmt,
+                        AccountTotal = SUM(TranAmt) OVER (PARTITION BY AccountId),
+                        AmountPct = TranAmt / SUM(TranAmt) OVER (PARTITION BY t.AccountId)
+                        FROM #Transactions AS t
+                    </code>
+                </pre>
+            </div>
+            <div class="AnswerCode">
+                <div class="pytanie">
+                    <h3></h3>
+                </div>
+                <div class="odpowiedz">
+                    
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="slide prism over bhgry">
+        <div class="grid-container">
+            <div class="HeaderTitle"> 
+                <h2 class="headerCODE">7-4 Kalkulacje  X-obecny wierszy i Y-wszystkich wierszy </h2>
+            </div>
+            <div class="PlaceCodeHere">
+                <pre style="font-size: 20px;overflow: hidden;  " class="language-sql">
+                    <code style="line-height: 30px !important;">
+                        SELECT AccountId,
+                        TranDate,
+                        TranAmt,
+                        AcctRowID = ROW_NUMBER() OVER (PARTITION BY AccountId ORDER BY AccountId, TranDate),
+                        AcctRowQty = COUNT(*) OVER (PARTITION BY AccountId),
+                        RowID = ROW_NUMBER() OVER (ORDER BY AccountId, TranDate),
+                        RowQty = COUNT(*) OVER ()
+                        FROM #Transactions AS t
+                        ORDER BY AccountId, TranDate;;
+                    </code>
+                </pre>
+            </div>
+            <div class="AnswerCode">
+                <div class="pytanie">
+                    <h3></h3>
+                </div>
+                <div class="odpowiedz">
+                    
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="slide prism over bhgry">
+        <div class="grid-container">
+            <div class="HeaderTitle"> 
+                <h2 class="headerCODE">7-5 Użycie logicznego Okna</h2>
+            </div>
+            <div class="PlaceCodeHere">
+                <pre style="font-size: 21px;overflow: hidden;  " class="language-sql">
+                    <code style="line-height: 20px !important;">
+                        CREATE TABLE #Test
+                        (
+                        RowID INT IDENTITY,
+                        FName VARCHAR(20),
+                        Salary SMALLINT
+                        );
+                        INSERT INTO #Test (FName, Salary)
+                        VALUES ('George', 800),
+                        ('Sam', 950),
+                        ('Diane', 1100),
+                        ('Nicholas', 1250),
+                        ('Samuel', 1250), --<< duplicate value of above row
+                        ('Patricia', 1300),
+                        ('Brian', 1500),
+                        ('Thomas', 1600),
+                        ('Fran', 2450),
+                        ('Debbie', 2850),
+                        ('Mark', 2975),
+                        ('James', 3000),
+                        ('Cynthia', 3000), --<< duplicate value of above row
+                        ('Christopher', 5000);
+                    </code>
+                </pre>
+            </div>
+            <div class="AnswerCode">
+                <div class="pytanie">
+                    <h3></h3>
+                </div>
+                <div class="odpowiedz">
+                    
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="slide prism over bhgry">
+        <div class="grid-container">
+            <div class="HeaderTitle"> 
+                <h2 class="headerCODE">7-5-1 Użycie logicznego Okna</h2>
+            </div>
+            <div class="PlaceCodeHere">
+                <pre style="font-size: 21px;overflow: hidden;  " class="language-sql">
+                    <code style="line-height: 30px !important;">
+                        SELECT RowID,
+                        FName,
+                        Salary,
+                        SumByRows = SUM(Salary) OVER (ORDER BY Salary ROWS UNBOUNDED PRECEDING),
+                        SumByRange = SUM(Salary) OVER (ORDER BY Salary RANGE UNBOUNDED PRECEDING)
+                        FROM #Test
+                        ORDER BY RowID;
+                    </code>
+                </pre>
+            </div>
+            <div class="AnswerCode">
+                <div class="pytanie">
+                    <h3></h3>
+                </div>
+                <div class="odpowiedz">
+                    
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="slide prism over bhgry">
+        <div class="grid-container">
+            <div class="HeaderTitle"> 
+                <h2 class="headerCODE">7-6 Generowanie kolumny z liczbą wierszy </h2>
+            </div>
+            <div class="PlaceCodeHere">
+                <pre style="font-size: 25px;overflow: hidden;  " class="language-sql">
+                    <code style="line-height: 40px !important;">
+                        SELECT TOP 10
+                        AccountNumber,
+                        OrderDate,
+                        TotalDue,
+                        ROW_NUMBER() OVER (PARTITION BY AccountNumber ORDER BY OrderDate) 
+                        AS RowNumber
+                        FROM AdventureWorks2014.Sales.SalesOrderHeader
+                        ORDER BY AccountNumber;
+                    </code>
+                </pre>
+            </div>
+            <div class="AnswerCode">
+                <div class="pytanie">
+                    <h3></h3>
+                </div>
+                <div class="odpowiedz">
+                    
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="slide prism over bhgry">
+        <div class="grid-container">
+            <div class="HeaderTitle"> 
+                <h2 class="headerCODE">7-7 Zwracanie wierszy poprzez ich range </h2>
+            </div>
+            <div class="PlaceCodeHere">
+                <pre style="font-size: 26px;overflow: hidden;  " class="language-sql">
+                    <code style="line-height: 40px !important;">
+                        SELECT BusinessEntityID,
+                        SalesQuota,
+                        RANK() OVER (ORDER BY SalesQuota DESC) AS RankWithGaps,
+                        DENSE_RANK() OVER (ORDER BY SalesQuota DESC) AS RankWithoutGaps,
+                        ROW_NUMBER() OVER (ORDER BY SalesQuota DESC) AS RowNumber
+                        FROM Sales.SalesPersonQuotaHistory
+                        WHERE QuotaDate = '2014-03-01'
+                        AND SalesQuota < 500000;
+                    </code>
+                </pre>
+            </div>
+            <div class="AnswerCode">
+                <div class="pytanie">
+                    <h3></h3>
+                </div>
+                <div class="odpowiedz">
+                    
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="slide prism over bhgry">
+        <div class="grid-container">
+            <div class="HeaderTitle"> 
+                <h2 class="headerCODE">7-8 Sortowanie rekordów do podgrup </h2>
+            </div>
+            <div class="PlaceCodeHere">
+                <pre style="font-size: 31px;overflow: hidden;  " class="language-sql">
+                    <code style="line-height: 40px !important;">
+                        SELECT BusinessEntityID,
+                        QuotaDate,
+                        SalesQuota,
+                        NTILE(4) OVER (ORDER BY SalesQuota DESC) AS [NTILE]
+                        FROM Sales.SalesPersonQuotaHistory
+                        WHERE SalesQuota BETWEEN 266000.00 AND 319000.00;
+                    </code>
+                </pre>
+            </div>
+            <div class="AnswerCode">
+                <div class="pytanie">
+                    <h3></h3>
+                </div>
+                <div class="odpowiedz">
+                    
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="slide prism over bhgry">
+        <div class="grid-container">
+            <div class="HeaderTitle"> 
+                <h2 class="headerCODE">7-9 Grupowanie logiczne kolejne wiersze razem</h2>
+            </div>
+            <div class="PlaceCodeHere">
+                <pre style="font-size: 15px;overflow: hidden;  " class="language-sql">
+                    <code style="line-height: 16px !important;">
+                        CREATE TABLE #RFID_Location (
+                            TagId INTEGER,
+                            Location VARCHAR(25),
+                            SensorReadTime DATETIME);
+                            INSERT INTO #RFID_Location
+                            (TagId, Location, SensorReadTime)
+                            VALUES (1, 'Room1', '2012-01-10T08:00:01'),
+                            (1, 'Room1', '2012-01-10T08:18:32'),
+                            (1, 'Room2', '2012-01-10T08:25:42'),
+                            (1, 'Room3', '2012-01-10T09:52:48'),
+                            (1, 'Room2', '2012-01-10T10:05:22'),
+                            (1, 'Room3', '2012-01-10T11:22:15'),
+                            (1, 'Room4', '2012-01-10T14:18:58'),
+                            (2, 'Room1', '2012-01-10T08:32:18'),
+                            (2, 'Room1', '2012-01-10T08:51:53'),
+                            (2, 'Room2', '2012-01-10T09:22:09'),
+                            (2, 'Room1', '2012-01-10T09:42:17'),
+                            (2, 'Room1', '2012-01-10T09:59:16'),
+                            (2, 'Room2', '2012-01-10T10:35:18'),
+                            (2, 'Room3', '2012-01-10T11:18:42'),
+                            (2, 'Room4', '2012-01-10T15:22:18');
+                    </code>
+                </pre>
+            </div>
+            <div class="AnswerCode">
+                <div class="pytanie">
+                    <h3></h3>
+                </div>
+                <div class="odpowiedz">
+                    
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="slide prism over bhgry">
+        <div class="grid-container">
+            <div class="HeaderTitle"> 
+                <h2 class="headerCODE">7-9 Grupowanie logiczne kolejne wiersze razem</h2>
+            </div>
+            <div class="PlaceCodeHere">
+                <pre style="font-size: 20px;overflow: hidden;  " class="language-sql">
+                    <code style="line-height: 21px !important;">
+                        WITH cte AS
+                        (
+                        SELECT TagId, Location, SensorReadTime,
+                        ROW_NUMBER() OVER (PARTITION BY TagId ORDER BY SensorReadTime) -
+                        ROW_NUMBER() OVER (PARTITION BY TagId, Location ORDER BY SensorReadTime) AS Grp
+                        FROM #RFID_Location
+                        )
+                        SELECT TagId, Location, SensorReadTime, Grp,
+                        DENSE_RANK() OVER (PARTITION BY TagId, Location ORDER BY Grp) AS TripNbr
+                        FROM cte
+                        ORDER BY TagId, SensorReadTime;
+                    </code>
+                </pre>
+            </div>
+            <div class="AnswerCode">
+                <div class="pytanie">
+                    <h3></h3>
+                </div>
+                <div class="odpowiedz">
+                    
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="slide prism over bhgry">
+        <div class="grid-container">
+            <div class="HeaderTitle"> 
+                <h2 class="headerCODE">7-9 Grupowanie logiczne kolejne wiersze razem</h2>
+            </div>
+            <div class="PlaceCodeHere">
+                <pre style="font-size: 21px;overflow: hidden;  " class="language-sql">
+                    <code style="line-height: 22px !important;">
+                        WITH cte AS
+                        (
+                        SELECT TagId, Location, SensorReadTime,
+                        ROW_NUMBER() OVER (PARTITION BY TagId ORDER BY SensorReadTime) -
+                        ROW_NUMBER() OVER (PARTITION BY TagId, Location ORDER BY SensorReadTime) AS Grp
+                        FROM #RFID_Location
+                        )
+                        SELECT TagId, Location, SensorReadTime, Grp,
+                        DENSE_RANK() OVER (PARTITION BY TagId, Location ORDER BY Grp) AS TripNbr,
+                        RANK() OVER (PARTITION BY TagId, Location ORDER BY Grp) AS TripNbrRank
+                        FROM cte
+                        ORDER BY TagId, SensorReadTime;
+                    </code>
+                </pre>
+            </div>
+            <div class="AnswerCode">
+                <div class="pytanie">
+                    <h3></h3>
+                </div>
+                <div class="odpowiedz">
+                    
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="slide prism over bhgry">
+        <div class="grid-container">
+            <div class="HeaderTitle"> 
+                <h2 class="headerCODE">7-10 Uzyskanie dostępu do innych wierszy</h2>
+            </div>
+            <div class="PlaceCodeHere">
+                <pre style="font-size: 22px;overflow: hidden;  " class="language-sql">
+                    <code style="line-height: 23px !important;">
+                        WITH cte AS
+                        (
+                        -- Break the OrderDate down into the Year and Quarter
+                        SELECT DATEPART(QUARTER, OrderDate) AS Qtr,
+                        DATEPART(YEAR, OrderDate) AS Yr,
+                        TotalDue
+                        FROM Sales.SalesOrderHeader
+                        ), cteAgg AS
+                        (
+                        -- Aggregate the TotalDue, Grouping on Year and Quarter
+                        SELECT Yr,
+                        Qtr,
+                        SUM(TotalDue) AS TotalDue
+                        FROM cte
+                        GROUP BY Yr, Qtr
+                        )
+                    </code>
+                </pre>
+            </div>
+            <div class="AnswerCode">
+                <div class="pytanie">
+                    <h3></h3>
+                </div>
+                <div class="odpowiedz">
+                    
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="slide prism over bhgry">
+        <div class="grid-container">
+            <div class="HeaderTitle"> 
+                <h2 class="headerCODE">7-11 Znajdowanie pustych wartości w sekwencjach liczbowych</h2>
+            </div>
+            <div class="PlaceCodeHere">
+                <pre style="font-size: 23px;overflow: hidden;  " class="language-sql">
+                    <code style="line-height: 24px !important;">
+                        CREATE TABLE #Gaps (col1 INTEGER PRIMARY KEY CLUSTERED);
+                        INSERT INTO #Gaps (col1)
+                        VALUES (1), (2), (3),
+                        (50), (51), (52), (53), (54), (55),
+                        (100), (101), (102),
+                        (500),
+                        (950), (951), (952),
+                        (954);
+                        -- Compare the value of the current row to the next row.
+                        -- If > 1, then there is a gap.
+                        WITH cte AS
+                        (
+                        SELECT col1 AS CurrentRow,
+                        LEAD(col1, 1, NULL) OVER (ORDER BY col1) AS NextRow
+                        FROM #Gaps
+                        )
+                        SELECT cte.CurrentRow + 1 AS [Start of Gap],
+                        cte.NextRow - 1 AS [End of Gap]
+                        FROM cte
+                        WHERE cte.NextRow - cte.CurrentRow > 1;
+                    </code>
+                </pre>
+            </div>
+            <div class="AnswerCode">
+                <div class="pytanie">
+                    <h3></h3>
+                </div>
+                <div class="odpowiedz">
+                    
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="slide prism over bhgry">
+        <div class="grid-container">
+            <div class="HeaderTitle"> 
+                <h2 class="headerCODE">7-12 Poibieranie pierwszej i ostatniej wartośći z partycji</h2>
+            </div>
+            <div class="PlaceCodeHere">
+                <pre style="font-size: 22px;overflow: hidden;  " class="language-sql">
+                    <code style="line-height: 22px !important;">
+                        SELECT DISTINCT TOP (5)
+                        CustomerID,
+                        -- Get the date for the customer's least expensive order
+                        FIRST_VALUE(OrderDate)
+                        OVER (PARTITION BY CustomerID
+                        ORDER BY TotalDue
+                        ROWS BETWEEN UNBOUNDED PRECEDING AND UNBOUNDED FOLLOWING) AS OrderDateLow,
+                        -- Get the date for the customer's most expensive order
+                        LAST_VALUE(OrderDate)
+                        OVER (PARTITION BY CustomerID
+                        ORDER BY TotalDue
+                        ROWS BETWEEN UNBOUNDED PRECEDING AND UNBOUNDED FOLLOWING) AS OrderDateHigh
+                        FROM Sales.SalesOrderHeader
+                        ORDER BY CustomerID;
+                    </code>
+                </pre>
+            </div>
+            <div class="AnswerCode">
+                <div class="pytanie">
+                    <h3></h3>
+                </div>
+                <div class="odpowiedz">
+                    
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="slide prism over bhgry">
+        <div class="grid-container">
+            <div class="HeaderTitle"> 
+                <h2 class="headerCODE">7-12-2 Poibieranie pierwszej i ostatniej wartośći z partycji</h2>
+            </div>
+            <div class="PlaceCodeHere">
+                <pre style="font-size: 31px;overflow: hidden;  " class="language-sql">
+                    <code style="line-height: 40px !important;">
+                        SELECT CustomerID, TotalDue, OrderDate
+                        FROM Sales.SalesOrderHeader
+                        WHERE CustomerID = 11000
+                        ORDER BY TotalDue;
+                    </code>
+                </pre>
+            </div>
+            <div class="AnswerCode">
+                <div class="pytanie">
+                    <h3></h3>
+                </div>
+                <div class="odpowiedz">
+                    
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="slide prism over bhgry">
+        <div class="grid-container">
+            <div class="HeaderTitle"> 
+                <h2 class="headerCODE">7-13 Kalkulowanie relatywnej pozytcji lub rankingu  wartości wewnątrz zbioru wartości</h2>
+            </div>
+            <div class="PlaceCodeHere">
+                <pre style="font-size: 31px;overflow: hidden;  " class="language-sql">
+                    <code style="line-height: 40px !important;">
+                        SELECT CustomerID,
+                        TotalDue,
+                        CUME_DIST()
+                        OVER (PARTITION BY CustomerID
+                        ORDER BY TotalDue) AS CumeDistOrderTotalDue,
+                        PERCENT_RANK()
+                        OVER (PARTITION BY CustomerID
+                        ORDER BY TotalDue) AS PercentRankOrderTotalDue
+                        FROM Sales.SalesOrderHeader
+                        WHERE CustomerID IN (11439, 30116)
+                        ORDER BY CustomerID, TotalDue;
+                    </code>
+                </pre>
+            </div>
+            <div class="AnswerCode">
+                <div class="pytanie">
+                    <h3></h3>
+                </div>
+                <div class="odpowiedz">
+                    
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="slide prism over bhgry">
+        <div class="grid-container">
+            <div class="HeaderTitle"> 
+                <h2 class="headerCODE">7-14 Kalkulowanie relatywnej pozytcji lub rankingu  wartości wewnątrz zbioru wartości</h2>
+            </div>
+            <div class="PlaceCodeHere">
+                <pre style="font-size: 31px;overflow: hidden;  " class="language-sql">
+                    <code style="line-height: 40px !important;">
+                        DECLARE @Employees TABLE
+                        (
+                            EmplId INT PRIMARY KEY CLUSTERED,
+                            DeptId INT,
+                            Salary NUMERIC(8, 2)
+                        );
+                    </code>
+                </pre>
+            </div>
+            <div class="AnswerCode">
+                <div class="pytanie">
+                    <h3></h3>
+                </div>
+                <div class="odpowiedz">
+                    
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="slide prism over bhgry">
+        <div class="grid-container">
+            <div class="HeaderTitle"> 
+                <h2 class="headerCODE">7-14 Kalkulowanie relatywnej pozytcji lub rankingu  wartości wewnątrz zbioru wartości</h2>
+            </div>
+            <div class="PlaceCodeHere">
+                <pre style="font-size: 31px;overflow: hidden;  " class="language-sql">
+                    <code style="line-height: 40px !important;">
+                        INSERT INTO @Employees
+                        VALUES (1, 1, 10000),
+                        (2, 1, 11000),
+                        (3, 1, 12000),
+                        (4, 2, 25000),
+                        (5, 2, 35000),
+                        (6, 2, 75000),
+                        (7, 2, 100000);
+                    </code>
+                </pre>
+            </div>
+            <div class="AnswerCode">
+                <div class="pytanie">
+                    <h3></h3>
+                </div>
+                <div class="odpowiedz">
+                    
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="slide prism over bhgry">
+        <div class="grid-container">
+            <div class="HeaderTitle"> 
+                <h2 class="headerCODE">7-14 Kalkulowanie relatywnej pozytcji lub rankingu  wartości wewnątrz zbioru wartości</h2>
+            </div>
+            <div class="PlaceCodeHere">
+                <pre style="font-size: 22px;overflow: hidden;  " class="language-sql">
+                    <code style="line-height: 22px !important;">
+                        SELECT EmplId,
+                        DeptId,
+                        Salary,
+                        PERCENTILE_CONT(0.5)
+                        WITHIN GROUP (ORDER BY Salary ASC)
+                        OVER (PARTITION BY DeptId) AS MedianCont,
+                        PERCENTILE_DISC(0.5)
+                        WITHIN GROUP (ORDER BY Salary ASC)
+                        OVER (PARTITION BY DeptId) AS MedianDisc,
+                        PERCENTILE_CONT(0.75)
+                        WITHIN GROUP (ORDER BY Salary ASC)
+                        OVER (PARTITION BY DeptId) AS Percent75Cont,
+                        PERCENTILE_DISC(0.75)
+                        WITHIN GROUP (ORDER BY Salary ASC)
+                        OVER (PARTITION BY DeptId) AS Percent75Disc,
+                        CUME_DIST()
+                        OVER (PARTITION BY DeptId
+                        ORDER BY Salary) AS CumeDist
+                        FROM @Employees
+                        ORDER BY DeptId, EmplId;
+                    </code>
+                </pre>
+            </div>
+            <div class="AnswerCode">
+                <div class="pytanie">
+                    <h3></h3>
+                </div>
+                <div class="odpowiedz">
+                    
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="slide prism over bhgry">
+        <div class="grid-container">
+            <div class="HeaderTitle"> 
+                <h2 class="headerCODE">7-15 Przypisywanie sekwencji do specyficznej kolejności</h2>
+            </div>
+            <div class="PlaceCodeHere">
+                <pre style="font-size: 22px;overflow: hidden;  " class="language-sql">
+                    <code style="line-height: 22px !important;">
+                        IF EXISTS (SELECT *
+                        FROM sys.sequences AS seq
+                        JOIN sys.schemas AS sch
+                        ON seq.schema_id = sch.schema_id
+                        WHERE sch.name = 'dbo'
+                        AND seq.name = 'CH7Sequence')
+                        DROP SEQUENCE dbo.CH7Sequence;
+                        CREATE SEQUENCE dbo.CH7Sequence AS INTEGER START WITH 1;
+                        DECLARE @ClassRank TABLE
+                        (
+                        StudentID TINYINT,
+                        Grade TINYINT,
+                        SeqNbr INTEGER
+                        );
+                    </code>
+                </pre>
+            </div>
+            <div class="AnswerCode">
+                <div class="pytanie">
+                    <h3></h3>
+                </div>
+                <div class="odpowiedz">
+                    
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="slide prism over bhgry">
+        <div class="grid-container">
+            <div class="HeaderTitle"> 
+                <h2 class="headerCODE">7-15 Przypisywanie sekwencji do specyficznej kolejności</h2>
+            </div>
+            <div class="PlaceCodeHere">
+                <pre style="font-size: 22px;overflow: hidden;  " class="language-sql">
+                    <code style="line-height: 22px !important;">
+                        INSERT INTO @ClassRank (StudentId, Grade, SeqNbr)
+                        SELECT StudentId,
+                        Grade,
+                        NEXT VALUE FOR dbo.CH7Sequence OVER (ORDER BY Grade ASC)
+                        FROM (VALUES (1, 100),
+                        (2, 95),
+                        (3, 85),
+                        (4, 100),
+                        (5, 99),
+                        (6, 98),
+                        (7, 95),
+                        (8, 90),
+                        (9, 89),
+                        (10, 89),
+                        (11, 85),
+                        (12, 82)) dt(StudentId, Grade);
+                        SELECT StudentId, Grade, SeqNbr
+                        FROM @ClassRank;
+                    </code>
+                </pre>
+            </div>
+            <div class="AnswerCode">
+                <div class="pytanie">
+                    <h3></h3>
+                </div>
+                <div class="odpowiedz">
+                    
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="slide" style="background-color:black">
+        <figure>
+            <img class="cover" src="pictures/01.png" alt="blog">
+            <figcaption class="white">Copyright © Cezary Walenciuk</figcaption>
+        </figure>
+    </section>
+
+
+    <section class="slide creamG">
+        <span class="shout colors"><span>Podsumowanie
+        </span></span>
+    </section>
+    <section class="slide creamG">
+        <span class="shout colors"><span>Dzięki za obecność
+        </span></span>
+    </section>
+    <!-- <div class="progress"></div> -->
+    <footer class="badge badge-top-left">
+        <a href="#" class="fullscreen">Fullscreen</a>
+    </footer>
+
+    <script src="vendors/gamepad/gamepad.js"></script>
+    <script src="vendors/shower/shower.min.js"></script>
+    <script src="vendors/shower-gamepad/shower.gamepad.js"></script>
+
+    <!-- Prism.js -->
+    <script src="vendors/prism/prism.js"></script>
+    <script src="vendors/prism/custom-prism.js"></script>
+
+</body>
+
+</html>

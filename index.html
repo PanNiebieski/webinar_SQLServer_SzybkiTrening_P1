@@ -1,0 +1,4695 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>SQL Server Problemy, Zapytania, Rozwiązania</title>
+    <meta charset="utf-8" />
+    <meta http-equiv="x-ua-compatible" content="ie=edge" />
+    <meta name="viewport" content="width=device-width" />
+    <link href="https://fonts.googleapis.com/css?family=Fira+Sans:400,900&amp;subset=latin-ext" rel="stylesheet" />
+    <!-- Shower Theme -->
+    <link rel="stylesheet" href="vendors/shower-ribbon/styles/screen-16x9.css" />
+    <link rel="stylesheet" href="vendors/shower-CezaryWalenciuk/styles/main.css" />
+    <!-- Prism.js -->
+    <link rel="stylesheet" href="vendors/prism/prism.css" />
+    <link rel="stylesheet" href="vendors/prism/custom-prism.css" />
+    <link rel="stylesheet" href="codegrid.css" />
+</head>
+<body class="shower list">
+    <header class="caption">
+        <h1>SQL Server Problemy, Zapytania, Rozwiązania</h1>
+        <p></p>
+    </header>
+
+    <section class="slide front-page">
+
+        <div class="details">
+            <!-- 1. Avatar -->
+
+
+            <h2>Cezary Walenciuk</h2>
+
+            <!-- 3. Presentation title -->
+            <h2 class="bigbig"><strong style="font-size: 35px;  line-height: 1.3;">
+
+                    <span class="titlec1">SQL Server Problemy, Zapytania, Rozwiązania</span>
+                    <span class=""></span></strong></h2>
+
+
+
+            <!-- 5. Contact the speaker -->
+            <h2><a href="https://twitter.com/WalenciukC">@walenciukC</a></h2>
+        </div>
+        <div>
+
+
+            <!-- 2. Speaker -->
+
+        </div>
+        <div class="imag">
+            <img src="images/my-avatar.jpg" alt="Speaker">
+        </div>
+    </section>
+
+    <section class="slide creamB smaller  compact ">
+        <ol>
+            <li class="next">Co trzeba wiedzieć zanim zrobisz SELECT</li>
+            <li class="next">Podstawy programowania w T-SQL</li>
+            <li class="next">Pracowanie z wartością NULL</li>
+            <li class="next">Operacje na kilku Tablicach na raz czyli JOIN-y i inne operacje łączące jak UNION</li>
+            <li class="next">Grupowanie i Agregacja czyli wyjaśni mi to w końcu dobrze</li>
+            <li class="next">Na rozluźnienie jeszcze raz o SELECT</li>
+            <li class="next">Window function i słowo kluczowe OVER</li>
+        </ol>
+    </section>
+
+    <section class="slide creamB smaller  compact ">
+        <ol>
+            <li class="next">Co trzeba wiedzieć zanim zrobisz SELECT</li>
+            <li class="next">Podstawy programowania w T-SQL</li>
+            <li class="next">Pracowanie z wartością NULL</li>
+            <li class="next">Operacje na kilku Tablicach na raz czyli JOIN-y i inne operacje łączące jak UNION</li>
+            <li class="next">Grupowanie i Agregacja czyli wyjaśni mi to w końcu dobrze</li>
+        </ol>
+    </section>
+
+    
+    <section class="slide prism over bhgry">
+        <div class="grid-container">
+            <div class="HeaderTitle">
+                <h2 class="headerCODE">1-1 Łączenie z bazą danych</h2>
+            </div>
+            <div class="PlaceCodeHere">
+                <pre style="font-size: 61px;overflow: hidden;  " class="language-sql">
+                    <code style="line-height: 60px !important;">
+                        USE AdventureWorks2014;
+                    </code>
+                </pre>
+            </div>
+            <div class="AnswerCode">
+                <div class="pytanie">
+                    <h3></h3>
+                </div>
+                <div class="odpowiedz">
+                    
+                </div>
+            </div>
+          </div>
+    </section>
+    <section class="slide" style="background-color:black">
+        <figure>
+            <img class="cover" src="pictures/00.PNG" alt="blog">
+            <figcaption class="white">Copyright © Cezary Walenciuk</figcaption>
+        </figure>
+    </section>
+    <section class="slide prism over bhgry">
+        <div class="grid-container">
+            <div class="HeaderTitle">
+                <h2 class="headerCODE">1-2 Sprawdzenie wersji serwera</h2>
+            </div>
+            <div class="PlaceCodeHere">
+                <pre style="font-size: 61px;overflow: hidden;  " class="language-sql">
+                    <code style="line-height: 60px !important;">
+                        SELECT @@VERSION;
+                    </code>
+                </pre>
+            </div>
+            <div class="AnswerCode">
+                <div class="pytanie">
+                    <h3></h3>
+                </div>
+                <div class="odpowiedz">
+                    
+                </div>
+            </div>
+          </div>
+    </section>
+    <section class="slide prism over bhgry">
+        <div class="grid-container">
+            <div class="HeaderTitle">
+                <h2 class="headerCODE">1-3 Sprawdzenie nazwy bazy danej do której jesteś podłączony</h2>
+            </div>
+            <div class="PlaceCodeHere">
+                <pre style="font-size: 61px;overflow: hidden;  " class="language-sql">
+                    <code style="line-height: 60px !important;">
+                        select DB_NAME();
+                    </code>
+                </pre>
+            </div>
+            <div class="AnswerCode">
+                <div class="pytanie">
+                    <h3></h3>
+                </div>
+                <div class="odpowiedz">
+                    
+                </div>
+            </div>
+          </div>
+    </section>
+
+    <section class="slide creamB">
+        <span class="shout colors"><span>Warto sprawdzać do jakiej bazy jesteś podłączony
+        </span></span>
+    </section>
+    <section class="slide prism over bhgry">
+        <div class="grid-container">
+            <div class="HeaderTitle">
+                <h2 class="headerCODE">1-4 Sprawdzenie nazwy swojego użytkownika</h2>
+            </div>
+            <div class="PlaceCodeHere">
+                <pre style="font-size: 21px;overflow: hidden;  " class="language-sql">
+                    <code style="line-height: 24px !important;">
+                        SELECT ORIGINAL_LOGIN() AS Orignal, CURRENT_USER AS CURRENTUSER,
+                        SYSTEM_USER AS SYSTEMUSER,SUSER_NAME() AS SUSERNAME, USER_NAME() AS USERNAME;
+
+                        --EXECUTE AS
+                        --ORIGINAL_LOGIN() sprawdza pierwsze zalogowanie
+                        --CURRENT_USER,SYSTEM_USER,SYSTEM_USER można oszukać przez impersonacje
+                    </code>
+                </pre>
+            </div>
+            <div class="AnswerCode">
+                <div class="pytanie">
+                    <h3></h3>
+                </div>
+                <div class="odpowiedz">
+                    
+                </div>
+            </div>
+          </div>
+    </section>
+    <section class="slide" style="background-color:black">
+        <figure>
+            <img class="cover" src="pictures/n08.PNG" alt="blog">
+            <figcaption class="white">Copyright © Cezary Walenciuk</figcaption>
+        </figure>
+    </section>
+    <section class="slide prism over bhgry">
+        <div class="grid-container">
+            <div class="HeaderTitle">
+                <h2 class="headerCODE">1-4 Sprawdzenie nazwy swoje użytkownika</h2>
+            </div>
+            <div class="PlaceCodeHere">
+                <pre style="font-size: 12px;overflow: hidden;  " class="language-sql">
+                    <code style="line-height: 12px !important;">
+                        --Create two temporary principals  
+                        CREATE LOGIN login1 WITH PASSWORD = 'J345#$)thb';  
+                        CREATE LOGIN login2 WITH PASSWORD = 'Uor80$23b';  
+                        GO  
+                        CREATE USER user1 FOR LOGIN login1;  
+                        CREATE USER user2 FOR LOGIN login2;  
+                        GO  
+                        --Give IMPERSONATE permissions on user2 to user1  
+                        --so that user1 can successfully set the execution context to user2.  
+                        GRANT IMPERSONATE ON USER:: user2 TO user1;  
+                        GO  
+                        --Display current execution context.  
+                        SELECT ORIGINAL_LOGIN() AS Orignal, CURRENT_USER AS CURRENTUSER,
+                        SYSTEM_USER AS SYSTEMUSER,SUSER_NAME()  AS SUSERNAME, USER_NAME()AS USERNAME;   
+                        -- Set the execution context to login1.   
+                        EXECUTE AS LOGIN = 'login1';  
+                        --Verify the execution context is now login1.  
+                        SELECT ORIGINAL_LOGIN() AS Orignal, CURRENT_USER AS CURRENTUSER,
+                        SYSTEM_USER AS SYSTEMUSER,SUSER_NAME()  AS SUSERNAME, USER_NAME() AS USERNAME;   
+                        --Login1 sets the execution context to login2.  
+                        EXECUTE AS USER = 'user2';  
+                        --Display current execution context.  
+                        SELECT ORIGINAL_LOGIN() AS Orignal, CURRENT_USER AS CURRENTUSER,
+                        SYSTEM_USER AS SYSTEMUSER,SUSER_NAME()  AS SUSERNAME, USER_NAME() AS USERNAME;   
+                        -- The execution context stack now has three principals: the originating caller, login1 and login2.  
+                        --The following REVERT statements will reset the execution context to the previous context.  
+                        REVERT;  
+                        --Display current execution context.  
+                        SELECT ORIGINAL_LOGIN() AS Orignal, CURRENT_USER AS CURRENTUSER,
+                        SYSTEM_USER AS SYSTEMUSER,SUSER_NAME()  AS SUSERNAME, USER_NAME() AS USERNAME;   
+                        REVERT;  
+                        --Display current execution context.  
+                        SELECT ORIGINAL_LOGIN() AS Orignal, CURRENT_USER AS CURRENTUSER,
+                        SYSTEM_USER AS SYSTEMUSER,SUSER_NAME()  AS SUSERNAME, USER_NAME() AS SUSERNAME;  
+                          
+                        --Remove temporary principals.  
+                        DROP LOGIN login1;  
+                        DROP LOGIN login2;  
+                        DROP USER user1;  
+                        DROP USER user2; 
+                    </code>
+                </pre>
+            </div>
+            <div class="AnswerCode">
+                <div class="pytanie">
+                    <h3></h3>
+                </div>
+                <div class="odpowiedz">
+                    
+                </div>
+            </div>
+          </div>
+    </section>
+    <section class="slide" style="background-color:black">
+        <figure>
+            <img class="cover" src="pictures/n07.PNG" alt="blog">
+            <figcaption class="white">Copyright © Cezary Walenciuk</figcaption>
+        </figure>
+    </section>
+    <section class="slide prism over bhgry">
+        <div class="grid-container">
+            <div class="HeaderTitle">
+                <h2 class="headerCODE">1-5 Proste zapytanie do bazy</h2>
+            </div>
+            <div class="PlaceCodeHere">
+                <pre style="font-size: 51px;overflow: hidden;  " class="language-sql">
+                    <code style="line-height: 50px !important;">
+                        SELECT NationalIDNumber,
+                        LoginID,
+                        JobTitle
+                        FROM HumanResources.Employee;
+                    </code>
+                </pre>
+            </div>
+            <div class="AnswerCode">
+                <div class="pytanie">
+                    <h3></h3>
+                </div>
+                <div class="odpowiedz">
+                    
+                </div>
+            </div>
+          </div>
+    </section>
+    <section class="slide prism over bhgry">
+        <div class="grid-container">
+            <div class="HeaderTitle">
+                <h2 class="headerCODE">1-6 Znalezienie specyficznych rekordów</h2>
+            </div>
+            <div class="PlaceCodeHere">
+                <pre style="font-size: 31px;overflow: hidden;  " class="language-sql">
+                    <code style="line-height: 40px !important;">
+                        SELECT Title, FirstName, LastName
+                        FROM Person.Person
+                        WHERE Title = 'Ms.';
+
+                        SELECT Title, FirstName, LastName
+                        FROM Person.Person
+                        WHERE Title = 'Ms.' AND LastName = 'Antrim';
+                    </code>
+                </pre>
+            </div>
+            <div class="AnswerCode">
+                <div class="pytanie">
+                    <h3></h3>
+                </div>
+                <div class="odpowiedz">
+                    
+                </div>
+            </div>
+          </div>
+    </section>
+    <section class="slide prism over bhgry">
+        <div class="grid-container">
+            <div class="HeaderTitle">
+                <h2 class="headerCODE">1-7 Pobierz liste dostępnych tabel</h2>
+            </div>
+            <div class="PlaceCodeHere">
+                <pre style="font-size: 41px;overflow: hidden;  " class="language-sql">
+                    <code style="line-height: 40px !important;">
+                        SELECT table_name, table_type
+                        FROM information_schema.tables
+                        WHERE table_schema = 'HumanResources';
+                    </code>
+                </pre>
+            </div>
+            <div class="AnswerCode">
+                <div class="pytanie">
+                    <h3></h3>
+                </div>
+                <div class="odpowiedz">
+                    
+                </div>
+            </div>
+          </div>
+    </section>
+    <section class="slide" style="background-color:black">
+        <figure>
+            <img class="cover" src="pictures/n05.PNG" alt="blog">
+            <figcaption class="white">Copyright © Cezary Walenciuk</figcaption>
+        </figure>
+    </section>
+    <section class="slide prism over bhgry">
+        <div class="grid-container">
+            <div class="HeaderTitle">
+                <h2 class="headerCODE">1-8 Zmiana nazw kolumn</h2>
+            </div>
+            <div class="PlaceCodeHere">
+                <pre style="font-size: 41px;overflow: hidden;  " class="language-sql">
+                    <code style="line-height: 40px !important;">
+                        SELECT BusinessEntityID AS 'ID Pracownika',
+                        VacationHours AS 'Wakacje',
+                        SickLeaveHours AS "Chorobowe"
+                        FROM HumanResources.Employee;
+                    </code>
+                </pre>
+            </div>
+            <div class="AnswerCode">
+                <div class="pytanie">
+                    <h3></h3>
+                </div>
+                <div class="odpowiedz">
+                    
+                </div>
+            </div>
+          </div>
+    </section>
+    <section class="slide prism over bhgry">
+        <div class="grid-container">
+            <div class="HeaderTitle">
+                <h2 class="headerCODE">1-9 Skrócenie nazw tabeli </h2>
+            </div>
+            <div class="PlaceCodeHere">
+                <pre style="font-size: 41px;overflow: hidden;  " class="language-sql">
+                    <code style="line-height: 40px !important;">
+                        SELECT BusinessEntityID AS 'ID Pracownika',
+                        VacationHours AS 'Wakacje',
+                        SickLeaveHours AS "Chorobowe"
+                        FROM HumanResources.Employee AS e
+                    </code>
+                </pre>
+            </div>
+            <div class="AnswerCode">
+                <div class="pytanie">
+                    <h3></h3>
+                </div>
+                <div class="odpowiedz">
+                    
+                </div>
+            </div>
+          </div>
+    </section>
+    <section class="slide" style="background-color:black">
+        <figure>
+            <img class="cover" src="pictures/n04.PNG" alt="blog">
+            <figcaption class="white">Copyright © Cezary Walenciuk</figcaption>
+        </figure>
+    </section>
+    <section class="slide prism over bhgry">
+        <div class="grid-container">
+            <div class="HeaderTitle">
+                <h2 class="headerCODE">1-10 Kalkulacja wartości do innej kolumny </h2>
+            </div>
+            <div class="PlaceCodeHere">
+                <pre style="font-size: 38px;overflow: hidden;  " class="language-sql">
+                    <code style="line-height: 39px !important;">
+                        SELECT BusinessEntityID AS "EmployeeID",
+                        VacationHours + SickLeaveHours AS "Czas wolny"
+                        FROM HumanResources.Employee
+                    </code>
+                </pre>
+            </div>
+            <div class="AnswerCode">
+                <div class="pytanie">
+                    <h3></h3>
+                </div>
+                <div class="odpowiedz">
+                    
+                </div>
+            </div>
+          </div>
+    </section>
+    <section class="slide" style="background-color:black">
+        <figure>
+            <img class="cover" src="pictures/n03.PNG" alt="blog">
+            <figcaption class="white">Copyright © Cezary Walenciuk</figcaption>
+        </figure>
+    </section>
+    <section class="slide prism over bhgry">
+        <div class="grid-container">
+            <div class="HeaderTitle">
+                <h2 class="headerCODE">1-11 Negowanie wyszukiwania </h2>
+            </div>
+            <div class="PlaceCodeHere">
+                <pre style="font-size: 37px;overflow: hidden;  " class="language-sql">
+                    <code style="line-height: 40px !important;">
+                        SELECT Title, FirstName, LastName
+                        FROM Person.Person
+                        WHERE NOT (Title = 'Ms.' OR Title = 'Mr.')
+                    </code>
+                </pre>
+            </div>
+            <div class="AnswerCode">
+                <div class="pytanie">
+                    <h3></h3>
+                </div>
+                <div class="odpowiedz">
+                    
+                </div>
+            </div>
+          </div>
+    </section>
+
+    <section class="slide prism over bhgry">
+        <div class="grid-container">
+            <div class="HeaderTitle">
+                <h2 class="headerCODE">1-12 Nawiasy w wyszukiwaniu </h2>
+            </div>
+            <div class="PlaceCodeHere">
+                <pre style="font-size: 31px;overflow: hidden;  " class="language-sql">
+                    <code style="line-height: 40px !important;">
+                        SELECT Title, FirstName, LastName
+                        FROM Person.Person
+                        WHERE Title = 'Ms.' AND
+                        (FirstName = 'Catherine' OR
+                        FirstName = 'Margaret' OR
+                        LastName = 'Adams' OR LastName = 'Smith');
+                    </code>
+                </pre>
+            </div>
+            <div class="AnswerCode">
+                <div class="pytanie">
+                    <h3></h3>
+                </div>
+                <div class="odpowiedz">
+                    
+                </div>
+            </div>
+          </div>
+        </div>
+  </section>
+
+  <section class="slide prism over bhgry">
+    <div class="grid-container">
+        <div class="HeaderTitle">
+            <h2 class="headerCODE">1-13 Sprawdzenie egzystencji </h2>
+        </div>
+        <div class="PlaceCodeHere">
+            <pre style="font-size: 31px;overflow: hidden;  " class="language-sql">
+                <code style="line-height: 40px !important;">
+                        SELECT TOP(1) 1
+                        FROM HumanResources.Employee
+                        WHERE SickLeaveHours > 70;
+                        
+                        SELECT 'Prawda'
+                        WHERE EXISTS (
+                            SELECT *
+                            FROM HumanResources.Employee
+                            WHERE SickLeaveHours > 40
+                        );
+                </code>
+            </pre>
+        </div>
+        <div class="AnswerCode">
+            <div class="pytanie">
+                <h3></h3>
+            </div>
+            <div class="odpowiedz">
+                
+            </div>
+        </div>
+      </div>
+    </div>
+</section>
+<section class="slide" style="background-color:black">
+    <figure>
+        <img class="cover" src="pictures/n02.PNG" alt="blog">
+        <figcaption class="white">Copyright © Cezary Walenciuk</figcaption>
+    </figure>
+</section>
+
+
+
+
+<section class="slide prism over bhgry">
+    <div class="grid-container">
+        <div class="HeaderTitle">
+            <h2 class="headerCODE">1-14 Wartości pomiędzy</h2>
+        </div>
+        <div class="PlaceCodeHere">
+            <pre style="font-size: 31px;overflow: hidden;  " class="language-sql">
+                <code style="line-height: 40px !important;">
+                        SELECT SalesOrderID, ShipDate
+                        FROM Sales.SalesOrderHeader
+                        WHERE ShipDate BETWEEN '2011-07-03 00:00:00.0' 
+                        AND '2011-07-04 23:59:59.0';
+                        
+                        SELECT SalesOrderID, ShipDate
+                        FROM Sales.SalesOrderHeader
+                        WHERE ShipDate >= '2011-07-03' 
+                        AND ShipDate < '2011-07-04';
+                </code>
+            </pre>
+        </div>
+        <div class="AnswerCode">
+            <div class="pytanie">
+                <h3></h3>
+            </div>
+            <div class="odpowiedz">
+                
+            </div>
+        </div>
+      </div>
+    </div>
+</section>
+
+<section class="slide" style="background-color:black">
+    <figure>
+        <img class="cover" src="pictures/01.png" alt="blog">
+        <figcaption class="white">Copyright © Cezary Walenciuk</figcaption>
+    </figure>
+</section>
+    <section class="slide prism over bhgry">
+        <div class="grid-container">
+            <div class="HeaderTitle">
+                <h2 class="headerCODE">1-14-2 Wartości pomiędzy</h2>
+            </div>
+            <div class="PlaceCodeHere">
+                <pre style="font-size: 31px;overflow: hidden;  " class="language-sql">
+                    <code style="line-height: 40px !important;">
+                        SELECT SalesOrderID, ShipDate
+                        FROM Sales.SalesOrderHeader
+                        WHERE ShipDate BETWEEN '2011-07-03 00:00:00.0' 
+                        AND '2011-07-03 23:59:59.0';
+                        
+                        SELECT SalesOrderID, ShipDate
+                        FROM Sales.SalesOrderHeader
+                        WHERE ShipDate >= '2011-07-03' 
+                        AND ShipDate < '2011-07-04';
+                    </code>
+                </pre>
+            </div>
+            <div class="AnswerCode">
+                <div class="pytanie">
+                    <h3></h3>
+                </div>
+                <div class="odpowiedz">
+                    
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="slide" style="background-color:black">
+        <figure>
+            <img class="cover" src="pictures/02.png" alt="blog">
+            <figcaption class="white">Copyright © Cezary Walenciuk</figcaption>
+        </figure>
+    </section>
+
+    <section class="slide prism over bhgry">
+        <div class="grid-container">
+            <div class="HeaderTitle">
+                <h2 class="headerCODE">1-15 Sprawdzenie czy wartość jest NULL</h2>
+            </div>
+            <div class="PlaceCodeHere">
+                <pre style="font-size: 41px;overflow: hidden;  " class="language-sql">
+                    <code style="line-height: 40px !important;">
+                        SELECT ProductID, Name, Weight
+                        FROM Production.Product
+                        WHERE Weight IS NULL;
+
+                    </code>
+                </pre>
+            </div>
+            <div class="AnswerCode">
+                <div class="pytanie">
+                    <h3></h3>
+                </div>
+                <div class="odpowiedz">
+                    
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <section class="slide prism over bhgry">
+        <div class="grid-container">
+            <div class="HeaderTitle">
+                <h2 class="headerCODE">1-15-2 Sprawdzenie czy wartość jest NULL</h2>
+            </div>
+            <div class="PlaceCodeHere">
+                <pre style="font-size: 31px;overflow: hidden;  " class="language-sql">
+                    <code style="line-height: 40px !important;">
+                        SELECT ProductID, Name, Weight
+                        FROM Production.Product
+                        WHERE Weight IS NULL;
+
+                        SELECT 1 
+                        WHERE NULL = NULL
+
+                        SELECT 1 
+                        WHERE NULL <> NULL
+                    </code>
+                </pre>
+            </div>
+            <div class="AnswerCode">
+                <div class="pytanie">
+                    <h3></h3>
+                </div>
+                <div class="odpowiedz">
+                    
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="slide" style="background-color:black">
+        <figure>
+            <img class="cover" src="pictures/n01.PNG" alt="blog">
+            <figcaption class="white">Copyright © Cezary Walenciuk</figcaption>
+        </figure>
+    </section>
+
+
+    <section class="slide prism over bhgry">
+        <div class="grid-container">
+            <div class="HeaderTitle">
+                <h2 class="headerCODE">1-16 Lista parametrów</h2>
+            </div>
+            <div class="PlaceCodeHere">
+                <pre style="font-size: 31px;overflow: hidden;  " class="language-sql">
+                    <code style="line-height: 40px !important;">
+                        SELECT ProductID, Name, Color
+                        FROM Production.Product
+                        WHERE Color IN ('Blue', 'Black','Red');
+
+                        --WHERE Color IN ('Blue', 'Black', 'Red')
+                        --WHERE Color = 'Blue' OR Color = 'Black' OR Color = 'Red'
+                    </code>
+                </pre>
+            </div>
+            <div class="AnswerCode">
+                <div class="pytanie">
+                    <h3></h3>
+                </div>
+                <div class="odpowiedz">
+                    
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <section class="slide prism over bhgry">
+        <div class="grid-container">
+            <div class="HeaderTitle">
+                <h2 class="headerCODE">1-16-2 Lista parametrów</h2>
+            </div>
+            <div class="PlaceCodeHere">
+                <pre style="font-size: 31px;overflow: hidden;  " class="language-sql">
+                    <code style="line-height: 40px !important;">
+                        SELECT ProductID, Name, Color
+                        FROM Production.Product
+                        WHERE Color NOT IN ('Kaszubski', 'Wojonwnik');
+
+                        SELECT ProductID, Name, Color
+                        FROM Production.Product
+                        WHERE Color NOT IN ('Kaszubski',NULL);
+                        --NOT IN jest kiepskim pomysłem
+                    </code>
+                </pre>
+            </div>
+            <div class="AnswerCode">
+                <div class="pytanie">
+                    <h3></h3>
+                </div>
+                <div class="odpowiedz">
+                    
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="slide prism over bhgry">
+        <div class="grid-container">
+            <div class="HeaderTitle">
+                <h2 class="headerCODE">1-17 Szukanie po WildCard</h2>
+            </div>
+            <div class="PlaceCodeHere">
+                <pre style="font-size: 31px;overflow: hidden;  " class="language-sql">
+                    <code style="line-height: 40px !important;">
+                        SELECT ProductID, Name
+                        FROM Production.Product
+                        WHERE Name LIKE 'B%';
+                        
+                        SELECT ProductID, Name
+                        FROM Production.Product
+                        WHERE Name LIKE '%/%%' ESCAPE '/'
+                    </code>
+                </pre>
+            </div>
+            <div class="AnswerCode">
+                <div class="pytanie">
+                    <h3></h3>
+                </div>
+                <div class="odpowiedz">
+                    
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="slide prism over bhgry">
+        <div class="grid-container">
+            <div class="HeaderTitle">
+                <h2 class="headerCODE">1-18 Sortowanie wartości</h2>
+            </div>
+            <div class="PlaceCodeHere">
+                <pre style="font-size: 31px;overflow: hidden;  " class="language-sql">
+                    <code style="line-height: 40px !important;">
+                        SELECT h.EndDate,h.StartDate, h.ListPrice
+                        FROM Production.ProductListPriceHistory h
+                        ORDER BY h.EndDate, h.ListPrice
+                    </code>
+                </pre>
+            </div>
+            <div class="AnswerCode">
+                <div class="pytanie">
+                    <h3></h3>
+                </div>
+                <div class="odpowiedz">
+                    
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="slide" style="background-color:black">
+        <figure>
+            <img class="cover" src="pictures/n09.PNG" alt="blog">
+            <figcaption class="white">Copyright © Cezary Walenciuk</figcaption>
+        </figure>
+    </section>
+    <section class="slide prism over bhgry">
+        <div class="grid-container">
+            <div class="HeaderTitle">
+                <h2 class="headerCODE">1-18-2 Sortowanie wartości</h2>
+            </div>
+            <div class="PlaceCodeHere">
+                <pre style="font-size: 31px;overflow: hidden;  " class="language-sql">
+                    <code style="line-height: 40px !important;">
+                        SELECT h.EndDate,h.StartDate, h.ListPrice
+                        FROM Production.ProductListPriceHistory h 
+                        ORDER BY h.EndDate ASC, h.ListPrice DESC
+                    </code>
+                </pre>
+            </div>
+            <div class="AnswerCode">
+                <div class="pytanie">
+                    <h3></h3>
+                </div>
+                <div class="odpowiedz">
+                    
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="slide" style="background-color:black">
+        <figure>
+            <img class="cover" src="pictures/n10.PNG" alt="blog">
+            <figcaption class="white">Copyright © Cezary Walenciuk</figcaption>
+        </figure>
+    </section>
+    <section class="slide prism over bhgry">
+        <div class="grid-container">
+            <div class="HeaderTitle">
+                <h2 class="headerCODE">1-19 Sortowanie wartości i wielkość liter</h2>
+            </div>
+            <div class="PlaceCodeHere">
+                <pre style="font-size: 31px;overflow: hidden;  " class="language-sql">
+                    <code style="line-height: 40px !important;">
+                        UPDATE [Production].[Product]
+                        SET [Name] = 'HL MOUNTAIN FRAME - Black, 42'
+                        WHERE Name = 'HL Mountain Frame - Black, 42'
+                        
+                        SELECT p.Name, p.ListPrice
+                        FROM Production.Product p
+                        WHERE p.Name LIKE 'HL Mountain Frame%'
+                        ORDER BY p.Name COLLATE Latin1_General_BIN ASC
+                    </code>
+                </pre>
+            </div>
+            <div class="AnswerCode">
+                <div class="pytanie">
+                    <h3></h3>
+                </div>
+                <div class="odpowiedz">
+                    
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="slide" style="background-color:black">
+        <figure>
+            <img class="cover" src="pictures/03.png" alt="blog">
+            <figcaption class="white">Copyright © Cezary Walenciuk</figcaption>
+        </figure>
+    </section>
+    <section class="slide prism over bhgry">
+        <div class="grid-container">
+            <div class="HeaderTitle">
+                <h2 class="headerCODE">1-19-2 Sortowanie wartości i wielkość liter</h2>
+            </div>
+            <div class="PlaceCodeHere">
+                <pre style="font-size: 31px;overflow: hidden;  " class="language-sql">
+                    <code style="line-height: 40px !important;">
+                        SELECT Name, Description
+                        FROM fn_helpcollations();
+
+                        SELECT Name, Description
+                        FROM fn_helpcollations()
+                        where NAME Like 'Pol%'
+                    </code>
+                </pre>
+            </div>
+            <div class="AnswerCode">
+                <div class="pytanie">
+                    <h3></h3>
+                </div>
+                <div class="odpowiedz">
+                    
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="slide" style="background-color:black">
+        <figure>
+            <img class="cover" src="pictures/n11.png" alt="blog">
+            <figcaption class="white">Copyright © Cezary Walenciuk</figcaption>
+        </figure>
+    </section>
+    <section class="slide prism over bhgry">
+        <div class="grid-container">
+            <div class="HeaderTitle">
+                <h2 class="headerCODE">1-20-1 Sortowanie wartości i NULL-e</h2>
+            </div>
+            <div class="PlaceCodeHere">
+                <pre style="font-size: 31px;overflow: hidden;  " class="language-sql">
+                    <code style="line-height: 40px !important;">
+                        SELECT ProductID, Name, Weight, 
+                        ISNULL(Weight, 1)
+                        FROM Production.Product
+                        ORDER BY ISNULL(Weight, 1) DESC, Weight;
+                        
+                        SELECT ProductID, Name, Weight, 
+                        IIF(Weight IS NULL, 1, 0)
+                        FROM Production.Product
+                        ORDER BY IIF(Weight IS NULL, 1, 0), Weight;
+                    </code>
+                </pre>
+            </div>
+            <div class="AnswerCode">
+                <div class="pytanie">
+                    <h3></h3>
+                </div>
+                <div class="odpowiedz">
+                    
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="slide" style="background-color:black">
+        <figure>
+            <img class="cover" src="pictures/n12.png" alt="blog">
+            <figcaption class="white">Copyright © Cezary Walenciuk</figcaption>
+        </figure>
+    </section>
+
+
+    <section class="slide prism over bhgry">
+        <div class="grid-container">
+            <div class="HeaderTitle">
+                <h2 class="headerCODE">1-21 Stronicowanie rezultatu od SQL Server 2012</h2>
+            </div>
+            <div class="PlaceCodeHere">
+                <pre style="font-size: 31px;overflow: hidden;  " class="language-sql">
+                    <code style="line-height: 40px !important;">
+                        SELECT ProductID, Name
+                        FROM Production.Product
+                        ORDER BY Name
+                        OFFSET 0 ROWS FETCH NEXT 10 ROWS ONLY;
+
+                        SELECT ProductID, Name
+                        FROM Production.Product
+                        ORDER BY Name
+                        OFFSET 8 ROWS FETCH NEXT 10 ROWS ONLY;
+                    </code>
+                </pre>
+            </div>
+            <div class="AnswerCode">
+                <div class="pytanie">
+                    <h3></h3>
+                </div>
+                <div class="odpowiedz">
+                    
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="slide" style="background-color:black">
+        <figure>
+            <img class="cover" src="pictures/n13.png" alt="blog">
+            <figcaption class="white">Copyright © Cezary Walenciuk</figcaption>
+        </figure>
+    </section>
+
+    <section class="slide prism over bhgry">
+        <div class="grid-container">
+            <div class="HeaderTitle">
+                <h2 class="headerCODE">1-21 Stronicowanie rezultatu od SQL Server 2012</h2>
+            </div>
+            <div class="PlaceCodeHere">
+                <pre style="font-size: 31px;overflow: hidden;  " class="language-sql">
+                    <code style="line-height: 40px !important;">
+                        SELECT ProductID, Name
+                        FROM Production.Product
+                        ORDER BY Name
+                        OFFSET 0 ROWS FETCH NEXT 10 ROWS ONLY;
+
+                        SELECT ProductID, Name
+                        FROM Production.Product
+                        ORDER BY Name
+                        OFFSET 8 ROWS FETCH NEXT 10 ROWS ONLY;
+
+                        -- a co jeśli nowy rekord sie pojawił ?
+                    </code>
+                </pre>
+            </div>
+            <div class="AnswerCode">
+                <div class="pytanie">
+                    <h3></h3>
+                </div>
+                <div class="odpowiedz">
+                    
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <section class="slide prism over bhgry">
+        <div class="grid-container">
+            <div class="HeaderTitle">
+                <h2 class="headerCODE">1-21-2 Stronicowanie rezultatu od SQL Server 2012</h2>
+            </div>
+            <div class="PlaceCodeHere">
+                <pre style="font-size: 31px;overflow: hidden;  " class="language-sql">
+                    <code style="line-height: 40px !important;">
+                        SET TRANSACTION ISOLATION LEVEL SNAPSHOT;
+                        BEGIN TRANSACTION;
+                        /* Queries go here */
+                        COMMIT;
+                        /* Return to default */
+                        SET TRANSACTION ISOLATION LEVEL READ COMMITTED;
+                    </code>
+                </pre>
+            </div>
+            <div class="AnswerCode">
+                <div class="pytanie">
+                    <h3></h3>
+                </div>
+                <div class="odpowiedz">
+                    
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <section class="slide prism over bhgry">
+        <div class="grid-container">
+            <div class="HeaderTitle">
+                <h2 class="headerCODE">1-22 Pobieranie przykładowych rekrodów z tabelki</h2>
+            </div>
+            <div class="PlaceCodeHere">
+                <pre style="font-size: 27x;overflow: hidden;  " class="language-sql">
+                    <code style="line-height: 30px !important;">
+                        SELECT *
+                        FROM Purchasing.PurchaseOrderHeader
+                        TABLESAMPLE (5 PERCENT);
+                        --Nie koniecznie jest to 5 procent
+
+                        SELECT *
+                        FROM Purchasing.PurchaseOrderHeader
+                        REPEATABLE TABLESAMPLE   (5 PERCENT);
+
+                        SELECT *
+                        FROM Purchasing.PurchaseOrderHeader
+                        TABLESAMPLE (200 ROWS);
+                        --Nie koniecznie jest to 200 rekordów
+                    </code>
+                </pre>
+            </div>
+            <div class="AnswerCode">
+                <div class="pytanie">
+                    <h3></h3>
+                </div>
+                <div class="odpowiedz">
+                    
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="slide prism over bhgry">
+        <div class="grid-container">
+            <div class="HeaderTitle">
+                <h2 class="headerCODE">1-23-2 Pobieranie procentu rekrodów z tabelki</h2>
+            </div>
+            <div class="PlaceCodeHere">
+                <pre style="font-size: 31px;overflow: hidden;  " class="language-sql">
+                    <code style="line-height: 40px !important;">
+                        SELECT * FROM Purchasing.PurchaseOrderHeader
+                        WHERE (ABS(CAST(
+                        (BINARY_CHECKSUM(*) *
+                        RAND()) as int)) % 100) < 10
+                    </code>
+                </pre>
+            </div>
+            <div class="AnswerCode">
+                <div class="pytanie">
+                    <h3></h3>
+                </div>
+                <div class="odpowiedz">
+                    
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="slide creamB">
+        <span class="shout colors"><span>2. Podstawy programowania w T-SQL
+        </span></span>
+
+    </section>
+
+    <section class="slide prism over bhgry">
+        <div class="grid-container">
+            <div class="HeaderTitle">
+                <h2 class="headerCODE">2-1 Uruchomienie pliku T-SQL</h2>
+            </div>
+            <div class="PlaceCodeHere">
+                <pre style="font-size: 30px;overflow: hidden;  " class="language-sql">
+                    <code style="line-height: 30px !important;">
+                        SQLCMD -e -s CEZMSI
+                        -i D:\PanNiebieski\Projekty\SCRIPT.sql
+                        -o D:\PanNiebieski\Projekty\output.txt
+
+                        USE AdventureWorks2014;
+                        SELECT TOP (10) [ProductID]
+                            ,[Name]
+                            ,[ProductNumber]
+                            ,[Color]
+
+                        FROM [AdventureWorks2014].[Production].[Product]
+
+                        GO
+                    </code>
+                </pre>
+            </div>
+            <div class="AnswerCode">
+                <div class="pytanie">
+                    <h3></h3>
+                </div>
+                <div class="odpowiedz">
+                    
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="slide creamB">
+        <span class="shout colors"><span>
+            Wyrażenie "GO" nie jest wyrażeniem SQL czy T-SQL. Pomaga to tylko w przetwarzaniu polecenia
+        </span></span>
+    </section>
+
+    <section class="slide creamB   compact ">
+        <h2>SQLCMD</h2>
+        <ol class="nonumbers">
+            <li class="next"><span class="green">-e</span> Wykona operacje Echo </li>
+            <li class="next"><span class="green">-s</span> łączy z podaną instancją serwera</li>
+            <li class="next"><span class="green">-i</span> Czyta wyrażenie SQL z podanego pliku</li>
+            <li class="next"><span class="green">-o</span> Napisanie wyniku do podanego pliku</li>
+        </ol>
+    </section>
+
+    <section class="slide prism over bhgry">
+        <div class="grid-container">
+            <div class="HeaderTitle">
+                <h2 class="headerCODE">2-2 Przypisanie rezultatu do zmiennej</h2>
+            </div>
+            <div class="PlaceCodeHere">
+                <pre style="font-size: 27px;overflow: hidden;  " class="language-sql">
+                    <code style="line-height: 27px !important;">
+                        DECLARE @AddressLine1 NVARCHAR(60);
+                        DECLARE @AddressLine2 NVARCHAR(60);
+
+                        SELECT @AddressLine1 = AddressLine1, @AddressLine2 = AddressLine2
+                        FROM Person.Address
+                        WHERE AddressID = 66;
+
+                        --To zwróci rekordy
+                        SELECT @AddressLine1 AS Address1, @AddressLine2 AS Address2;
+                    </code>
+                </pre>
+            </div>
+            <div class="AnswerCode">
+                <div class="pytanie">
+                    <h3></h3>
+                </div>
+                <div class="odpowiedz">
+                    
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="slide" style="background-color:black">
+        <figure>
+            <img class="cover" src="pictures/n16.PNG" alt="blog">
+            <figcaption class="white">Copyright © Cezary Walenciuk</figcaption>
+        </figure>
+    </section>
+
+    <section class="slide prism over bhgry">
+        <div class="grid-container">
+            <div class="HeaderTitle">
+                <h2 class="headerCODE">2-2-1 Przypisanie rezultatu do zmiennej</h2>
+            </div>
+            <div class="PlaceCodeHere">
+                <pre style="font-size: 25px;overflow: hidden;  " class="language-sql">
+                    <code style="line-height: 25px !important;">
+                        DECLARE @AddressLine1 NVARCHAR(60) = ''
+                        DECLARE @AddressLine2 NVARCHAR(60) = ''
+                        
+                        SELECT @AddressLine1 = AddressLine1, @AddressLine2 = AddressLine2
+                        FROM Person.Address
+                        WHERE AddressID = 156;
+                        
+                        IF @@ROWCOUNT = 1
+                        SELECT @AddressLine1, @AddressLine2
+                        ELSE IF @@ROWCOUNT > 1
+                        SELECT 'Znaleziono więcej niż 1 rekord';
+                        ELSE 
+                        SELECT 'Brak rekordów';
+                    </code>
+                </pre>
+            </div>
+            <div class="AnswerCode">
+                <div class="pytanie">
+                    <h3></h3>
+                </div>
+                <div class="odpowiedz">
+                    
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="slide prism over bhgry">
+        <div class="grid-container">
+            <div class="HeaderTitle">
+                <h2 class="headerCODE">2-2-2 Przypisanie rezultatu do zmiennej</h2>
+            </div>
+            <div class="PlaceCodeHere">
+                <pre style="font-size: 31px;overflow: hidden;  " class="language-sql">
+                    <code style="line-height: 31px !important;">
+                        DECLARE @totalviews INT
+                        SELECT @totalviews = CAST(RAND() * 10 + 1  as INT)
+                        print(@totalviews)
+
+                        --Losowa liczba od 1 do 11
+                    </code>
+                </pre>
+            </div>
+            <div class="AnswerCode">
+                <div class="pytanie">
+                    <h3></h3>
+                </div>
+                <div class="odpowiedz">
+                    
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="slide prism over bhgry">
+        <div class="grid-container">
+            <div class="HeaderTitle">
+                <h2 class="headerCODE">2-3 Pisanie wyrażeń</h2>
+            </div>
+            <div class="PlaceCodeHere">
+                <pre style="font-size: 27px;overflow: hidden;  " class="language-sql">
+                    <code style="line-height: 27px !important;">
+                        DECLARE @AddressLine1 NVARCHAR(60);
+                        DECLARE @AddressLine2 NVARCHAR(60);
+                        DECLARE @OneLine NVARCHAR(120);
+
+                        SELECT @AddressLine1 = AddressLine1, @AddressLine2 = AddressLine2
+                        FROM Person.Address
+                        WHERE AddressID = 66;
+
+                        SET @OneLine = @AddressLine1 + '; ' + @AddressLine2;
+                        SELECT @OneLine;
+                    </code>
+                </pre>
+            </div>
+            <div class="AnswerCode">
+                <div class="pytanie">
+                    <h3></h3>
+                </div>
+                <div class="odpowiedz">
+                    
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="slide" style="background-color:black">
+        <figure>
+            <img class="cover" src="pictures/n15.PNG" alt="blog">
+            <figcaption class="white">Copyright © Cezary Walenciuk</figcaption>
+        </figure>
+    </section>
+    <section class="slide prism over bhgry">
+        <div class="grid-container">
+            <div class="HeaderTitle">
+                <h2 class="headerCODE">2-4 Wyrażenia IF</h2>
+            </div>
+            <div class="PlaceCodeHere">
+                <pre style="font-size: 30px;overflow: hidden;  " class="language-sql">
+                    <code style="line-height: 30px !important;">
+                        DECLARE @QuerySelector int = 2;
+                        IF @QuerySelector = 1
+                            BEGIN
+                                SELECT TOP 3 ProductID, Name, Color
+                                FROM Production.Product
+                                WHERE Color = 'Silver'
+                                ORDER BY Name;
+                            END
+                        ELSE
+                            BEGIN
+                                SELECT TOP 3 ProductID, Name, Color
+                                FROM Production.Product
+                                WHERE Color = 'Black'
+                                ORDER BY Name;
+                            END;
+                    </code>
+                </pre>
+            </div>
+            <div class="AnswerCode">
+                <div class="pytanie">
+                    <h3></h3>
+                </div>
+                <div class="odpowiedz">
+                    
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="slide" style="background-color:black">
+        <figure>
+            <img class="cover" src="pictures/n17.PNG" alt="blog">
+            <figcaption class="white">Copyright © Cezary Walenciuk</figcaption>
+        </figure>
+    </section>
+    <section class="slide prism over bhgry">
+        <div class="grid-container">
+            <div class="HeaderTitle">
+                <h2 class="headerCODE">2-5 Sprawdzenie czy rekord istnieje</h2>
+            </div>
+            <div class="PlaceCodeHere">
+                <pre style="font-size: 28px;overflow: hidden;  " class="language-sql">
+                    <code style="line-height: 28px !important;">
+                        IF EXISTS (
+                            SELECT * FROM Production.Product
+                            WHERE Color = 'Silver')
+                            BEGIN
+                                SELECT TOP 3 ProductID, Name, Color
+                                FROM Production.Product
+                                WHERE Color = 'Silver'
+                                ORDER BY Name;
+                            END
+                        ELSE
+                            BEGIN
+                                SELECT TOP 3 ProductID, Name, Color
+                                FROM Production.Product
+                                WHERE Color = 'Black'
+                                ORDER BY Name;
+                            END;
+                    </code>
+                </pre>
+            </div>
+            <div class="AnswerCode">
+                <div class="pytanie">
+                    <h3></h3>
+                </div>
+                <div class="odpowiedz">
+                    
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="slide prism over bhgry">
+        <div class="grid-container">
+            <div class="HeaderTitle">
+                <h2 class="headerCODE">2-6 GoTO</h2>
+            </div>
+            <div class="PlaceCodeHere">
+                <pre style="font-size: 18px;overflow: hidden;  " class="language-sql">
+                    <code style="line-height: 18px !important;">
+                        DECLARE @Name nvarchar(50) = 'Engineering';
+                        DECLARE @GroupName nvarchar(50) = 'Research and Development';
+                        DECLARE @Exists bit = 0;
+
+                        IF EXISTS (
+                            SELECT Name
+                            FROM HumanResources.Department
+                            WHERE Name = @Name)
+                            BEGIN
+                                SET @Exists = 1;
+                                GOTO SkipInsert;
+                            END;
+
+                        INSERT INTO HumanResources.Department
+                        (Name, GroupName)
+                        VALUES(@Name , @GroupName);
+
+                        SkipInsert: IF @Exists = 1
+                            BEGIN
+                                PRINT @Name + ' already exists in HumanResources.Department';
+                            END
+                        ELSE
+                            BEGIN
+                            PRINT 'Row added';
+                            END;
+                    </code>
+                </pre>
+            </div>
+            <div class="AnswerCode">
+                <div class="pytanie">
+                    <h3></h3>
+                </div>
+                <div class="odpowiedz">
+                    
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="slide prism over bhgry">
+        <div class="grid-container">
+            <div class="HeaderTitle">
+                <h2 class="headerCODE">2-7 Przechwytywanie błędów</h2>
+            </div>
+            <div class="PlaceCodeHere">
+                <pre style="font-size: 25px;overflow: hidden;  " class="language-sql">
+                    <code style="line-height: 25px !important;">
+                        BEGIN TRY
+                            ALTER TABLE Production.Product
+                            DROP CONSTRAINT FK_Trap_Color;
+                        END TRY
+                        BEGIN CATCH
+                            PRINT 'Ignore this failure.';
+                        END CATCH;
+                        GO
+                        BEGIN TRY
+                            DROP TABLE Production.TrapColor;
+                        END TRY
+                        BEGIN CATCH
+                            PRINT 'Ignore this failure.';
+                        END CATCH;
+                        GO
+                    </code>
+                </pre>
+            </div>
+            <div class="AnswerCode">
+                <div class="pytanie">
+                    <h3></h3>
+                </div>
+                <div class="odpowiedz">
+                    
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="slide prism over bhgry">
+        <div class="grid-container">
+            <div class="HeaderTitle">
+                <h2 class="headerCODE">2-7-1 Przechwytywanie błędów</h2>
+            </div>
+            <div class="PlaceCodeHere">
+                <pre style="font-size: 17px;overflow: hidden;  " class="language-sql">
+                    <code style="line-height: 20px !important;">
+                        CREATE TABLE Production.TrapColor (
+                            Color NVARCHAR(15),
+                            CONSTRAINT PK_TrapColor_Color
+                            PRIMARY KEY (Color)
+                            );
+                        GO
+
+                        BEGIN TRY
+                            INSERT INTO Production.TrapColor (Color)
+                            SELECT DISTINCT Color
+                            FROM Production.Product;
+                        END TRY
+                        BEGIN CATCH
+                            PRINT 'Fail!';
+                            DROP TABLE Production.TrapColor;
+                            THROW;
+                        END CATCH;
+                            GO
+                    </code>
+                </pre>
+            </div>
+            <div class="AnswerCode">
+                <div class="pytanie">
+                    <h3></h3>
+                </div>
+                <div class="odpowiedz">
+                    
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="slide" style="background-color:black">
+        <figure>
+            <img class="cover" src="pictures/n18.PNG" alt="blog">
+            <figcaption class="white">Copyright © Cezary Walenciuk</figcaption>
+        </figure>
+    </section>
+
+    <section class="slide prism over bhgry">
+        <div class="grid-container">
+            <div class="HeaderTitle">
+                <h2 class="headerCODE">2-7-2 Przechwytywanie błędów</h2>
+            </div>
+            <div class="PlaceCodeHere">
+                <pre style="font-size: 22px;overflow: hidden;  " class="language-sql">
+                    <code style="line-height: 25px !important;">
+                        echo off
+                        SQLCMD -e -s CEZMSI -i "D:\PanNiebieski\Sync\Praca\SQLQueriesforSQLSERVER\2-7.sql" -b -o 
+                        "D:\PanNiebieski\Sync\Praca\SQLQueriesforSQLSERVER\2-7output.txt"
+                        
+                        if errorlevel 1 goto script_failure
+                        echo "Jest okej"
+                        exit
+                        :script_failure
+                        echo "Nie wykonał się Skrypt"
+                    </code>
+                </pre>
+            </div>
+            <div class="AnswerCode">
+                <div class="pytanie">
+                    <h3></h3>
+                </div>
+                <div class="odpowiedz">
+                    
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="slide" style="background-color:black">
+        <figure>
+            <img class="cover" src="pictures/_02_script.PNG" alt="blog">
+            <figcaption class="white">Copyright © Cezary Walenciuk</figcaption>
+        </figure>
+    </section>
+    <section class="slide prism over bhgry">
+        <div class="grid-container">
+            <div class="HeaderTitle">
+                <h2 class="headerCODE">2-8 Zwracanie wartości</h2>
+            </div>
+            <div class="PlaceCodeHere">
+                <pre style="font-size: 22px;overflow: hidden;  " class="language-sql">
+                    <code style="line-height: 22px !important;">
+                        IF NOT EXISTS
+                            (SELECT ProductID
+                            FROM Production.Product
+                            WHERE Color = 'Pink')
+                        BEGIN
+                            RETURN;
+                        END;
+
+                        SELECT ProductID
+                        FROM Production.Product
+                        WHERE Color = 'Pink';
+
+                        --bez niczego
+                    </code>
+                </pre>
+            </div>
+            <div class="AnswerCode">
+                <div class="pytanie">
+                    <h3></h3>
+                </div>
+                <div class="odpowiedz">
+                    
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="slide" style="background-color:black">
+        <figure>
+            <img class="cover" src="pictures/n19.PNG" alt="blog">
+            <figcaption class="white">Copyright © Cezary Walenciuk</figcaption>
+        </figure>
+    </section>
+    <section class="slide prism over bhgry">
+        <div class="grid-container">
+            <div class="HeaderTitle">
+                <h2 class="headerCODE">2-8-2 Zwracanie wartości</h2>
+            </div>
+            <div class="PlaceCodeHere">
+                <pre style="font-size: 28px;overflow: hidden;  " class="language-sql">
+                    <code style="line-height: 28px !important;">
+                        CREATE OR ALTER PROCEDURE ReportPink AS
+                        IF NOT EXISTS
+                            (SELECT ProductID
+                            FROM Production.Product
+                            WHERE Color = 'Pink')
+                        BEGIN
+                                --Return the value 404 to indicate no pink products
+                                RETURN 404;
+                        END;
+                    </code>
+                </pre>
+            </div>
+            <div class="AnswerCode">
+                <div class="pytanie">
+                    <h3></h3>
+                </div>
+                <div class="odpowiedz">
+                    
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="slide prism over bhgry">
+        <div class="grid-container">
+            <div class="HeaderTitle">
+                <h2 class="headerCODE">2-8-2 Zwracanie wartości</h2>
+            </div>
+            <div class="PlaceCodeHere">
+                <pre style="font-size: 40px;overflow: hidden;  " class="language-sql">
+                    <code style="line-height: 40px !important;">
+                        DECLARE @ResultStatus int;
+                        EXEC @ResultStatus = ReportPink;
+                        PRINT @ResultStatus;
+                    </code>
+                </pre>
+            </div>
+            <div class="AnswerCode">
+                <div class="pytanie">
+                    <h3></h3>
+                </div>
+                <div class="odpowiedz">
+                    
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="slide prism over bhgry">
+        <div class="grid-container">
+            <div class="HeaderTitle">
+                <h2 class="headerCODE">2-9 Pisanie wyrażenia CASE</h2>
+            </div>
+            <div class="PlaceCodeHere">
+                <pre style="font-size: 27px;overflow: hidden;  " class="language-sql">
+                    <code style="line-height: 27px !important;">
+                        SELECT OBJECT_NAME(OBJECT_ID) AS TableName,
+                        'Index' = 
+                          CASE 
+                             WHEN index_id  =  0 THEN 'HEAP'
+                             WHEN index_id  = 1  THEN 'Clustered index.'
+                             WHEN index_id  > 1 THEN 'Nonclustered index'
+                             ELSE 'ERROR'
+                        END,
+                        used_page_count,
+                        reserved_page_count,
+                        row_count
+                        FROM sys.dm_db_partition_stats
+                    </code>
+                </pre>
+            </div>
+            <div class="AnswerCode">
+                <div class="pytanie">
+                    <h3></h3>
+                </div>
+                <div class="odpowiedz">
+                    
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="slide" style="background-color:black">
+        <figure>
+            <img class="cover" src="pictures/n20.PNG" alt="blog">
+            <figcaption class="white">Copyright © Cezary Walenciuk</figcaption>
+        </figure>
+    </section>
+    <section class="slide prism over bhgry">
+        <div class="grid-container">
+            <div class="HeaderTitle">
+                <h2 class="headerCODE">2-10 Pisanie wyrażenia CASE</h2>
+            </div>
+            <div class="PlaceCodeHere">
+                <pre style="font-size: 24px;overflow: hidden;  " class="language-sql">
+                    <code style="line-height: 24px !important;">
+                        SELECT DepartmentID, Name,
+                        CASE
+                        WHEN Name = 'Research and Development' THEN 'Room A'
+                        WHEN (Name = 'Sales and Marketing' OR DepartmentID = 10) THEN 'Room B'
+                        WHEN Name LIKE 'T%'THEN 'Room C'
+                        ELSE 'Room D' END AS ConferenceRoom
+                        FROM HumanResources.Department;
+                    </code>
+                </pre>
+            </div>
+            <div class="AnswerCode">
+                <div class="pytanie">
+                    <h3></h3>
+                </div>
+                <div class="odpowiedz">
+                    
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="slide" style="background-color:black">
+        <figure>
+            <img class="cover" src="pictures/n21.PNG" alt="blog">
+            <figcaption class="white">Copyright © Cezary Walenciuk</figcaption>
+        </figure>
+    </section>
+
+    <section class="slide prism over bhgry">
+        <div class="grid-container">
+            <div class="HeaderTitle">
+                <h2 class="headerCODE">2-11 Powtarzanie wykonywania kodu</h2>
+            </div>
+            <div class="PlaceCodeHere">
+                <pre style="font-size: 17px;overflow: hidden;  " class="language-sql">
+                    <code style="line-height: 20px !important;">
+                        -- Declare variables
+                        DECLARE @AWTables TABLE (SchemaTable varchar(100));
+                        DECLARE @TableName varchar(100);
+
+                        -- Insert table names into the table variable
+                        INSERT @AWTables (SchemaTable)
+                        SELECT TABLE_SCHEMA + '.' + TABLE_NAME
+                        FROM INFORMATION_SCHEMA.tables
+                        WHERE TABLE_TYPE = 'BASE TABLE'
+                        ORDER BY TABLE_SCHEMA + '.' + TABLE_NAME;
+
+                        -- Report on each table using sp_spaceused
+                        WHILE (SELECT COUNT(*) FROM @AWTables) > 0
+                        BEGIN
+                            SELECT TOP 1 @TableName = SchemaTable
+                            FROM @AWTables
+                            ORDER BY SchemaTable;
+
+                            EXEC sp_spaceused @TableName;
+                            DELETE @AWTables
+                            WHERE SchemaTable = @TableName;
+                        END;
+                    </code>
+                </pre>
+            </div>
+            <div class="AnswerCode">
+                <div class="pytanie">
+                    <h3></h3>
+                </div>
+                <div class="odpowiedz">
+                    
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="slide prism over bhgry">
+        <div class="grid-container">
+            <div class="HeaderTitle">
+                <h2 class="headerCODE">2-12 Pętle</h2>
+            </div>
+            <div class="PlaceCodeHere">
+                <pre style="font-size: 42px;overflow: hidden;  " class="language-sql">
+                    <code style="line-height: 42px !important;">
+                        DECLARE @I INT
+                        SET @I = 0 
+                        WHILE (@I < 18000)
+                        BEGIN
+
+                        END;
+                    </code>
+                </pre>
+            </div>
+            <div class="AnswerCode">
+                <div class="pytanie">
+                    <h3></h3>
+                </div>
+                <div class="odpowiedz">
+                    
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="slide prism over bhgry">
+        <div class="grid-container">
+            <div class="HeaderTitle">
+                <h2 class="headerCODE">2-12 Pętle</h2>
+            </div>
+            <div class="PlaceCodeHere">
+                <pre style="font-size: 26px;overflow: hidden;  " class="language-sql">
+                    <code style="line-height: 26px !important;">
+                        DECLARE @I INT
+                        SET @I = 0 
+                        WHILE (@I < 18000)
+                        BEGIN
+
+                            DECLARE @j INT = FLOOR(RAND(CHECKSUM(NEWID())) * 18008)
+
+                            UPDATE [dbo].[SuperHeroes_ColumnIndex]
+                                SET [PowerLevel] = RAND(CHECKSUM(NEWID()))*500
+                                WHERE Id = @j;
+
+                        END;
+                    </code>
+                </pre>
+            </div>
+            <div class="AnswerCode">
+                <div class="pytanie">
+                    <h3></h3>
+                </div>
+                <div class="odpowiedz">
+                    
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="slide prism over bhgry">
+        <div class="grid-container">
+            <div class="HeaderTitle">
+                <h2 class="headerCODE">2-12 Pętle</h2>
+            </div>
+            <div class="PlaceCodeHere">
+                <pre style="font-size: 25px;overflow: hidden;  " class="language-sql">
+                    <code style="line-height: 25px !important;">
+                        WHILE (1=1)
+                            BEGIN
+                                PRINT 'Endless While, because 1 always equals 1.';
+                                IF 1=1
+                            BEGIN
+                                PRINT 'But we won''t let the endless loop happen!';
+                                BREAK; --Because this BREAK statement terminates the loop.
+                            END;
+                        END;
+                    </code>
+                </pre>
+            </div>
+            <div class="AnswerCode">
+                <div class="pytanie">
+                    <h3></h3>
+                </div>
+                <div class="odpowiedz">
+                    
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="slide prism over bhgry">
+        <div class="grid-container">
+            <div class="HeaderTitle">
+                <h2 class="headerCODE">2-12 Pętle</h2>
+            </div>
+            <div class="PlaceCodeHere">
+                <pre style="font-size: 34px;overflow: hidden;  " class="language-sql">
+                    <code style="line-height: 34px !important;">
+                        DECLARE @n int = 1;
+                        WHILE @n = 1
+                            BEGIN
+                                SET @n = @n + 1;
+                                IF @n > 1
+                                CONTINUE;
+                                PRINT 'You will never see this message.';
+                            END;
+                    </code>
+                </pre>
+            </div>
+            <div class="AnswerCode">
+                <div class="pytanie">
+                    <h3></h3>
+                </div>
+                <div class="odpowiedz">
+                    
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section class="slide prism over bhgry">
+        <div class="grid-container">
+            <div class="HeaderTitle">
+                <h2 class="headerCODE">2-13 Pauzowanie</h2>
+            </div>
+            <div class="PlaceCodeHere">
+                <pre style="font-size: 37px;overflow: hidden;  " class="language-sql">
+                    <code style="line-height: 37px !important;">
+                        WAITFOR DELAY '00:00:10';
+                            BEGIN
+                                SELECT TransactionID, Quantity
+                                FROM Production.TransactionHistory;
+                            END;
+                    </code>
+                </pre>
+            </div>
+            <div class="AnswerCode">
+                <div class="pytanie">
+                    <h3></h3>
+                </div>
+                <div class="odpowiedz">
+                    
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="slide prism over bhgry">
+        <div class="grid-container">
+            <div class="HeaderTitle">
+                <h2 class="headerCODE">2-13 Pauzowanie</h2>
+            </div>
+            <div class="PlaceCodeHere">
+                <pre style="font-size: 37px;overflow: hidden;  " class="language-sql">
+                    <code style="line-height: 40px !important;">
+                        WAITFOR TIME '20:22:00';
+                            BEGIN
+                                SELECT COUNT(*)
+                                FROM Production.TransactionHistory;
+                            END;
+                    </code>
+                </pre>
+            </div>
+            <div class="AnswerCode">
+                <div class="pytanie">
+                    <h3></h3>
+                </div>
+                <div class="odpowiedz">
+                    
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="slide prism over bhgry">
+        <div class="grid-container">
+            <div class="HeaderTitle">
+                <h2 class="headerCODE">2-14 Pętla przez wynik zapytania czyli kursory</h2>
+            </div>
+            <div class="PlaceCodeHere">
+                <pre style="font-size: 15px;overflow: hidden;  " class="language-sql">
+                    <code style="line-height: 15px !important;">
+                        -- Do not show rowcounts in the results
+                        SET NOCOUNT ON;
+                        DECLARE @session_id smallint;
+
+                        -- Declare the cursor
+                        DECLARE session_cursor CURSOR FORWARD_ONLY READ_ONLY FOR
+                            SELECT session_id
+                            FROM sys.dm_exec_requests
+                            WHERE status IN ('runnable', 'sleeping', 'running');
+
+                        -- Open the cursor
+                        OPEN session_cursor;
+
+                        -- Retrieve one row at a time from the cursor
+                        FETCH NEXT
+                            FROM session_cursor
+                            INTO @session_id;
+
+                        -- Process and retrieve new rows until no more are available
+                        WHILE @@FETCH_STATUS = 0
+                        BEGIN
+                            PRINT 'Spid #: ' + STR(@session_id);
+                            EXEC ('sp_who ' + @session_id);
+                            FETCH NEXT
+                            FROM session_cursor
+                            INTO @session_id;
+                        END;
+
+                        -- Close the cursor
+                        CLOSE session_cursor;
+                        -- Deallocate the cursor
+                        DEALLOCATE session_cursor;
+                    </code>
+                </pre>
+            </div>
+            <div class="AnswerCode">
+                <div class="pytanie">
+                    <h3></h3>
+                </div>
+                <div class="odpowiedz">
+                    
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="slide creamB   compact ">
+        <h2>@@FETCH_STATUS</h2>
+        <ol class="nonumbers">
+            <li class="next"><span class="green">0</span> Operacja zakończyła się z sukcesem</li>
+            <li class="next"><span class="green">-1</span> Pobrałeś dane poza końcówką kursora </li>
+            <li class="next"><span class="green">-2</span> Pobrany rekord powinnien być prawidłowy, ale został skasowany lub zmodyfiowany</li>
+        </ol>
+    </section>
+    <section class="slide creamB">
+        <span class="shout colors"><span>3. Pracowanie z NULL-ami
+        </span></span>
+
+    </section>
+
+    <section class="slide prism over bhgry">
+        <div class="grid-container">
+            <div class="HeaderTitle">
+                <h2 class="headerCODE">3-01 Jak działaja wartość NULL</h2>
+            </div>
+            <div class="PlaceCodeHere">
+                <pre style="font-size: 51px;overflow: hidden;  " class="language-sql">
+                    <code style="line-height: 50px !important;">
+                        NULL + 10 = NULL
+                        NULL AND TRUE = NULL
+                        NULL OR FALSE = NULL
+                    </code>
+                </pre>
+            </div>
+            <div class="AnswerCode">
+                <div class="pytanie">
+                    <h3></h3>
+                </div>
+                <div class="odpowiedz">
+                    
+                </div>
+            </div>
+        </div>
+        </div>
+    </section>
+    <section class="slide creamB  compact">
+        <h2>Funkcje na rozwiązanie problemu NULL</h2>
+        <ol>
+            <li class="next">ISNULL (jeżeli jest NULL to daj 'X')</li>
+            <li class="next">COALESCE (zamiast Null daj 'X')</li>
+            <li class="next">NULLIF (zwróć NULL Gdy)</li>
+        </ol>
+    </section>
+    <section class="slide prism over bhgry">
+        <div class="grid-container">
+            <div class="HeaderTitle">
+                <h2 class="headerCODE">3-1 Zastąpienie NULL inną wartością</h2>
+            </div>
+            <div class="PlaceCodeHere">
+                <pre style="font-size: 31px;overflow: hidden;  " class="language-sql">
+                    <code style="line-height: 40px !important;">
+                        SELECT h.SalesOrderID,
+                        h.CreditCardApprovalCode,
+                        
+                        CreditApprovalCode_Display = 
+                        ISNULL(h.CreditCardApprovalCode,'**BRAK ZGODY**')
+                        
+                        FROM Sales.SalesOrderHeader h
+                        WHERE h.SalesOrderID BETWEEN 43736 AND 43740;
+                    </code>
+                </pre>
+            </div>
+            <div class="AnswerCode">
+                <div class="pytanie">
+                    <h3></h3>
+                </div>
+                <div class="odpowiedz">
+                    
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="slide" style="background-color:black">
+        <figure>
+            <img class="cover" src="pictures/null01.PNG" alt="blog">
+            <figcaption class="white">Copyright © Cezary Walenciuk</figcaption>
+        </figure>
+    </section>
+    <section class="slide prism over bhgry">
+        <div class="grid-container">
+            <div class="HeaderTitle">
+                <h2 class="headerCODE">3-1-2 Zastąpienie NULL inną wartością</h2>
+            </div>
+            <div class="PlaceCodeHere">
+                <pre style="font-size: 31px;overflow: hidden;  " class="language-sql">
+                    <code style="line-height: 40px !important;">
+                        SELECT ISNULL(CAST(NULL AS CHAR(10)), 'UNKNOW')
+                        SELECT ISNULL(CAST('Test' AS CHAR(10)), 'UNKNOW')
+
+                        SELECT ISNULL(CAST(NULL AS INT), 'UNKNOW') ;
+                    </code>
+                </pre>
+            </div>
+            <div class="AnswerCode">
+                <div class="pytanie">
+                    <h3></h3>
+                </div>
+                <div class="odpowiedz">
+                    
+                </div>
+            </div>
+        </div>
+        </div>
+    </section>
+    <section class="slide" style="background-color:black">
+        <figure>
+            <img class="cover" src="pictures/null02.PNG" alt="blog">
+            <figcaption class="white">Copyright © Cezary Walenciuk</figcaption>
+        </figure>
+    </section>
+    <section class="slide prism over bhgry">
+        <div class="grid-container">
+            <div class="HeaderTitle">
+                <h2 class="headerCODE">3-2 Zastąpienie NULL inną wartością</h2>
+            </div>
+            <div class="PlaceCodeHere">
+                <pre style="font-size: 21px;overflow: hidden;  " class="language-sql">
+                    <code style="line-height: 26px !important;">
+                        SELECT c.CustomerID,
+                        SalesPersonPhone = spp.PhoneNumber,
+                        CustomerPhone = pp.PhoneNumber,
+                        PhoneNumber = COALESCE(pp.PhoneNumber, spp.PhoneNumber, '**BRAK TELEFONU*')
+                        FROM Sales.Customer c
+
+                        LEFT OUTER JOIN Sales.Store s
+                        ON c.StoreID = s.BusinessEntityID
+                        LEFT OUTER JOIN Person.PersonPhone spp
+                        ON s.SalesPersonID = spp.BusinessEntityID
+                        LEFT OUTER JOIN Person.PersonPhone pp
+                        ON c.CustomerID = pp.BusinessEntityID
+
+                        ORDER BY CustomerID 
+                    </code>
+                </pre>
+            </div>
+            <div class="AnswerCode">
+                <div class="pytanie">
+                    <h3></h3>
+                </div>
+                <div class="odpowiedz">
+                    
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="slide" style="background-color:black">
+        <figure>
+            <img class="cover" src="pictures/null03.PNG" alt="blog">
+            <figcaption class="white">Copyright © Cezary Walenciuk</figcaption>
+        </figure>
+    </section>
+    <section class="slide prism over bhgry">
+        <div class="grid-container">
+            <div class="HeaderTitle">
+                <h2 class="headerCODE">3-3 COALESCE ciekawe użycie</h2>
+            </div>
+            <div class="PlaceCodeHere">
+                <pre style="font-size: 20px;overflow: hidden;  " class="language-sql">
+                    <code style="line-height: 20px !important;">
+                        USE demo;
+
+                        CREATE TABLE [dbo].[PeopleNames](
+                            [Id] [int] NOT NULL,
+                            [FirstName] [nvarchar](50) NOT NULL,
+                            [MiddleName] [nvarchar](50) NULL,
+                            [LastName] [nvarchar](50) NOT NULL,
+                        CONSTRAINT [PK_PeopleNames] PRIMARY KEY CLUSTERED 
+                        (
+                            [Id] ASC
+                        )WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+                        ) ON [PRIMARY]
+
+                        INSERT INTO [dbo].[PeopleNames]
+                        ([Id]
+                        ,[FirstName]
+                        ,[MiddleName]
+                        ,[LastName])
+                        VALUES
+                        (1,'Cezary',NULL,'Walenciuk'),
+                        (2,'Stefan','Viktor','Kowalski'),
+                        (3,'Franko','Cyryl','Domanowski'),
+                        (4,'Zdzisław',NULL,'Bohaterowicz')
+                    </code>
+                </pre>
+            </div>
+            <div class="AnswerCode">
+                <div class="pytanie">
+                    <h3></h3>
+                </div>
+                <div class="odpowiedz">
+                    
+                </div>
+            </div>
+        </div>
+        </div>
+    </section>
+    <section class="slide prism over bhgry">
+        <div class="grid-container">
+            <div class="HeaderTitle">
+                <h2 class="headerCODE">3-3-2 COALESCE ciekawe użycie</h2>
+            </div>
+            <div class="PlaceCodeHere">
+                <pre style="font-size: 20px;overflow: hidden;  " class="language-sql">
+                    <code style="line-height: 20px !important;">
+                        CREATE OR ALTER PROCEDURE [dbo].[uspReadPeopleNames]
+                        @FirstName VARCHAR(50) = NULL,
+                        @LastName VARCHAR(50) = NULL,
+                        @MiddleName VARCHAR(50) = NULL
+                        AS
+                        BEGIN
+                            SELECT [Id]
+                                ,[FirstName]
+                                ,[MiddleName]
+                                ,[LastName]
+                        
+                            FROM [dbo].[PeopleNames]
+                            WHERE 
+                            [FirstName] LIKE COALESCE(@FirstName,[FirstName]) OR
+                            [LastName] LIKE COALESCE(@LastName,[LastName]) OR
+                            (([MiddleName] IS NULL AND @MiddleName IS NULL) 
+                            OR ([MiddleName] LIKE @MiddleName) 
+                            OR ([MiddleName] IS NOT NULL AND  @MiddleName IS NULL))
+                        
+                        END
+                    </code>
+                </pre>
+            </div>
+            <div class="AnswerCode">
+                <div class="pytanie">
+                    <h3></h3>
+                </div>
+                <div class="odpowiedz">
+                    
+                </div>
+            </div>
+        </div>
+ 
+    </section>
+    <section class="slide" style="background-color:black">
+        <figure>
+            <img class="cover" src="pictures/null04.PNG" alt="blog">
+            <figcaption class="white">Copyright © Cezary Walenciuk</figcaption>
+        </figure>
+    </section>
+    <section class="slide prism over bhgry">
+        <div class="grid-container">
+            <div class="HeaderTitle">
+                <h2 class="headerCODE">3-3-3 COALESCE ciekawe użycie</h2>
+            </div>
+            <div class="PlaceCodeHere">
+                <pre style="font-size: 31px;overflow: hidden;  " class="language-sql">
+                    <code style="line-height: 40px !important;">
+                        DECLARE	@return_value int
+
+                        EXEC	@return_value = [dbo].[uspReadPeopleNames]
+                                @FirstName = N'F%',
+                                @LastName = N'W%',
+                                @MiddleName = NULL
+                        
+                        SELECT	'Return Value' = @return_value
+
+                    </code>
+                </pre>
+            </div>
+            <div class="AnswerCode">
+                <div class="pytanie">
+                    <h3></h3>
+                </div>
+                <div class="odpowiedz">
+                    
+                </div>
+            </div>
+        </div>
+    
+    </section>
+    <section class="slide" style="background-color:black">
+        <figure>
+            <img class="cover" src="pictures/null05.PNG" alt="blog">
+            <figcaption class="white">Copyright © Cezary Walenciuk</figcaption>
+        </figure>
+    </section>
+    <!-- <section class="slide prism over bhgry">
+        <div class="grid-container">
+            <div class="HeaderTitle">
+                <h2 class="headerCODE">3-4 Co jest lepsze COALESCE czy ISNULL</h2>
+            </div>
+            <div class="PlaceCodeHere">
+                <pre style="font-size: 28px;overflow: hidden;  " class="language-sql">
+                    <code style="line-height: 28px !important;">
+                        DECLARE @sql NVARCHAR(MAX) = '
+                        SELECT ISNULL(''5'', 5),
+                        ISNULL(5, ''5''),
+                        COALESCE(''5'', 5),
+                        COALESCE(5, ''5'') ;
+                        ' ;
+
+                        EXEC sp_executesql @sql ;
+                        SELECT column_ordinal,
+                        is_nullable,
+                        system_type_name
+                        FROM master.sys.dm_exec_describe_first_result_set(@sql, NULL, 0) a ;
+                    </code>
+                </pre>
+            </div>
+            <div class="AnswerCode">
+                <div class="pytanie">
+                    <h3></h3>
+                </div>
+                <div class="odpowiedz">
+                    
+                </div>
+            </div>
+        </div>
+        </div>
+    </section> -->
+
+    <section class="slide prism over bhgry">
+        <div class="grid-container">
+            <div class="HeaderTitle">
+                <h2 class="headerCODE">3-4 Pamiętaj o problemie NULL = NULL</h2>
+            </div>
+            <div class="PlaceCodeHere">
+                <pre style="font-size: 31px;overflow: hidden;  " class="language-sql">
+                    <code style="line-height: 40px !important;">
+                        DECLARE @value INT = NULL;
+
+                        SELECT CASE WHEN @value = NULL THEN 1
+                        WHEN @value <> NULL THEN 2
+                        WHEN @value IS NULL THEN 3
+                        ELSE 4
+                        END ;
+                    </code>
+                </pre>
+            </div>
+            <div class="AnswerCode">
+                <div class="pytanie">
+                    <h3></h3>
+                </div>
+                <div class="odpowiedz">
+                    
+                </div>
+            </div>
+        </div>
+        </div>
+    </section>
+
+    <section class="slide prism over bhgry">
+        <div class="grid-container">
+            <div class="HeaderTitle">
+                <h2 class="headerCODE">3-5 Szukanie NULL-i w Tabelce</h2>
+            </div>
+            <div class="PlaceCodeHere">
+                <pre style="font-size: 40px;overflow: hidden;  " class="language-sql">
+                    <code style="line-height: 40px !important;">
+                        SELECT TOP 5
+                        LastName, FirstName, MiddleName
+                        FROM Person.Person
+                        WHERE MiddleName IS NULL ;
+                    </code>
+                </pre>
+            </div>
+            <div class="AnswerCode">
+                <div class="pytanie">
+                    <h3></h3>
+                </div>
+                <div class="odpowiedz">
+                    
+                </div>
+            </div>
+        </div>
+        </div>
+    </section>
+
+    <section class="slide prism over bhgry">
+        <div class="grid-container">
+            <div class="HeaderTitle">
+                <h2 class="headerCODE">3-6 NULLIF -> Usuwanie wartości z agregacji</h2>
+            </div>
+            <div class="PlaceCodeHere">
+                <pre style="font-size: 26px;overflow: hidden;  " class="language-sql">
+                    <code style="line-height: 35px !important;">
+                        SELECT r.ProductID,
+                            r.OperationSequence,
+                            StartDateVariance = 
+                            AVG(DATEDIFF(day, ScheduledStartDate,ActualStartDate)),
+                            StartDateVariance_Adjusted = 
+                            AVG(NULLIF(DATEDIFF(day,ScheduledStartDate,ActualStartDate), 0))
+
+                        FROM Production.WorkOrderRouting r
+                        WHERE r.ProductID BETWEEN 514 AND 520
+                        GROUP BY r.ProductID,
+                        r.OperationSequence
+                        ORDER BY r.ProductID,
+                        r.OperationSequence ;
+                    </code>
+                </pre>
+            </div>
+            <div class="AnswerCode">
+                <div class="pytanie">
+                    <h3></h3>
+                </div>
+                <div class="odpowiedz">
+                    
+                </div>
+            </div>
+        </div>
+        </div>
+    </section>
+
+    <section class="slide prism over bhgry">
+        <div class="grid-container">
+            <div class="HeaderTitle">
+                <h2 class="headerCODE">3-7 Unikatowość indeksu i wartości NULL</h2>
+            </div>
+            <div class="PlaceCodeHere">
+                <pre style="font-size: 19px;overflow: hidden;  " class="language-sql">
+                    <code style="line-height: 19px !important;">
+                        USE tempdb;
+                        CREATE TABLE dbo.Movie
+                        (
+                            MovieId INT NOT NULL
+                            CONSTRAINT PK_Movie PRIMARY KEY CLUSTERED,
+                            MovieName NVARCHAR(50) NOT NULL,
+                            MovieCode NVARCHAR(50) NULL,
+                        ) ;
+                        GO
+
+                        CREATE UNIQUE INDEX UX_Movie_MovieCode ON dbo.Movie (MovieCode) ;
+                        GO
+
+                        INSERT INTO dbo.Movie (MovieId, MovieName,MovieCode) VALUES (1, 'M 1', 'a2q321');
+                        INSERT INTO dbo.Movie (MovieId, MovieName,MovieCode) VALUES (2, 'M 2', 'a3232');
+                        INSERT INTO dbo.Movie (MovieId, MovieName,MovieCode) VALUES (3, 'M 3', NULL);
+                        INSERT INTO dbo.Movie (MovieId, MovieName,MovieCode) VALUES (4, 'M 4', NULL);
+
+                        --Cannot insert duplicate key row in object 'dbo.Movie' with unique index 'UX_Movie_MovieCode'.
+                        --The duplicate key value is (NULL).
+                    </code>
+                </pre>
+            </div>
+            <div class="AnswerCode">
+                <div class="pytanie">
+                    <h3></h3>
+                </div>
+                <div class="odpowiedz">
+                    
+                </div>
+            </div>
+        </div>
+        </div>
+    </section>
+    <section class="slide" style="background-color:black">
+        <figure>
+            <img class="cover" src="pictures/null06.PNG" alt="blog">
+            <figcaption class="white">Copyright © Cezary Walenciuk</figcaption>
+        </figure>
+    </section>
+
+    <section class="slide prism over bhgry">
+        <div class="grid-container">
+            <div class="HeaderTitle">
+                <h2 class="headerCODE">3-7 Unikatowość indeksu i wartości NULL</h2>
+            </div>
+            <div class="PlaceCodeHere">
+                <pre style="font-size: 19px;overflow: hidden;  " class="language-sql">
+                    <code style="line-height: 19px !important;">
+                        DROP INDEX dbo.Movie.UX_Movie_MovieCode;
+                        GO;
+                        CREATE UNIQUE INDEX UX_Movie_MovieCode ON dbo.Movie(MovieCode) WHERE MovieCode IS NOT NULL
+                        GO;
+
+                        INSERT INTO dbo.Movie (MovieId, MovieName,MovieCode) VALUES (4, 'M 3', 'L9621');
+                        INSERT INTO dbo.Movie (MovieId, MovieName,MovieCode) VALUES (5, 'M 4', 'N3322');
+                        INSERT INTO dbo.Movie (MovieId, MovieName,MovieCode) VALUES (6, 'M 6', NULL);
+                    </code>
+                </pre>
+            </div>
+            <div class="AnswerCode">
+                <div class="pytanie">
+                    <h3></h3>
+                </div>
+                <div class="odpowiedz">
+                    
+                </div>
+            </div>
+        </div>
+        </div>
+    </section>
+
+
+
+
+
+    <section class="slide prism over bhgry">
+        <div class="grid-container">
+            <div class="HeaderTitle">
+                <h2 class="headerCODE">3-8 JOIN-owanie tabelek z kolumnami NULL</h2>
+            </div>
+            <div class="PlaceCodeHere">
+                <pre style="font-size: 19px;overflow: hidden;  " class="language-sql">
+                    <code style="line-height: 19px !important;">
+                        CREATE TABLE dbo.Test01
+                        (
+                            TestValue NVARCHAR(10) NULL
+                        );
+                        
+                        CREATE TABLE dbo.Test02
+                        (
+                            TestValue NVARCHAR(10) NULL
+                        ) ;
+                        GO
+                        
+                        INSERT INTO dbo.Test01
+                            VALUES ('C#'),
+                            ('SQL'),
+                            (NULL),
+                            ('JavaScript'),
+                            (NULL);
+                        
+                        INSERT INTO dbo.Test02
+                            VALUES (NULL),
+                            ('SQL'),
+                            ('C#'),
+                            (NULL) ;
+                        GO
+                        
+                    </code>
+                </pre>
+            </div>
+            <div class="AnswerCode">
+                <div class="pytanie">
+                    <h3></h3>
+                </div>
+                <div class="odpowiedz">
+                    
+                </div>
+            </div>
+        </div>
+        </div>
+    </section>
+    <section class="slide prism over bhgry">
+        <div class="grid-container">
+            <div class="HeaderTitle">
+                <h2 class="headerCODE">3-9 JOIN-owanie tabelek z kolumnami NULL</h2>
+            </div>
+            <div class="PlaceCodeHere">
+                <pre style="font-size: 41px;overflow: hidden;  " class="language-sql">
+                    <code style="line-height: 40px !important;">
+                        SELECT t1.TestValue,
+                        t2.TestValue
+                        FROM dbo.Test01 t1
+                        INNER JOIN dbo.Test02 t2
+                        ON t1.TestValue = t2.TestValue ;
+                    </code>
+                </pre>
+            </div>
+            <div class="AnswerCode">
+                <div class="pytanie">
+                    <h3></h3>
+                </div>
+                <div class="odpowiedz">
+                    
+                </div>
+            </div>
+        </div>
+        </div>
+    </section>
+    <section class="slide" style="background-color:black">
+        <figure>
+            <img class="cover" src="pictures/04.png" alt="blog">
+            <figcaption class="white">Copyright © Cezary Walenciuk</figcaption>
+        </figure>
+    </section>
+
+    <section class="slide creamB">
+        <span class="shout colors"><span>4. Operacje na kilku Tablicach na raz czyli JOIN-y i inne operacje łączące jak UNION
+        </span></span>
+    </section>
+    <section class="slide" style="background-color:black">
+        <figure>
+            <img class="cover" src="pictures/JOIN01.PNG" alt="blog">
+            <figcaption class="white">Copyright © Cezary Walenciuk</figcaption>
+        </figure>
+    </section>
+    <section class="slide prism over bhgry">
+        <div class="grid-container">
+            <div class="HeaderTitle">
+                <h2 class="headerCODE">4-1 JOIN-owanie tabelek </h2>
+            </div>
+            <div class="PlaceCodeHere">
+                <pre style="font-size: 28px;overflow: hidden;  " class="language-sql">
+                    <code style="line-height: 28px !important;">
+                        SELECT PersonPhone.BusinessEntityID,
+                        FirstName,
+                        LastName,
+                        PhoneNumber
+                        FROM Person.Person
+
+                        INNER JOIN Person.PersonPhone
+                        ON Person.BusinessEntityID = PersonPhone.BusinessEntityID
+
+                        ORDER BY LastName,
+                        FirstName,
+                        Person.BusinessEntityID;
+                    </code>
+                </pre>
+            </div>
+            <div class="AnswerCode">
+                <div class="pytanie">
+                    <h3></h3>
+                </div>
+                <div class="odpowiedz">
+                    
+                </div>
+            </div>
+        </div>
+        </div>
+    </section>
+    <section class="slide" style="background-color:black">
+        <figure>
+            <img class="cover" src="pictures/JOIN02.PNG" alt="blog">
+            <figcaption class="white">Copyright © Cezary Walenciuk</figcaption>
+        </figure>
+    </section>
+    <section class="slide prism over bhgry">
+        <div class="grid-container">
+            <div class="HeaderTitle">
+                <h2 class="headerCODE">4-2 JOIN-owanie w relacji wielu do wielu</h2>
+            </div>
+            <div class="PlaceCodeHere">
+                <pre style="font-size: 31px;overflow: hidden;  " class="language-sql">
+                    <code style="line-height: 40px !important;">
+                        SELECT p.Name,
+                        s.DiscountPct
+                        FROM Sales.SpecialOffer s
+                        INNER JOIN Sales.SpecialOfferProduct o
+                        ON s.SpecialOfferID = o.SpecialOfferID
+                        INNER JOIN Production.Product p
+                        ON o.ProductID = p.ProductID
+                        WHERE p.Name = 'All-Purpose Bike Stand';
+                    </code>
+                </pre>
+            </div>
+            <div class="AnswerCode">
+                <div class="pytanie">
+                    <h3></h3>
+                </div>
+                <div class="odpowiedz">
+                    
+                </div>
+            </div>
+        </div>
+        </div>
+    </section>
+
+    <section class="slide prism over bhgry">
+        <div class="grid-container">
+            <div class="HeaderTitle">
+                <h2 class="headerCODE">4-3 Aby JOIN-owanie po jednej stronie opcjonale</h2>
+            </div>
+            <div class="PlaceCodeHere">
+                <pre style="font-size: 31px;overflow: hidden;  " class="language-sql">
+                    <code style="line-height: 40px !important;">
+                        SELECT s.CountryRegionCode,
+                        s.StateProvinceCode,
+                        t.TaxType,
+                        t.TaxRate
+                        FROM Person.StateProvince s
+                        LEFT OUTER JOIN Sales.SalesTaxRate t
+                        ON s.StateProvinceID = t.StateProvinceID;
+                    </code>
+                </pre>
+            </div>
+            <div class="AnswerCode">
+                <div class="pytanie">
+                    <h3></h3>
+                </div>
+                <div class="odpowiedz">
+                    
+                </div>
+            </div>
+        </div>
+
+    </section>
+    <section class="slide" style="background-color:black">
+        <figure>
+            <img class="cover" src="pictures/JOIN03.PNG" alt="blog">
+            <figcaption class="white">Copyright © Cezary Walenciuk</figcaption>
+        </figure>
+    </section>
+    <section class="slide prism over bhgry">
+        <div class="grid-container">
+            <div class="HeaderTitle">
+                <h2 class="headerCODE">4-4 Wyjaśnij mi JOINY</h2>
+            </div>
+            <div class="PlaceCodeHere">
+                <pre style="font-size: 21px;overflow: hidden;  " class="language-sql">
+                    <code style="line-height: 21px !important;">
+                        CREATE TABLE [dbo].[Region](
+                            [RegionId] [int] NOT NULL,
+                            [Name] [varchar](50) NOT NULL,
+                        CONSTRAINT [PK_Region] PRIMARY KEY CLUSTERED 
+                        (
+                            [RegionId] ASC
+                        )WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, 
+                        IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+                        
+                        ) ON [PRIMARY]
+                        
+                        CREATE TABLE [dbo].[Country](
+                            [CountryId] [int] NOT NULL,
+                            [Name] [varchar](50) NOT NULL,
+                            [RegionId] [int] NULL,
+                        CONSTRAINT [PK_Country] PRIMARY KEY CLUSTERED 
+                        (
+                            [CountryId] ASC
+                        )WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, 
+                        IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+                        ) ON [PRIMARY]
+                    </code>
+                </pre>
+            </div>
+            <div class="AnswerCode">
+                <div class="pytanie">
+                    <h3></h3>
+                </div>
+                <div class="odpowiedz">
+                    
+                </div>
+            </div>
+        </div>
+        </div>
+    </section>
+    <section class="slide prism over bhgry">
+        <div class="grid-container">
+            <div class="HeaderTitle">
+                <h2 class="headerCODE">4-4 Wyjaśnij mi JOINY</h2>
+            </div>
+            <div class="PlaceCodeHere">
+                <pre style="font-size: 17px;overflow: hidden;  " class="language-sql">
+                    <code style="line-height: 17px !important;">
+                        ALTER TABLE [dbo].[Country]  WITH CHECK ADD  CONSTRAINT [FK_Country_Region] FOREIGN KEY([RegionId])
+                        REFERENCES [dbo].[Region] ([RegionId])
+                        GO
+                        
+                        ALTER TABLE [dbo].[Country] CHECK CONSTRAINT [FK_Country_Region]
+                        GO
+                        INSERT INTO [dbo].[Region]
+                                ([RegionId]
+                                ,[Name])
+                            VALUES
+                                (1,'Europe'),(2,'Asia'),(3,'Africa'),
+                                (4,'South America'),(5,'North America'),(6,'Australia')
+                        
+                        
+                        INSERT INTO [dbo].[Country]
+                                ([CountryId]
+                                ,[Name]
+                                ,[RegionId])
+                            VALUES
+                                (1,'Poland',1),(2,'Japan',2),
+                                (3,'Algeria',3),(4,'Argentina',4),
+                                (5,'New Zealand',NULL),(6,'Federated States of Micronesia',NULL)
+                    </code>
+                </pre>
+            </div>
+            <div class="AnswerCode">
+                <div class="pytanie">
+                    <h3></h3>
+                </div>
+                <div class="odpowiedz">
+                    
+                </div>
+            </div>
+        </div>
+        </div>
+    </section>
+    <section class="slide" style="background-color:black">
+        <figure>
+            <img class="cover" src="pictures/SQLJoins-01.png" alt="blog">
+            <figcaption class="white">Copyright © Cezary Walenciuk</figcaption>
+        </figure>
+    </section>
+    <section class="slide" style="background-color:black">
+        <figure>
+            <img class="cover" src="pictures/JOIN04.PNG" alt="blog">
+            <figcaption class="white">Copyright © Cezary Walenciuk</figcaption>
+        </figure>
+    </section>
+    <section class="slide" style="background-color:black">
+        <figure>
+            <img class="cover" src="pictures/SQLJoins-02.png" alt="blog">
+            <figcaption class="white">Copyright © Cezary Walenciuk</figcaption>
+        </figure>
+    </section>
+    <section class="slide prism over bhgry">
+        <div class="grid-container">
+            <div class="HeaderTitle">
+                <h2 class="headerCODE">4-4-1 Wyjaśnij mi JOINY : INNER JOIN</h2>
+            </div>
+            <div class="PlaceCodeHere">
+                <pre style="font-size: 26px;overflow: hidden;  " class="language-sql">
+                    <code style="line-height: 40px !important;">
+                        SELECT t1.Name AS Country,t2.Name AS Region FROM dbo.Country AS t1
+                        INNER JOIN dbo.Region AS t2 ON t2.RegionId = t1.RegionId
+                    </code>
+                </pre>
+            </div>
+            <div class="AnswerCode">
+                <div class="pytanie">
+                    <h3></h3>
+                </div>
+                <div class="odpowiedz">
+                    
+                </div>
+            </div>
+        </div>
+
+    </section>
+    <section class="slide" style="background-color:black">
+        <figure>
+            <img class="cover" src="pictures/JOIN05.PNG" alt="blog">
+            <figcaption class="white">Copyright © Cezary Walenciuk</figcaption>
+        </figure>
+    </section>
+    <section class="slide" style="background-color:black">
+        <figure>
+            <img class="cover" src="pictures/SQLJoins-03.png" alt="blog">
+            <figcaption class="white">Copyright © Cezary Walenciuk</figcaption>
+        </figure>
+    </section>
+    <section class="slide prism over bhgry">
+        <div class="grid-container">
+            <div class="HeaderTitle">
+                <h2 class="headerCODE">4-4-2 Wyjaśnij mi JOINY : LEFT OUTER JOIN</h2>
+            </div>
+            <div class="PlaceCodeHere">
+                <pre style="font-size: 26px;overflow: hidden;  " class="language-sql">
+                    <code style="line-height: 40px !important;">
+                        SELECT t1.Name,t2.Name FROM dbo.Country AS t1
+                        LEFT OUTER JOIN dbo.Region AS t2 ON t2.RegionId = t1.RegionId
+                    </code>
+                </pre>
+            </div>
+            <div class="AnswerCode">
+                <div class="pytanie">
+                    <h3></h3>
+                </div>
+                <div class="odpowiedz">
+                    
+                </div>
+            </div>
+        </div>
+   
+    </section>
+    <section class="slide" style="background-color:black">
+        <figure>
+            <img class="cover" src="pictures/JOIN06.PNG" alt="blog">
+            <figcaption class="white">Copyright © Cezary Walenciuk</figcaption>
+        </figure>
+    </section>
+    <section class="slide" style="background-color:black">
+        <figure>
+            <img class="cover" src="pictures/SQLJoins-04.png" alt="blog">
+            <figcaption class="white">Copyright © Cezary Walenciuk</figcaption>
+        </figure>
+    </section>
+    <section class="slide prism over bhgry">
+        <div class="grid-container">
+            <div class="HeaderTitle">
+                <h2 class="headerCODE">4-4-3 Wyjaśnij mi JOINY : RIGHT OUTER JOIN</h2>
+            </div>
+            <div class="PlaceCodeHere">
+                <pre style="font-size: 26px;overflow: hidden;  " class="language-sql">
+                    <code style="line-height: 40px !important;">
+                        SELECT t1.Name AS Country,t2.Name AS Region FROM dbo.Country AS t1
+                        RIGHT OUTER JOIN dbo.Region AS t2 ON t2.RegionId = t1.RegionId
+                    </code>
+                </pre>
+            </div>
+            <div class="AnswerCode">
+                <div class="pytanie">
+                    <h3></h3>
+                </div>
+                <div class="odpowiedz">
+                    
+                </div>
+            </div>
+        </div>
+        </div>
+    </section>
+    <section class="slide" style="background-color:black">
+        <figure>
+            <img class="cover" src="pictures/JOIN07.PNG" alt="blog">
+            <figcaption class="white">Copyright © Cezary Walenciuk</figcaption>
+        </figure>
+    </section>
+    <section class="slide" style="background-color:black">
+        <figure>
+            <img class="cover" src="pictures/SQLJoins-05.png" alt="blog">
+            <figcaption class="white">Copyright © Cezary Walenciuk</figcaption>
+        </figure>
+    </section>
+    <section class="slide prism over bhgry">
+        <div class="grid-container">
+            <div class="HeaderTitle">
+                <h2 class="headerCODE">4-4-4 Wyjaśnij mi JOINY : FULL OUTER JOIN</h2>
+            </div>
+            <div class="PlaceCodeHere">
+                <pre style="font-size: 26px;overflow: hidden;  " class="language-sql">
+                    <code style="line-height: 40px !important;">
+                        SELECT t1.Name AS Country,t2.Name AS Region FROM dbo.Country AS t1
+                        FULL OUTER JOIN dbo.Region AS t2 ON t2.RegionId = t1.RegionId
+                    </code>
+                </pre>
+            </div>
+            <div class="AnswerCode">
+                <div class="pytanie">
+                    <h3></h3>
+                </div>
+                <div class="odpowiedz">
+                    
+                </div>
+            </div>
+        </div>
+        </div>
+    </section>
+    <section class="slide" style="background-color:black">
+        <figure>
+            <img class="cover" src="pictures/JOIN08.PNG" alt="blog">
+            <figcaption class="white">Copyright © Cezary Walenciuk</figcaption>
+        </figure>
+    </section>
+    <section class="slide" style="background-color:black">
+        <figure>
+            <img class="cover" src="pictures/SQLJoins-06.png" alt="blog">
+            <figcaption class="white">Copyright © Cezary Walenciuk</figcaption>
+        </figure>
+    </section>
+    <section class="slide prism over bhgry">
+        <div class="grid-container">
+            <div class="HeaderTitle">
+                <h2 class="headerCODE">4-4-5 Wyjaśnij mi JOINY : LEFT OUTER JOIN IS NULL</h2>
+            </div>
+            <div class="PlaceCodeHere">
+                <pre style="font-size: 26px;overflow: hidden;  " class="language-sql">
+                    <code style="line-height: 40px !important;">
+                        SELECT t1.Name AS Country,t2.Name AS Region FROM dbo.Country AS t1
+                        LEFT OUTER JOIN dbo.Region AS t2 ON t2.RegionId = t1.RegionId
+                        WHERE t2.RegionId IS NULL
+                    </code>
+                </pre>
+            </div>
+            <div class="AnswerCode">
+                <div class="pytanie">
+                    <h3></h3>
+                </div>
+                <div class="odpowiedz">
+                    
+                </div>
+            </div>
+        </div>
+
+    </section>
+    <section class="slide" style="background-color:black">
+        <figure>
+            <img class="cover" src="pictures/JOIN09.PNG" alt="blog">
+            <figcaption class="white">Copyright © Cezary Walenciuk</figcaption>
+        </figure>
+    </section>
+    <section class="slide" style="background-color:black">
+        <figure>
+            <img class="cover" src="pictures/SQLJoins-07.png" alt="blog">
+            <figcaption class="white">Copyright © Cezary Walenciuk</figcaption>
+        </figure>
+    </section>
+    <section class="slide prism over bhgry">
+        <div class="grid-container">
+            <div class="HeaderTitle">
+                <h2 class="headerCODE">4-4-5 Wyjaśnij mi JOINY :  RIGHT OUTER JOIN  IS NULL</h2>
+            </div>
+            <div class="PlaceCodeHere">
+                <pre style="font-size: 26px;overflow: hidden;  " class="language-sql">
+                    <code style="line-height: 40px !important;">
+                        SELECT t1.Name AS Country,t2.Name AS Region FROM dbo.Country AS t1
+                        RIGHT OUTER JOIN dbo.Region AS t2 ON t2.RegionId = t1.RegionId
+                        WHERE t1.RegionId IS NULL
+                    </code>
+                </pre>
+            </div>
+            <div class="AnswerCode">
+                <div class="pytanie">
+                    <h3></h3>
+                </div>
+                <div class="odpowiedz">
+                    
+                </div>
+            </div>
+        </div>
+
+    </section>
+    <section class="slide" style="background-color:black">
+        <figure>
+            <img class="cover" src="pictures/JOIN10.PNG" alt="blog">
+            <figcaption class="white">Copyright © Cezary Walenciuk</figcaption>
+        </figure>
+    </section>
+    <section class="slide" style="background-color:black">
+        <figure>
+            <img class="cover" src="pictures/SQLJoins-08.png" alt="blog">
+            <figcaption class="white">Copyright © Cezary Walenciuk</figcaption>
+        </figure>
+    </section>
+    <section class="slide prism over bhgry">
+        <div class="grid-container">
+            <div class="HeaderTitle">
+                <h2 class="headerCODE">4-4-5 Wyjaśnij mi JOINY : FULL OUTER JOIN WHERE IS NULL</h2>
+            </div>
+            <div class="PlaceCodeHere">
+                <pre style="font-size: 26px;overflow: hidden;  " class="language-sql">
+                    <code style="line-height: 40px !important;">
+                        SELECT t1.Name AS Country,t2.Name AS Region FROM dbo.Country AS t1
+                        FULL OUTER JOIN dbo.Region AS t2 ON t2.RegionId = t1.RegionId
+                        WHERE t1.RegionId IS NULL OR t2.RegionId IS NULL
+                    </code>
+                </pre>
+            </div>
+            <div class="AnswerCode">
+                <div class="pytanie">
+                    <h3></h3>
+                </div>
+                <div class="odpowiedz">
+                    
+                </div>
+            </div>
+        </div>
+       
+    </section>
+    <section class="slide" style="background-color:black">
+        <figure>
+            <img class="cover" src="pictures/JOIN11.PNG" alt="blog">
+            <figcaption class="white">Copyright © Cezary Walenciuk</figcaption>
+        </figure>
+    </section>
+
+    <section class="slide prism over bhgry">
+        <div class="grid-container">
+            <div class="HeaderTitle">
+                <h2 class="headerCODE">4-4-5 Wyjaśnij mi JOINY : CROSS JOIN</h2>
+            </div>
+            <div class="PlaceCodeHere">
+                <pre style="font-size: 26px;overflow: hidden;  " class="language-sql">
+                    <code style="line-height: 40px !important;">
+                        SELECT t1.Name AS Country,t2.Name AS Region FROM dbo.Country AS t1
+                        CROSS JOIN dbo.Region AS t2
+                        
+                        --Alternatywnie
+                        SELECT t1.Name AS Country,t2.Name AS Region 
+                        FROM dbo.Country AS t1, dbo.Region AS t2
+                    </code>
+                </pre>
+            </div>
+            <div class="AnswerCode">
+                <div class="pytanie">
+                    <h3></h3>
+                </div>
+                <div class="odpowiedz">
+                    
+                </div>
+            </div>
+        </div>
+        </div>
+    </section>
+    <section class="slide" style="background-color:black">
+        <figure>
+            <img class="cover" src="pictures/SQLJoins-09.png" alt="blog">
+            <figcaption class="white">Copyright © Cezary Walenciuk</figcaption>
+        </figure>
+    </section>
+    <section class="slide" style="background-color:black">
+        <figure>
+            <img class="cover" src="pictures/SQLJoins-10.png" alt="blog">
+            <figcaption class="white">Copyright © Cezary Walenciuk</figcaption>
+        </figure>
+    </section>
+    <!-- <section class="slide prism over bhgry">
+        <div class="grid-container">
+            <div class="HeaderTitle">
+                <h2 class="headerCODE">4-5 Aby JOIN-owanie po obu stronach było opcjonale</h2>
+            </div>
+            <div class="PlaceCodeHere">
+                <pre style="font-size: 31px;overflow: hidden;  " class="language-sql">
+                    <code style="line-height: 40px !important;">
+                        SELECT soh.SalesOrderID,
+                        sr.SalesReasonID,
+                        sr.Name
+                        FROM Sales.SalesOrderHeader soh
+                        FULL OUTER JOIN Sales.SalesOrderHeaderSalesReason sohsr
+                        ON soh.SalesOrderID = sohsr.SalesOrderID
+                        FULL OUTER JOIN Sales.SalesReason sr
+                        ON sr.SalesReasonID = sohsr.SalesReasonID;
+                    </code>
+                </pre>
+            </div>
+            <div class="AnswerCode">
+                <div class="pytanie">
+                    <h3></h3>
+                </div>
+                <div class="odpowiedz">
+                    
+                </div>
+            </div>
+        </div>
+        </div>
+    </section> -->
+
+    <!-- <section class="slide prism over bhgry">
+        <div class="grid-container">
+            <div class="HeaderTitle">
+                <h2 class="headerCODE">4-6 CROSS JOIN Daj mi wszystkie możliwe kombinacje</h2>
+            </div>
+            <div class="PlaceCodeHere">
+                <pre style="font-size: 31px;overflow: hidden;  " class="language-sql">
+                    <code style="line-height: 40px !important;">
+                        SELECT s.CountryRegionCode,
+                        s.StateProvinceCode,
+                        t.TaxType,
+                        t.TaxRate
+                        FROM Person.StateProvince s
+                        CROSS JOIN Sales.SalesTaxRate t;
+                    </code>
+                </pre>
+            </div>
+            <div class="AnswerCode">
+                <div class="pytanie">
+                    <h3></h3>
+                </div>
+                <div class="odpowiedz">
+                    
+                </div>
+            </div>
+        </div>
+        </div>
+    </section> -->
+
+    <section class="slide prism over bhgry">
+        <div class="grid-container">
+            <div class="HeaderTitle">
+                <h2 class="headerCODE">4-5 Wybieranie z innego rezultatu</h2>
+            </div>
+            <div class="PlaceCodeHere">
+                <pre style="font-size: 29px;overflow: hidden;  " class="language-sql">
+                    <code style="line-height: 40px !important;">
+                        SELECT t1.Name FROM dbo.Country AS t1
+                        INNER JOIN (SELECT r.RegionId
+                        FROM dbo.Region as r
+                        WHERE r.Name = 'Europe' OR r.Name ='ASIA'
+                        ) 
+                        as d ON t1.RegionId = d.RegionId;
+                    </code>
+                </pre>
+            </div>
+            <div class="AnswerCode">
+                <div class="pytanie">
+                    <h3></h3>
+                </div>
+                <div class="odpowiedz">
+                    
+                </div>
+            </div>
+        </div>
+       
+    </section>
+    <section class="slide" style="background-color:black">
+        <figure>
+            <img class="cover" src="pictures/JOIN12.PNG" alt="blog">
+            <figcaption class="white">Copyright © Cezary Walenciuk</figcaption>
+        </figure>
+    </section>
+    <section class="slide prism over bhgry">
+        <div class="grid-container">
+            <div class="HeaderTitle">
+                <h2 class="headerCODE">4-7 Przedstawienie nowej kolumny</h2>
+            </div>
+            <div class="PlaceCodeHere">
+                <pre style="font-size: 19px;overflow: hidden;  " class="language-sql">
+                    <code style="line-height: 40px !important;">
+                        SELECT DATEDIFF(MONTH,'2011-03-30','2011-12-30')
+                        SELECT DATEADD(MONTH,1,'2011-12-30')
+                        SELECT DATENAME(DAYOFYEAR,'2011-12-30')
+                        SELECT DATENAME(MONTH,'2011-12-30')
+                        
+                        SELECT DATENAME(MONTH,DATEADD(MONTH,DATEDIFF(MONTH,'2011-03-30','2011-12-30'),'2011-12-30'))
+                        SELECT DATENAME(DAYOFYEAR,DATEADD(MONTH,DATEDIFF(MONTH,'2011-03-30','2011-12-30'),'2011-12-30'))
+                    </code>
+                </pre>
+            </div>
+            <div class="AnswerCode">
+                <div class="pytanie">
+                    <h3></h3>
+                </div>
+                <div class="odpowiedz">
+                    
+                </div>
+            </div>
+        </div>
+        </div>
+    </section>
+    <section class="slide prism over bhgry">
+        <div class="grid-container">
+            <div class="HeaderTitle">
+                <h2 class="headerCODE">4-7-1 Przedstawienie nowej kolumny</h2>
+            </div>
+            <div class="PlaceCodeHere">
+                <pre style="font-size: 19px;overflow: hidden;  " class="language-sql">
+                    <code style="line-height: 21px !important;">
+                        SELECT
+                        DATENAME(MONTH,DATEADD(MONTH,DATEDIFF(MONTH,'2011-03-30',OrderDate),'2011-12-30')) AS Mth,
+                        SUM(TotalDue) AS Total
+                        FROM Sales.SalesOrderHeader
+                        WHERE OrderDate>='20110101'
+                        AND OrderDate<'20140101'
+                        GROUP BY DATEADD(MONTH,DATEDIFF(MONTH,'2011-03-30',OrderDate),'2011-12-30')
+                        ORDER BY DATEADD(MONTH,DATEDIFF(MONTH,'2011-03-30',OrderDate),'2011-12-30')
+                    </code>
+                </pre>
+            </div>
+            <div class="AnswerCode">
+                <div class="pytanie">
+                    <h3></h3>
+                </div>
+                <div class="odpowiedz">
+                    
+                </div>
+            </div>
+        </div>
+        </div>
+    </section>
+   
+    <section class="slide prism over bhgry">
+        <div class="grid-container">
+            <div class="HeaderTitle">
+                <h2 class="headerCODE">4-7-2 Przedstawienie nowej kolumny</h2>
+            </div>
+            <div class="PlaceCodeHere">
+                <pre style="font-size: 14px;overflow: hidden;  " class="language-sql">
+                    <code style="line-height: 21px !important;">
+                        SELECT
+                        DATENAME(MONTH,DATEADD(MONTH,DATEDIFF(MONTH,'2011-03-30',OrderDate),'2011-12-30')) AS Mth,
+                        DATENAME(DAYOFYEAR,DATEADD(MONTH,DATEDIFF(MONTH,'2011-03-30',OrderDate),'2011-12-30')) AS dOFYEAR,
+                        SUM(TotalDue) AS Total
+                        FROM Sales.SalesOrderHeader
+                        WHERE OrderDate>='20110101'
+                        AND OrderDate<'20140101'
+                        GROUP BY DATEADD(MONTH,DATEDIFF(MONTH,'2011-03-30',OrderDate),'2011-12-30')
+                        ORDER BY 
+                        CONVERT(INT,SUBSTRING(
+                        DATENAME(DAYOFYEAR,DATEADD(MONTH,DATEDIFF(MONTH,'2011-03-30',OrderDate),'2011-12-30')),
+                        PATINDEX('%[0-9]%',
+                        DATENAME(DAYOFYEAR,DATEADD(MONTH,DATEDIFF(MONTH,'2011-03-30',OrderDate),'2011-12-30'))
+                        ),LEN(DATENAME(DAYOFYEAR,DATEADD(MONTH,DATEDIFF(MONTH,'2011-03-30',OrderDate),'2011-12-30')))))
+
+                        ------ Numerical Sort
+                        CONVERT(INT,SUBSTRING(NumStr,PATINDEX('%[0-9]%',NumStr),LEN(NumStr)))
+                    </code>
+                </pre>
+            </div>
+            <div class="AnswerCode">
+                <div class="pytanie">
+                    <h3></h3>
+                </div>
+                <div class="odpowiedz">
+                    
+                </div>
+            </div>
+        </div>
+        </div>
+    </section>
+    <section class="slide prism over bhgry">
+        <div class="grid-container">
+            <div class="HeaderTitle">
+                <h2 class="headerCODE">4-7-3-1 Przedstawienie nowej kolumny</h2>
+            </div>
+            <div class="PlaceCodeHere">
+                <pre style="font-size: 31px;overflow: hidden;  " class="language-sql">
+                    <code style="line-height: 40px !important;">
+                        SELECT  t1.*, t2o.*
+                        FROM    t1
+                        CROSS APPLY
+                        (
+                                SELECT  TOP 3 *
+                                FROM    t2
+                                WHERE   t2.t1_id = t1.id
+                                ORDER BY
+                                        t2.rank DESC
+                        ) t2o
+                    </code>
+                </pre>
+            </div>
+            <div class="AnswerCode">
+                <div class="pytanie">
+                    <h3></h3>
+                </div>
+                <div class="odpowiedz">
+                    
+                </div>
+            </div>
+        </div>
+      
+    </section>
+
+    <section class="slide prism over bhgry">
+        <div class="grid-container">
+            <div class="HeaderTitle">
+                <h2 class="headerCODE">4-7-3-1 Przedstawienie nowej kolumny</h2>
+            </div>
+            <div class="PlaceCodeHere">
+                <pre style="font-size: 31px;overflow: hidden;  " class="language-sql">
+                    <code style="line-height: 40px !important;">
+                        SELECT  r.*, t2o.*
+                        FROM  Region AS R
+                        CROSS APPLY
+                        (
+                                SELECT  TOP 3 *
+                                FROM    Country AS c
+                                WHERE   c.RegionId = r.RegionId
+                                ORDER BY
+                                        c.CountryId DESC
+                        ) t2o
+                    </code>
+                </pre>
+            </div>
+            <div class="AnswerCode">
+                <div class="pytanie">
+                    <h3></h3>
+                </div>
+                <div class="odpowiedz">
+                    
+                </div>
+            </div>
+        </div>
+      
+    </section>
+    <section class="slide" style="background-color:black">
+        <figure>
+            <img class="cover" src="pictures/JOIN13.PNG" alt="blog">
+            <figcaption class="white">Copyright © Cezary Walenciuk</figcaption>
+        </figure>
+    </section>
+    <section class="slide prism over bhgry">
+        <div class="grid-container">
+            <div class="HeaderTitle">
+                <h2 class="headerCODE">4-7-3-1 Przedstawienie nowej kolumny</h2>
+            </div>
+            <div class="PlaceCodeHere">
+                <pre style="font-size: 31px;overflow: hidden;  " class="language-sql">
+                    <code style="line-height: 40px !important;">
+                        SELECT  r.*, t2o.LOL
+                        FROM  Region AS R
+                        CROSS APPLY
+                        (
+                                SELECT  TOP(10)
+								RegionId + 120 AS LOL
+                                FROM    Country AS c
+                                WHERE   c.RegionId = r.RegionId
+                                ORDER BY
+                                c.CountryId DESC
+                        ) t2o
+                    </code>
+                </pre>
+            </div>
+            <div class="AnswerCode">
+                <div class="pytanie">
+                    <h3></h3>
+                </div>
+                <div class="odpowiedz">
+                    
+                </div>
+            </div>
+        </div>
+      
+    </section>
+
+    <section class="slide prism over bhgry">
+        <div class="grid-container">
+            <div class="HeaderTitle">
+                <h2 class="headerCODE">4-7-4 Przedstawienie nowej kolumny</h2>
+            </div>
+            <div class="PlaceCodeHere">
+                <pre style="font-size: 21px;overflow: hidden;  " class="language-sql">
+                    <code style="line-height: 25px !important;">
+                        SELECT 
+                        DATENAME(MONTH,FirstDayOfMth) AS Mth,
+                        DATENAME(DAYOFYEAR,FirstDayOfMth) AS dOFYEAR,
+                        SUM(TotalDue) AS Total
+                        FROM Sales.SalesOrderHeader
+                        
+                            CROSS APPLY (
+                            SELECT 
+                                DATEADD(MONTH,DATEDIFF(MONTH,'2011-03-30',OrderDate),'2011-12-30') 
+                                AS FirstDayOfMth,
+
+                            ) F_Mth
+                        
+                        WHERE OrderDate>='20110101'
+                        AND OrderDate<'20140101'
+                        group by FirstDayOfMth
+                        order by DATENAME(DAYOFYEAR,FirstDayOfMth);
+                    </code>
+                </pre>
+            </div>
+            <div class="AnswerCode">
+                <div class="pytanie">
+                    <h3></h3>
+                </div>
+                <div class="odpowiedz">
+                    
+                </div>
+            </div>
+        </div>
+
+    </section>
+
+
+
+
+    <section class="slide prism over bhgry">
+        <div class="grid-container">
+            <div class="HeaderTitle">
+                <h2 class="headerCODE">4-8 Testowanie na istnienie rekordu</h2>
+            </div>
+            <div class="PlaceCodeHere">
+                <pre style="font-size: 31px;overflow: hidden;  " class="language-sql">
+                    <code style="line-height: 40px !important;">
+                        SELECT s.PurchaseOrderNumber
+                        FROM Sales.SalesOrderHeader s
+                            WHERE EXISTS ( SELECT SalesOrderID
+                            FROM Sales.SalesOrderDetail sod
+                                WHERE sod.UnitPrice BETWEEN 10 AND 200
+                                AND sod.SalesOrderID = s.SalesOrderID );
+                    </code>
+                </pre>
+            </div>
+            <div class="AnswerCode">
+                <div class="pytanie">
+                    <h3></h3>
+                </div>
+                <div class="odpowiedz">
+                    
+                </div>
+            </div>
+        </div>
+        </div>
+    </section>
+
+    <section class="slide prism over bhgry">
+        <div class="grid-container">
+            <div class="HeaderTitle">
+                <h2 class="headerCODE">4-9 PRZECIW Testowanie na istnienie rekordu</h2>
+            </div>
+            <div class="PlaceCodeHere">
+                <pre style="font-size: 31px;overflow: hidden;  " class="language-sql">
+                    <code style="line-height: 40px !important;">
+                        SELECT BusinessEntityID,
+                        SalesQuota AS CurrentSalesQuota
+                        FROM Sales.SalesPerson
+                            WHERE SalesQuota = (SELECT MAX(SalesQuota)
+                                FROM Sales.SalesPerson
+                            );
+                    </code>
+                </pre>
+            </div>
+            <div class="AnswerCode">
+                <div class="pytanie">
+                    <h3></h3>
+                </div>
+                <div class="odpowiedz">
+                    
+                </div>
+            </div>
+        </div>
+        </div>
+    </section>
+    <section class="slide prism over bhgry">
+        <div class="grid-container">
+            <div class="HeaderTitle">
+                <h2 class="headerCODE">4-10 Ustawienie dwóch rezultatów miedzy sobą</h2>
+            </div>
+            <div class="PlaceCodeHere">
+                <pre style="font-size: 31px;overflow: hidden;  " class="language-sql">
+                    <code style="line-height: 40px !important;">
+                        SELECT t1.Name AS Country FROM dbo.Country AS t1
+                        UNION ALL
+                        SELECT t1.Name AS Country FROM dbo.Country AS t1
+                    </code>
+                </pre>
+            </div>
+            <div class="AnswerCode">
+                <div class="pytanie">
+                    <h3></h3>
+                </div>
+                <div class="odpowiedz">
+                    
+                </div>
+            </div>
+        </div>
+        </div>
+    </section>
+    <section class="slide" style="background-color:black">
+        <figure>
+            <img class="cover" src="pictures/05.PNG" alt="blog">
+            <figcaption class="white">Copyright © Cezary Walenciuk</figcaption>
+        </figure>
+    </section>
+    <section class="slide prism over bhgry">
+        <div class="grid-container">
+            <div class="HeaderTitle">
+                <h2 class="headerCODE">4-10-1 Ustawienie dwóch rezultatów miedzy sobą</h2>
+            </div>
+            <div class="PlaceCodeHere">
+                <pre style="font-size: 22px;overflow: hidden;  " class="language-sql">
+                    <code style="line-height: 30px !important;">
+                        SELECT BusinessEntityID,
+                            GETDATE() QuotaDate,
+                            SalesQuota
+                            FROM Sales.SalesPerson
+                            WHERE SalesQuota > 0
+                        UNION ALL
+                        SELECT BusinessEntityID,
+                            QuotaDate,
+                            SalesQuota
+                        FROM Sales.SalesPersonQuotaHistory
+                            WHERE SalesQuota > 0
+                            ORDER BY BusinessEntityID DESC,
+                            QuotaDate DESC;
+                    </code>
+                </pre>
+            </div>
+            <div class="AnswerCode">
+                <div class="pytanie">
+                    <h3></h3>
+                </div>
+                <div class="odpowiedz">
+                    
+                </div>
+            </div>
+        </div>
+        </div>
+    </section>
+    <section class="slide prism over bhgry">
+        <div class="grid-container">
+            <div class="HeaderTitle">
+                <h2 class="headerCODE">4-11  Uniknięcie Duplikatów : Ustawienie dwóch rezultatów miedzy sobą</h2>
+            </div>
+            <div class="PlaceCodeHere">
+                <pre style="font-size: 31px;overflow: hidden;  " class="language-sql">
+                    <code style="line-height: 40px !important;">
+                        SELECT t1.Name AS Country FROM dbo.Country AS t1
+                        UNION 
+                        SELECT t1.Name AS Country FROM dbo.Country AS t1
+                    </code>
+                </pre>
+            </div>
+            <div class="AnswerCode">
+                <div class="pytanie">
+                    <h3></h3>
+                </div>
+                <div class="odpowiedz">
+                    
+                </div>
+            </div>
+        </div>
+        </div>
+    </section>
+    <section class="slide" style="background-color:black">
+        <figure>
+            <img class="cover" src="pictures/06.PNG" alt="blog">
+            <figcaption class="white">Copyright © Cezary Walenciuk</figcaption>
+        </figure>
+    </section>
+    <section class="slide prism over bhgry">
+        <div class="grid-container">
+            <div class="HeaderTitle">
+                <h2 class="headerCODE">4-11  Uniknięcie Duplikatów : Ustawienie dwóch rezultatów miedzy sobą</h2>
+            </div>
+            <div class="PlaceCodeHere">
+                <pre style="font-size: 31px;overflow: hidden;  " class="language-sql">
+                    <code style="line-height: 40px !important;">
+                        SELECT P1.LastName
+                        FROM HumanResources.Employee E
+                        INNER JOIN Person.Person P1
+                        ON E.BusinessEntityID = P1.BusinessEntityID
+                        UNION
+                        SELECT P2.LastName
+                        FROM Sales.SalesPerson SP
+                        INNER JOIN Person.Person P2
+                        ON SP.BusinessEntityID = P2.BusinessEntityID;
+                    </code>
+                </pre>
+            </div>
+            <div class="AnswerCode">
+                <div class="pytanie">
+                    <h3></h3>
+                </div>
+                <div class="odpowiedz">
+                    
+                </div>
+            </div>
+        </div>
+        </div>
+    </section>
+    <section class="slide prism over bhgry">
+        <div class="grid-container">
+            <div class="HeaderTitle">
+                <h2 class="headerCODE">4-12  Usunięcie jednego zbioru danych z drugiego</h2>
+            </div>
+            <div class="PlaceCodeHere">
+                <pre style="font-size: 31px;overflow: hidden;  " class="language-sql">
+                    <code style="line-height: 40px !important;">
+                        SELECT t1.Name AS Country FROM dbo.Country AS t1
+                        EXCEPT 
+                        SELECT t1.Name AS Country FROM dbo.Country AS t1
+                        where Name LIKE N'A%'
+                    </code>
+                </pre>
+            </div>
+            <div class="AnswerCode">
+                <div class="pytanie">
+                    <h3></h3>
+                </div>
+                <div class="odpowiedz">
+                    
+                </div>
+            </div>
+        </div>
+        </div>
+    </section>
+    <section class="slide" style="background-color:black">
+        <figure>
+            <img class="cover" src="pictures/JOIN14.PNG" alt="blog">
+            <figcaption class="white">Copyright © Cezary Walenciuk</figcaption>
+        </figure>
+    </section>
+    <section class="slide prism over bhgry">
+        <div class="grid-container">
+            <div class="HeaderTitle">
+                <h2 class="headerCODE">4-12  Usunięcie jednego zbioru danych z drugiego</h2>
+            </div>
+            <div class="PlaceCodeHere">
+                <pre style="font-size: 31px;overflow: hidden;  " class="language-sql">
+                    <code style="line-height: 40px !important;">
+                        SELECT P.ProductID
+                        FROM Production.Product P
+                        EXCEPT
+                        SELECT BOM.ComponentID
+                        FROM Production.BillOfMaterials BOM;
+                        --Uwaga nie będzie duplikatów
+                    </code>
+                </pre>
+            </div>
+            <div class="AnswerCode">
+                <div class="pytanie">
+                    <h3></h3>
+                </div>
+                <div class="odpowiedz">
+                    
+                </div>
+            </div>
+        </div>
+        </div>
+    </section>
+
+    <section class="slide prism over bhgry">
+        <div class="grid-container">
+            <div class="HeaderTitle">
+                <h2 class="headerCODE">4-13 Znalezienie częsci wspólnej zbioru danych z drugiego</h2>
+            </div>
+            <div class="PlaceCodeHere">
+                <pre style="font-size: 31px;overflow: hidden;  " class="language-sql">
+                    <code style="line-height: 40px !important;">
+                        SELECT t1.Name AS Country FROM dbo.Country AS t1
+                        INTERSECT 
+                        SELECT t1.Name AS Country FROM dbo.Country AS t1
+                        where Name like N'A%'
+                        
+                    </code>
+                </pre>
+            </div>
+            <div class="AnswerCode">
+                <div class="pytanie">
+                    <h3></h3>
+                </div>
+                <div class="odpowiedz">
+                    
+                </div>
+            </div>
+        </div>
+        </div>
+    </section>
+    <section class="slide" style="background-color:black">
+        <figure>
+            <img class="cover" src="pictures/08.PNG" alt="blog">
+            <figcaption class="white">Copyright © Cezary Walenciuk</figcaption>
+        </figure>
+    </section>
+    <section class="slide prism over bhgry">
+        <div class="grid-container">
+            <div class="HeaderTitle">
+                <h2 class="headerCODE">4-13 Znalezienie częsci wspólnej zbioru danych z drugiego</h2>
+            </div>
+            <div class="PlaceCodeHere">
+                <pre style="font-size: 31px;overflow: hidden;  " class="language-sql">
+                    <code style="line-height: 40px !important;">
+                        SELECT PR1.ProductID
+                        FROM Production.ProductReview PR1
+                        WHERE PR1.Rating >= 4
+                        INTERSECT
+                        SELECT PR1.ProductID
+                        FROM Production.ProductReview PR1
+                        WHERE PR1.Rating <= 2;
+                        --Uwaga nie będzie duplikatów
+                    </code>
+                </pre>
+            </div>
+            <div class="AnswerCode">
+                <div class="pytanie">
+                    <h3></h3>
+                </div>
+                <div class="odpowiedz">
+                    
+                </div>
+            </div>
+        </div>
+        </div>
+    </section>
+    <section class="slide prism over bhgry">
+        <div class="grid-container">
+            <div class="HeaderTitle">
+                <h2 class="headerCODE">4-13-1 Znalezienie rekordów których brakuje w innej tabelce</h2>
+            </div>
+            <div class="PlaceCodeHere">
+                <pre style="font-size: 31px;overflow: hidden;  " class="language-sql">
+                    <code style="line-height: 40px !important;">
+                        SELECT R.RegionId FROM Region AS R
+                        EXCEPT
+                        SELECT t1.RegionId AS Country FROM dbo.Country AS t1
+                    </code>
+                </pre>
+            </div>
+            <div class="AnswerCode">
+                <div class="pytanie">
+                    <h3></h3>
+                </div>
+                <div class="odpowiedz">
+                    
+                </div>
+            </div>
+        </div>
+  
+
+    </section>
+    <section class="slide" style="background-color:black">
+        <figure>
+            <img class="cover" src="pictures/JOIN15.PNG" alt="blog">
+            <figcaption class="white">Copyright © Cezary Walenciuk</figcaption>
+        </figure>
+    </section>
+    <!-- <section class="slide prism over bhgry">
+        <div class="grid-container">
+            <div class="HeaderTitle">
+                <h2 class="headerCODE">4-13-2 Znalezienie rekordów których brakuje w innej tabelce</h2>
+            </div>
+            <div class="PlaceCodeHere">
+                <pre style="font-size: 31px;overflow: hidden;  " class="language-sql">
+                    <code style="line-height: 40px !important;">
+                        SELECT P.ProductID,
+                        P.Name
+                        FROM Production.Product P
+                        WHERE NOT EXISTS ( SELECT *
+                        FROM Sales.SpecialOfferProduct SOP
+                        WHERE SOP.ProductID = P.ProductID );
+                    </code>
+                </pre>
+            </div>
+            <div class="AnswerCode">
+                <div class="pytanie">
+                    <h3></h3>
+                </div>
+                <div class="odpowiedz">
+                    
+                </div>
+            </div>
+        </div>
+        </div>
+
+    </section> -->
+
+    <section class="slide prism over bhgry">
+        <div class="grid-container">
+            <div class="HeaderTitle">
+                <h2 class="headerCODE">4-13-3 Znalezienie częsci wspólnej zbioru danych z drugiego</h2>
+            </div>
+            <div class="PlaceCodeHere">
+                <pre style="font-size: 31px;overflow: hidden;  " class="language-sql">
+                    <code style="line-height: 40px !important;">
+                        SELECT R.RegionId, r.Name FROM Region AS R 
+                        WHERE NOT EXISTS ( SELECT *
+                        FROM dbo.Country AS t1
+                        WHERE R.RegionId = t1.RegionId );
+                    </code>
+                </pre>
+            </div>
+            <div class="AnswerCode">
+                <div class="pytanie">
+                    <h3></h3>
+                </div>
+                <div class="odpowiedz">
+                    
+                </div>
+            </div>
+        </div>
+    
+    </section>
+    <section class="slide" style="background-color:black">
+        <figure>
+            <img class="cover" src="pictures/JOIN16.PNG" alt="blog">
+            <figcaption class="white">Copyright © Cezary Walenciuk</figcaption>
+        </figure>
+    </section>
+    <section class="slide prism over bhgry">
+        <div class="grid-container">
+            <div class="HeaderTitle">
+                <h2 class="headerCODE">4-13-4 Znalezienie częsci wspólnej zbioru danych z drugiego</h2>
+            </div>
+            <div class="PlaceCodeHere">
+                <pre style="font-size: 31px;overflow: hidden;  " class="language-sql">
+                    <code style="line-height: 40px !important;">
+                        SELECT P.ProductID,
+                        P.Name
+                        FROM Production.Product P
+                            WHERE NOT EXISTS ( SELECT *
+                            FROM Sales.SpecialOfferProduct SOP
+                                WHERE SOP.ProductID = P.ProductID );
+                    </code>
+                </pre>
+            </div>
+            <div class="AnswerCode">
+                <div class="pytanie">
+                    <h3></h3>
+                </div>
+                <div class="odpowiedz">
+                    
+                </div>
+            </div>
+        </div>
+      
+    </section>
+
+    <section class="slide creamB">
+        <span class="shout colors"><span>5. Grupowanie i Agregacja czyli wyjaśni mi to w końcu dobrze
+        </span></span>
+    </section>
+    <section class="slide creamB   compact ">
+        <h2>Funkcje</h2>
+        <ol>
+            <li class="next">AVG (kalkuluje przeciętną wartość po wartościach nie-NULL w grupie)</li>
+            <li class="next">CHECKSUM_AGG (pozwala Tobie śledzić zmiany na danej kolumnej)</li>
+            <li class="next">COUNT (zwraca Ci liczbę rekordów. Kolumny NULL też to dotyczy)</li>
+            <li class="next">COUNT_BIG (to samo tylko mamy BigInt)</li>
+        </ol>
+    </section>
+    <section class="slide creamB   compact ">
+        <h2>Funkcje</h2>
+        <ol>
+            <li class="next">MAX (wyświetli maksymalną wartość)</li>
+            <li class="next">MIN (wyświetli minimalną wartość)</li>
+            <li class="next">STDEV (Odchylenie standardowe ) </li>
+            <li class="next">STDEVP(Odchylenie standardowe na całej populacji)</li>
+        </ol>
+    </section>
+    <section class="slide creamB   compact ">
+        <h2>Funkcje</h2>
+        <ol>
+            <li class="next">SUM (suma wartości)</li>
+            <li class="next">VAR (statyczna wariancja)</li>
+            <li class="next">VARP (statyczna wariancja na całej populacji)</li>
+        </ol>
+    </section>
+
+
+    <section class="slide prism over bhgry">
+        <div class="grid-container">
+            <div class="HeaderTitle">
+                <h2 class="headerCODE">5-1 Grupowanie podstawy</h2>
+            </div>
+            <div class="PlaceCodeHere">
+                <pre style="font-size: 31px;overflow: hidden;  " class="language-sql">
+                    <code style="line-height: 40px !important;">
+                        SELECT MIN(Rating) Rating_Min,
+                        MAX(Rating) Rating_Max,
+                        SUM(Rating) Rating_Sum,
+                        AVG(Rating) Rating_Avg
+                        FROM Production.ProductReview;
+                    </code>
+                </pre>
+            </div>
+            <div class="AnswerCode">
+                <div class="pytanie">
+                    <h3></h3>
+                </div>
+                <div class="odpowiedz">
+                    
+                </div>
+            </div>
+        </div>
+   
+
+    </section>
+    <section class="slide" style="background-color:black">
+        <figure>
+            <img class="cover" src="pictures/group-01.PNG" alt="blog">
+            <figcaption class="white">Copyright © Cezary Walenciuk</figcaption>
+        </figure>
+    </section>
+    <section class="slide prism over bhgry">
+        <div class="grid-container">
+            <div class="HeaderTitle">
+                <h2 class="headerCODE">5-1 Grupowanie podstawy</h2>
+            </div>
+            <div class="PlaceCodeHere">
+                <pre style="font-size: 24px;overflow: hidden;  " class="language-sql">
+                    <code style="line-height: 24px !important;">
+                        SELECT AVG(Grade) AS AvgGrade,
+                        AVG(DISTINCT Grade) AS AvgDistinctGrade,
+                        MAX(Grade) AS MaxGrade,
+                        MIN(Grade) AS MinGrade
+                        FROM (VALUES (1, 100),
+                        (1, 99),
+                        (1, 99),
+                        (1, 98),
+                        (1, 99),
+                        (1, 32),
+                        (2, 77),
+                        (2, 56),
+                        (2, 88),
+                        (2, 60),
+                        (2, 80)
+                        ) dt (StudentId, Grade)
+            
+                    </code>
+                </pre>
+            </div>
+            <div class="AnswerCode">
+                <div class="pytanie">
+                    <h3></h3>
+                </div>
+                <div class="odpowiedz">
+                    
+                </div>
+            </div>
+        </div>
+        </div>
+    </section>
+    <section class="slide" style="background-color:black">
+        <figure>
+            <img class="cover" src="pictures/09.PNG" alt="blog">
+            <figcaption class="white">Copyright © Cezary Walenciuk</figcaption>
+        </figure>
+    </section>
+    <section class="slide prism over bhgry">
+        <div class="grid-container">
+            <div class="HeaderTitle">
+                <h2 class="headerCODE">5-2 Grupowanie podstawy z groupby</h2>
+            </div>
+            <div class="PlaceCodeHere">
+                <pre style="font-size: 24px;overflow: hidden;  " class="language-sql">
+                    <code style="line-height: 24px !important;">
+                        SELECT AVG(Grade) AS AvgGrade,
+                        AVG(DISTINCT Grade) AS AvgDistinctGrade,
+                        MAX(Grade) AS MaxGrade,
+                        MIN(Grade) AS MinGrade
+                        FROM (VALUES (1, 100),
+                        (1, 99),
+                        (1, 99),
+                        (1, 98),
+                        (1, 99),
+                        (1, 32),
+                        (2, 77),
+                        (2, 56),
+                        (2, 88),
+                        (2, 60),
+                        (2, 80)
+                        ) dt (StudentId, Grade)
+            
+                        GROUP BY StudentId
+                    </code>
+                </pre>
+            </div>
+            <div class="AnswerCode">
+                <div class="pytanie">
+                    <h3></h3>
+                </div>
+                <div class="odpowiedz">
+                    
+                </div>
+            </div>
+        </div>
+        </div>
+    </section>
+    <section class="slide" style="background-color:black">
+        <figure>
+            <img class="cover" src="pictures/10.PNG" alt="blog">
+            <figcaption class="white">Copyright © Cezary Walenciuk</figcaption>
+        </figure>
+    </section>
+    <section class="slide prism over bhgry">
+        <div class="grid-container">
+            <div class="HeaderTitle">
+                <h2 class="headerCODE">5-2 Grupowanie podstawy z groupby</h2>
+            </div>
+            <div class="PlaceCodeHere">
+                <pre style="font-size: 31px;overflow: hidden;  " class="language-sql">
+                    <code style="line-height: 40px !important;">
+                        SELECT TOP (10)
+                        SalesOrderID,
+                        SUM(LineTotal) AS OrderTotal,
+                        MIN(LineTotal) AS MinLine,
+                        MAX(LineTotal) AS MaxLine,
+                        AVG(LineTotal) AS AvgLine,
+                        COUNT(LineTotal) AS CountLine
+                        FROM [Sales].[SalesOrderDetail]
+                        GROUP BY SalesOrderID
+                        ORDER BY SalesOrderID;
+                    </code>
+                </pre>
+            </div>
+            <div class="AnswerCode">
+                <div class="pytanie">
+                    <h3></h3>
+                </div>
+                <div class="odpowiedz">
+                    
+                </div>
+            </div>
+        </div>
+
+
+    </section>
+    <section class="slide" style="background-color:black">
+        <figure>
+            <img class="cover" src="pictures/group-02.PNG" alt="blog">
+            <figcaption class="white">Copyright © Cezary Walenciuk</figcaption>
+        </figure>
+    </section>
+    <section class="slide prism over bhgry">
+        <div class="grid-container">
+            <div class="HeaderTitle">
+                <h2 class="headerCODE">5-3  Liczenie liczby rekordów</h2>
+            </div>
+            <div class="PlaceCodeHere">
+                <pre style="font-size: 24px;overflow: hidden;  " class="language-sql">
+                    <code style="line-height: 24px !important;">
+                        SELECT COUNT(FakeGrades),
+                        COUNT(*)
+                        FROM (VALUES (1, 100,88),
+                        (1, 99,NULL),
+                        (1, 99,NULL),
+                        (1, 98,NULL),
+                        (1, 99,NULL),
+                        (1, 32,NULL),
+                        (2, 77,NULL),
+                        (2, 56,NULL),
+                        (2, 88,NULL),
+                        (2, 60,NULL),
+                        (2, 80,NULL)
+                        ) dt (StudentId, Grade,FakeGrades)
+                        GROUP BY StudentId
+                    </code>
+                </pre>
+            </div>
+            <div class="AnswerCode">
+                <div class="pytanie">
+                    <h3></h3>
+                </div>
+                <div class="odpowiedz">
+                    
+                </div>
+            </div>
+    
+        </div>
+
+    </section>
+    <section class="slide" style="background-color:black">
+        <figure>
+            <img class="cover" src="pictures/group-03.PNG" alt="blog">
+            <figcaption class="white">Copyright © Cezary Walenciuk</figcaption>
+        </figure>
+    </section>
+    <section class="slide prism over bhgry">
+        <div class="grid-container">
+            <div class="HeaderTitle">
+                <h2 class="headerCODE">5-3 Liczenie liczby rekordów</h2>
+            </div>
+            <div class="PlaceCodeHere">
+                <pre style="font-size: 30px;overflow: hidden;  " class="language-sql">
+                    <code style="line-height: 33px !important;">
+                        SELECT TOP (5)
+                        Shelf,
+                        COUNT(ProductID) AS ProductCount,
+                        COUNT_BIG(ProductID) AS ProductCountBig
+                        FROM Production.ProductInventory
+                        GROUP BY Shelf
+                        ORDER BY Shelf;
+                    </code>
+                </pre>
+            </div>
+            <div class="AnswerCode">
+                <div class="pytanie">
+                    <h3></h3>
+                </div>
+                <div class="odpowiedz">
+                    
+                </div>
+            </div>
+        </div>
+  
+
+    </section>
+    <section class="slide" style="background-color:black">
+        <figure>
+            <img class="cover" src="pictures/group-04.PNG" alt="blog">
+            <figcaption class="white">Copyright © Cezary Walenciuk</figcaption>
+        </figure>
+    </section>
+    <section class="slide prism over bhgry">
+        <div class="grid-container">
+            <div class="HeaderTitle">
+                <h2 class="headerCODE">5-4 Sprawdzenie czy są zmiany w tabelce</h2>
+            </div>
+            <div class="PlaceCodeHere">
+                <pre style="font-size: 25px;overflow: hidden;  " class="language-sql">
+                    <code style="line-height: 25px !important;">
+                        IF OBJECT_ID('tempdb.dbo.[#test5.4]') 
+                        IS NOT NULL DROP TABLE [#test5.4];
+
+                        CREATE TABLE [#test5.4]
+                        (
+                            StudentID INTEGER,
+                            Grade INTEGER
+                        );
+
+                        INSERT INTO [#test5.4] (StudentID, Grade)
+                        VALUES (1, 100),
+                        (1, 95)
+                    </code>
+                </pre>
+            </div>
+            <div class="AnswerCode">
+                <div class="pytanie">
+                    <h3></h3>
+                </div>
+                <div class="odpowiedz">
+                    
+                </div>
+            </div>
+        </div>
+  
+
+    </section>
+    <section class="slide prism over bhgry">
+        <div class="grid-container">
+            <div class="HeaderTitle">
+                <h2 class="headerCODE">5-4-1 Sprawdzenie czy są zmiany w tabelce</h2>
+            </div>
+            <div class="PlaceCodeHere">
+                <pre style="font-size: 28px;overflow: hidden;  " class="language-sql">
+                    <code style="line-height: 28px !important;">
+                        SELECT StudentID, CHECKSUM_AGG(Grade) AS GradeChecksumAgg
+                        FROM [#test5.4]
+                        GROUP BY StudentID;
+
+                        UPDATE [#test5.4]
+                        SET Grade = 99
+                        WHERE Grade = 95;
+
+                        SELECT StudentID, CHECKSUM_AGG(Grade) AS GradeChecksumAgg
+                        FROM [#test5.4]
+                        GROUP BY StudentID;
+                    </code>
+                </pre>
+            </div>
+            <div class="AnswerCode">
+                <div class="pytanie">
+                    <h3></h3>
+                </div>
+                <div class="odpowiedz">
+                    
+                </div>
+            </div>
+        </div>
+ 
+    </section>
+    <section class="slide" style="background-color:black">
+        <figure>
+            <img class="cover" src="pictures/group-05.PNG" alt="blog">
+            <figcaption class="white">Copyright © Cezary Walenciuk</figcaption>
+        </figure>
+    </section>
+    <section class="slide prism over bhgry">
+        <div class="grid-container">
+            <div class="HeaderTitle">
+                <h2 class="headerCODE">5-5 Restrykcja na zbiorze pogrupowanym </h2>
+            </div>
+            <div class="PlaceCodeHere">
+                <pre style="font-size: 29px;overflow: hidden;  " class="language-sql">
+                    <code style="line-height: 29px !important;">
+                        SELECT 
+                        AVG(Grade)
+                        FROM (VALUES (1, 100,88),
+                        (1, 99,NULL),
+                        (1, 99,NULL),
+                        (2, 77,NULL),
+                        (2, 56,NULL),
+                        (2, 88,NULL),
+                        (2, 60,NULL),
+                        (2, 80,NULL)
+                        ) dt (StudentId, Grade,FakeGrades)
+                        GROUP BY StudentId
+                        HAVING COUNT(*) = 3 
+                    </code>
+                </pre>
+            </div>
+            <div class="AnswerCode">
+                <div class="pytanie">
+                    <h3></h3>
+                </div>
+                <div class="odpowiedz">
+                    
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="slide" style="background-color:black">
+        <figure>
+            <img class="cover" src="pictures/group-06.PNG" alt="blog">
+            <figcaption class="white">Copyright © Cezary Walenciuk</figcaption>
+        </figure>
+    </section>
+    <section class="slide prism over bhgry">
+        <div class="grid-container">
+            <div class="HeaderTitle">
+                <h2 class="headerCODE">5-5 Restrykcja na zbiorze pogrupowanym </h2>
+            </div>
+            <div class="PlaceCodeHere">
+                <pre style="font-size: 29px;overflow: hidden;  " class="language-sql">
+                    <code style="line-height: 29px !important;">
+                        SELECT 
+                        AVG(Grade)
+                        FROM (VALUES (1, 100,88),
+                        (1, 99,NULL),
+                        (1, 99,NULL),
+                        (2, 77,NULL),
+                        (2, 56,NULL),
+                        (2, 88,NULL),
+                        (2, 60,NULL),
+                        (2, 80,NULL)
+                        ) dt (StudentId, Grade,FakeGrades)
+                        GROUP BY StudentId
+                        HAVING COUNT(*) = 5
+                    </code>
+                </pre>
+            </div>
+            <div class="AnswerCode">
+                <div class="pytanie">
+                    <h3></h3>
+                </div>
+                <div class="odpowiedz">
+                    
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="slide" style="background-color:black">
+        <figure>
+            <img class="cover" src="pictures/group-07.PNG" alt="blog">
+            <figcaption class="white">Copyright © Cezary Walenciuk</figcaption>
+        </figure>
+    </section>
+    <section class="slide prism over bhgry">
+        <div class="grid-container">
+            <div class="HeaderTitle">
+                <h2 class="headerCODE">5-5 Restrykcja na zbiorze pogrupowanym </h2>
+            </div>
+            <div class="PlaceCodeHere">
+                <pre style="font-size: 31px;overflow: hidden;  " class="language-sql">
+                    <code style="line-height: 40px !important;">
+                        SELECT s.Name,
+                        COUNT(w.WorkOrderID) AS Cnt
+                        FROM Production.ScrapReason s
+                        INNER JOIN Production.WorkOrder w
+                        ON s.ScrapReasonID = w.ScrapReasonID
+                        GROUP BY s.Name
+                        HAVING COUNT(*) > 50;
+                    </code>
+                </pre>
+            </div>
+            <div class="AnswerCode">
+                <div class="pytanie">
+                    <h3></h3>
+                </div>
+                <div class="odpowiedz">
+                    
+                </div>
+        </div>
+    </section>
+    <section class="slide prism over bhgry">
+        <div class="grid-container">
+            <div class="HeaderTitle"> 
+                <h2 class="headerCODE">5-6 Agregacja na wartościach unikatowych</h2>
+            </div>
+            <div class="PlaceCodeHere">
+                <pre style="font-size: 29px;overflow: hidden;  " class="language-sql">
+                    <code style="line-height: 29px !important;">
+                        SELECT 
+                        COUNT(Grade) AS [Grade],
+                        COUNT(DISTINCT Grade) AS [DistinctGrade]
+                        FROM (VALUES (1, 100,88),
+                        (1, 99,NULL),
+                        (1, 99,NULL),
+                        (2, 77,NULL),
+                        (2, 88,NULL),
+                        (2, 88,NULL),
+                        (2, 60,NULL),
+                        (2, 80,NULL)
+                        ) dt (StudentId, Grade,FakeGrades)
+                        GROUP BY StudentId
+        
+                    </code>
+                </pre>
+            </div>
+            <div class="AnswerCode">
+                <div class="pytanie">
+                    <h3></h3>
+                </div>
+                <div class="odpowiedz">
+                    
+                </div>
+    </div>
+
+    </section>
+    <section class="slide" style="background-color:black">
+        <figure>
+            <img class="cover" src="pictures/group-08.PNG" alt="blog">
+            <figcaption class="white">Copyright © Cezary Walenciuk</figcaption>
+        </figure>
+    </section>
+    <section class="slide prism over bhgry">
+        <div class="grid-container">
+            <div class="HeaderTitle"> 
+                <h2 class="headerCODE">5-6 Agregacja na wartościach unikatowych</h2>
+            </div>
+            <div class="PlaceCodeHere">
+                <pre style="font-size: 31px;overflow: hidden;  " class="language-sql">
+                    <code style="line-height: 40px !important;">
+                        SELECT [RateChangeDate],
+                        COUNT([Rate]) AS [Count],
+                        COUNT(DISTINCT Rate) AS [DistinctCount]
+                        FROM [HumanResources].[EmployeePayHistory]
+                        WHERE RateChangeDate >= '2008-12-01'
+                        AND RateChangeDate < '2008-12-10'
+                        GROUP BY RateChangeDate;
+                    </code>
+                </pre>
+            </div>
+            <div class="AnswerCode">
+                <div class="pytanie">
+                    <h3></h3>
+                </div>
+                <div class="odpowiedz">
+                    
+                </div>
+            </div>
+        </div>
+
+    </section>
+
+    <section class="slide prism over bhgry">
+        <div class="grid-container">
+            <div class="HeaderTitle"> 
+                <h2 class="headerCODE">5-7 Hierachia agregacji : Tworzenie podsumowania</h2>
+            </div>
+            <div class="PlaceCodeHere">
+                <pre style="font-size: 29px;overflow: hidden;  " class="language-sql">
+                    <code style="line-height: 29px !important;">
+                        SELECT 
+                        TestName,StudentId,
+                        SUM(Grade)
+                        FROM (VALUES (1,'A',1, 100,88),
+                        (1,'B',1, 99,NULL),
+                        (1,'C',1, 99,NULL),
+                        (2,'A',1, 77,NULL),
+                        (2,'B',1, 88,NULL),
+                        (2,'C',2, 88,NULL),
+                        (2,'D',2, 60,NULL),
+                        (2,'E',2, 80,NULL)
+                        ) dt (StudentId,TestName,YearS, Grade,FakeGrades)
+                        GROUP BY ROLLUP(StudentId, TestName);
+                    </code>
+                </pre>
+            </div>
+            <div class="AnswerCode">
+                <div class="pytanie">
+                    <h3></h3>
+                </div>
+                <div class="odpowiedz">
+                    
+                </div>
+            </div>
+        </div>
+
+    </section>
+
+    <section class="slide" style="background-color:black">
+        <figure>
+            <img class="cover" src="pictures/12.PNG" alt="blog">
+            <figcaption class="white">Copyright © Cezary Walenciuk</figcaption>
+        </figure>
+    </section>
+        
+    <section class="slide creamB">
+        <span class="shout colors"><span>GROUP BY ROLLUP nie spełnia standardu ISO więc może on zostać usunięty z SQL Servera
+        </span></span>
+    </section>
+    <section class="slide prism over bhgry">
+        <div class="grid-container">
+            <div class="HeaderTitle"> 
+                <h2 class="headerCODE">5-7 Hierachia agregacji : Tworzenie podsumowania</h2>
+            </div>
+            <div class="PlaceCodeHere">
+                <pre style="font-size: 31px;overflow: hidden;  " class="language-sql">
+                    <code style="line-height: 40px !important;">
+                        SELECT i.Shelf,
+                        p.Name,
+                        SUM(i.Quantity) AS Total
+                        FROM Production.ProductInventory i
+                        INNER JOIN Production.Product p
+                        ON i.ProductID = p.ProductID
+                        WHERE i.Shelf IN ('A','B')
+                        AND p.Name LIKE 'Metal%'
+                        GROUP BY ROLLUP(i.Shelf, p.Name);
+                    </code>
+                </pre>
+            </div>
+            <div class="AnswerCode">
+                <div class="pytanie">
+                    <h3></h3>
+                </div>
+                <div class="odpowiedz">
+                    
+                </div>
+            </div>
+        </div>
+
+    </section>
+
+    <section class="slide prism over bhgry">
+        <div class="grid-container">
+            <div class="HeaderTitle"> 
+                <h2 class="headerCODE">5-8 Tworzenie raportu z kombinacją każdej kolumny w GroupBy</h2>
+            </div>
+            <div class="PlaceCodeHere">
+                <pre style="font-size: 27px;overflow: hidden;  " class="language-sql">
+                    <code style="line-height: 37px !important;">
+
+                        SELECT 
+                        TestName,StudentId,
+                        SUM(Grade)
+                        FROM (VALUES (1,'A',1, 100,88),
+                        (1,'B',1, 99,NULL),
+                        (1,'C',1, 99,NULL),
+                        (2,'A',1, 77,NULL),
+                        (2,'B',1, 88,NULL),
+                        (2,'C',2, 88,NULL),
+                        (2,'D',2, 60,NULL),
+                        (2,'E',2, 80,NULL)
+                        ) dt (StudentId,TestName,YearS, Grade,FakeGrades)
+                        GROUP BY CUBE(StudentId, TestName);
+                    </code>
+                </pre>
+            </div>
+            <div class="AnswerCode">
+                <div class="pytanie">
+                    <h3></h3>
+                </div>
+                <div class="odpowiedz">
+                    
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="slide" style="background-color:black">
+        <figure>
+            <img class="cover" src="pictures/13.PNG" alt="blog">
+            <figcaption class="white">Copyright © Cezary Walenciuk</figcaption>
+        </figure>
+    </section>
+    <section class="slide prism over bhgry">
+        <div class="grid-container">
+            <div class="HeaderTitle"> 
+                <h2 class="headerCODE">5-8 Tworzenie raportu z kombinacją każdej kolumny w GroupBy</h2>
+            </div>
+            <div class="PlaceCodeHere">
+                <pre style="font-size: 31px;overflow: hidden;  " class="language-sql">
+                    <code style="line-height: 40px !important;">
+                        SELECT Shelf,
+                        LocationID,
+                        SUM(Quantity) AS Total
+                        FROM Production.ProductInventory
+                        WHERE Shelf IN ('A','B')
+                        AND LocationID IN (10, 20)
+                        GROUP BY CUBE(Shelf, LocationID);
+                    </code>
+                </pre>
+            </div>
+            <div class="AnswerCode">
+                <div class="pytanie">
+                    <h3></h3>
+                </div>
+                <div class="odpowiedz">
+                    
+                </div>
+            </div>
+        </div>
+
+    </section>
+    <section class="slide" style="background-color:black">
+        <figure>
+            <img class="cover" src="pictures/group-10.PNG" alt="blog">
+            <figcaption class="white">Copyright © Cezary Walenciuk</figcaption>
+        </figure>
+    </section>
+    <section class="slide creamB">
+        <span class="shout colors"><span>GROUP BY CUBE nie spełnia standardu ISO więc może on zostać usunięty z SQL Servera
+        </span></span>
+    </section>
+    <section class="slide prism over bhgry">
+        <div class="grid-container">
+            <div class="HeaderTitle"> 
+                <h2 class="headerCODE">5-9 Tworzenie raportów według swoich pomysłów</h2>
+            </div>
+            <div class="PlaceCodeHere">
+                <pre style="font-size: 29px;overflow: hidden;  " class="language-sql">
+                    <code style="line-height:29px !important;">
+                        SELECT i.Shelf,
+                        i.LocationID,
+                        p.Name,
+                        SUM(i.Quantity) AS Total
+                        FROM Production.ProductInventory i
+                        INNER JOIN Production.Product p
+                        ON i.ProductID = p.ProductID
+                        WHERE Shelf IN ('A', 'C')
+                        AND Name IN ('Chain', 'Decal', 'Head Tube')
+                        GROUP BY 
+                        GROUPING SETS((i.Shelf), (i.Shelf, p.Name), 
+                        (i.LocationID, p.Name));
+                    </code>
+                </pre>
+            </div>
+            <div class="AnswerCode">
+                <div class="pytanie">
+                    <h3></h3>
+                </div>
+                <div class="odpowiedz">
+                    
+                </div>
+            </div>
+        </div>
+
+    </section>
+    <section class="slide" style="background-color:black">
+        <figure>
+            <img class="cover" src="pictures/group-09.PNG" alt="blog">
+            <figcaption class="white">Copyright © Cezary Walenciuk</figcaption>
+        </figure>
+    </section>
+    <section class="slide prism over bhgry">
+        <div class="grid-container">
+            <div class="HeaderTitle"> 
+                <h2 class="headerCODE">5-10 Identyfikowanie wierszy generowanych przez argumenty GROUP BY</h2>
+            </div>
+            <div class="PlaceCodeHere">
+                <pre style="font-size: 22px;overflow: hidden;  " class="language-sql">
+                    <code style="line-height: 22px !important;">
+                        SELECT CASE WHEN GROUPING(ReorderPoint) = 1 THEN '--GROUP--'
+                        ELSE CONVERT(VARCHAR(15), ReorderPoint)
+                        END AS ReorderPointCalc,
+                        ReorderPoint,
+                        CASE WHEN GROUPING(Size) = 1 THEN '--GROUP--'
+                        ELSE CONVERT(VARCHAR(15), Size)
+                        END AS SizeCalc,
+                        Size,
+                        CASE WHEN GROUPING(ReorderPoint) = 0 AND GROUPING(Size) = 1 THEN 'Size Total'
+                        WHEN GROUPING(ReorderPoint) = 1 AND GROUPING(Size) = 0 THEN 'ReorderPoint
+                        Total'
+                        WHEN GROUPING(ReorderPoint) = 1 AND GROUPING(Size) = 1 THEN 'Grand Total'
+                        ELSE 'Regular Row'
+                        END AS RowType,
+                        SUM(StandardCost) AS Total
+                        FROM Production.Product
+                        WHERE ReorderPoint = 3
+                        GROUP BY CUBE(ReorderPoint, Size);
+                    </code>
+                </pre>
+            </div>
+            <div class="AnswerCode">
+                <div class="pytanie">
+                    <h3></h3>
+                </div>
+                <div class="odpowiedz">
+                    
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="slide" style="background-color:black">
+        <figure>
+            <img class="cover" src="pictures/group-11.PNG" alt="blog">
+            <figcaption class="white">Copyright © Cezary Walenciuk</figcaption>
+        </figure>
+    </section>
+    <section class="slide prism over bhgry">
+        <div class="grid-container">
+            <div class="HeaderTitle"> 
+                <h2 class="headerCODE">5-11 Identyfikowanie poziomów podsumowania</h2>
+            </div>
+            <div class="PlaceCodeHere">
+                <pre style="font-size: 22px;overflow: hidden;  " class="language-sql">
+                    <code style="line-height: 23px !important;">
+
+                        SELECT 
+                        TestName,StudentId,
+                        SUM(Grade),
+						CASE GROUPING_ID(StudentId, TestName)
+                        WHEN 1 THEN 'StudentId'
+                        WHEN 2 THEN 'TestName'
+                        WHEN 3 THEN 'StudentId/TestName'
+                        WHEN 7 THEN 'ALL'
+                        ELSE 'Regular Row'
+                        END AS GroupingType
+                        FROM (VALUES (1,'A',1, 100,88),
+                        (1,'B',1, 99,NULL),
+                        (1,'C',1, 99,NULL),
+                        (2,'A',1, 77,NULL),
+                        (2,'B',1, 88,NULL),
+                        (2,'C',2, 88,NULL),
+                        (2,'D',2, 60,NULL),
+                        (2,'E',2, 80,NULL)
+                        ) dt (StudentId,TestName,YearS, Grade,FakeGrades)
+                        GROUP BY CUBE(StudentId, TestName);
+                    </code>
+                </pre>
+            </div>
+            <div class="AnswerCode">
+                <div class="pytanie">
+                    <h3></h3>
+                </div>
+                <div class="odpowiedz">
+                    
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="slide" style="background-color:black">
+        <figure>
+            <img class="cover" src="pictures/group-12.PNG" alt="blog">
+            <figcaption class="white">Copyright © Cezary Walenciuk</figcaption>
+        </figure>
+    </section>
+    <section class="slide prism over bhgry">
+        <div class="grid-container">
+            <div class="HeaderTitle"> 
+                <h2 class="headerCODE">5-11  Identyfikowanie poziomów podsumowania</h2>
+            </div>
+            <div class="PlaceCodeHere">
+                <pre style="font-size: 21px;overflow: hidden;  " class="language-sql">
+                    <code style="line-height: 21px !important;">
+                        SELECT Shelf,
+                        LocationID,
+                        Bin,
+
+                        CASE GROUPING_ID(Shelf, LocationID, Bin)
+                        WHEN 1 THEN 'Shelf/Location Total'
+                        WHEN 2 THEN 'Shelf/Bin Total'
+                        WHEN 3 THEN 'Shelf Total'
+                        WHEN 4 THEN 'Location/Bin Total'
+                        WHEN 5 THEN 'Location Total'
+                        WHEN 6 THEN 'Bin Total'
+                        WHEN 7 THEN 'Grand Total'
+                        ELSE 'Regular Row'
+                        END AS GroupingType,
+
+                        SUM(Quantity) AS Total
+                        FROM Production.ProductInventory
+                        WHERE LocationID IN (3)
+                        AND Bin IN (1, 2)
+                        GROUP BY CUBE(Shelf, LocationID, Bin)
+                        ORDER BY Shelf,
+                        LocationID,
+                        Bin;
+                    </code>
+                </pre>
+            </div>
+            <div class="AnswerCode">
+                <div class="pytanie">
+                    <h3></h3>
+                </div>
+                <div class="odpowiedz">
+                    
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+
+
+    <section class="slide creamG">
+        <span class="shout colors"><span>Podsumowanie
+        </span></span>
+    </section>
+    <section class="slide creamG">
+        <span class="shout colors"><span>Dzięki za obecność
+        </span></span>
+    </section>
+    <!-- <div class="progress"></div> -->
+    <footer class="badge badge-top-left">
+        <a href="#" class="fullscreen">Fullscreen</a>
+    </footer>
+
+    <script src="vendors/gamepad/gamepad.js"></script>
+    <script src="vendors/shower/shower.min.js"></script>
+    <script src="vendors/shower-gamepad/shower.gamepad.js"></script>
+
+    <!-- Prism.js -->
+    <script src="vendors/prism/prism.js"></script>
+    <script src="vendors/prism/custom-prism.js"></script>
+
+</body>
+
+</html>

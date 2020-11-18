@@ -1557,7 +1557,7 @@
                             FROM Production.Product
                             WHERE Color = 'Pink')
                         BEGIN
-                                --Return the value 404 to indicate no pink products
+                                --Zwróćmy 404 jako informacje, że nie ma koloru różowego
                                 RETURN 404;
                         END;
                     </code>
@@ -2601,7 +2601,7 @@
     <section class="slide prism over bhgry">
         <div class="grid-container">
             <div class="HeaderTitle">
-                <h2 class="headerCODE">4-3 Aby JOIN-owanie po jednej stronie opcjonale</h2>
+                <h2 class="headerCODE">4-3 Aby JOIN-owanie po jednej stronie było opcjonale</h2>
             </div>
             <div class="PlaceCodeHere">
                 <pre style="font-size: 31px;overflow: hidden;  " class="language-sql">
@@ -3618,7 +3618,7 @@
     <section class="slide prism over bhgry">
         <div class="grid-container">
             <div class="HeaderTitle">
-                <h2 class="headerCODE">4-13 Znalezienie częsci wspólnej zbioru danych z drugiego</h2>
+                <h2 class="headerCODE">4-13 Znalezienie części wspólnej zbioru danych z drugiego</h2>
             </div>
             <div class="PlaceCodeHere">
                 <pre style="font-size: 31px;overflow: hidden;  " class="language-sql">
@@ -3681,7 +3681,7 @@
     <section class="slide prism over bhgry">
         <div class="grid-container">
             <div class="HeaderTitle">
-                <h2 class="headerCODE">4-13-1 Znalezienie rekordów których brakuje w innej tabelce</h2>
+                <h2 class="headerCODE">4-14 Znalezienie rekordów których brakuje w innej tabelce</h2>
             </div>
             <div class="PlaceCodeHere">
                 <pre style="font-size: 31px;overflow: hidden;  " class="language-sql">
@@ -3743,7 +3743,7 @@
     <section class="slide prism over bhgry">
         <div class="grid-container">
             <div class="HeaderTitle">
-                <h2 class="headerCODE">4-13-3 Znalezienie częsci wspólnej zbioru danych z drugiego</h2>
+                <h2 class="headerCODE">4-14 Znalezienie rekordów których brakuje w innej tabelce</h2>
             </div>
             <div class="PlaceCodeHere">
                 <pre style="font-size: 31px;overflow: hidden;  " class="language-sql">
@@ -3775,7 +3775,7 @@
     <section class="slide prism over bhgry">
         <div class="grid-container">
             <div class="HeaderTitle">
-                <h2 class="headerCODE">4-13-4 Znalezienie częsci wspólnej zbioru danych z drugiego</h2>
+                <h2 class="headerCODE">4-14 Znalezienie rekordów których brakuje w innej tabelce</h2>
             </div>
             <div class="PlaceCodeHere">
                 <pre style="font-size: 31px;overflow: hidden;  " class="language-sql">
@@ -4673,6 +4673,99 @@
         <span class="shout colors"><span>Podsumowanie
         </span></span>
     </section>
+    <section class="slide creamG">
+        <span class="shout colors"><span>Co zrobimy w przyszłości?
+        </span></span>
+    </section>
+    <section class="slide prism over bhgry">
+        <div class="grid-container">
+            <div class="HeaderTitle"> 
+                <h2 class="headerCODE">6-12 Używanie zapytań ponownie</h2>
+            </div>
+            <div class="PlaceCodeHere">
+                <pre style="font-size: 31px;overflow: hidden;  " class="language-sql">
+                    <code style="line-height: 40px !important;">
+                        WITH cte AS
+                        (
+                            SELECT SalesOrderID
+                            FROM Sales.SalesOrderDetail
+                            WHERE UnitPrice BETWEEN 1900 AND 2000
+                        )
+                        SELECT s.PurchaseOrderNumber
+                        FROM Sales.SalesOrderHeader s
+                        WHERE EXISTS (SELECT SalesOrderID
+                        FROM cte
+                        WHERE SalesOrderID = s.SalesOrderID );
+                    </code>
+                </pre>
+            </div>
+            <div class="AnswerCode">
+                <div class="pytanie">
+                    <h3></h3>
+                </div>
+                <div class="odpowiedz">
+                    
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="slide prism over bhgry">
+        <div class="grid-container">
+            <div class="HeaderTitle"> 
+                <h2 class="headerCODE">6-12-2 Używanie zapytań ponownie</h2>
+            </div>
+            <div class="PlaceCodeHere">
+                <pre style="font-size: 31px;overflow: hidden;  " class="language-sql">
+                    <code style="line-height: 40px !important;">
+                        WITH CTE(N) AS
+                        (
+                            SELECT TOP (5) object_id
+                            FROM sys.objects
+                        )
+                        SELECT N FROM CTE;
+                    </code>
+                </pre>
+            </div>
+            <div class="AnswerCode">
+                <div class="pytanie">
+                    <h3></h3>
+                </div>
+                <div class="odpowiedz">
+                    
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="slide prism over bhgry">
+        <div class="grid-container">
+            <div class="HeaderTitle"> 
+                <h2 class="headerCODE">7-6 Generowanie kolumny z liczbą wierszy </h2>
+            </div>
+            <div class="PlaceCodeHere">
+                <pre style="font-size: 25px;overflow: hidden;  " class="language-sql">
+                    <code style="line-height: 40px !important;">
+                        SELECT TOP 10
+                        AccountNumber,
+                        OrderDate,
+                        TotalDue,
+                        ROW_NUMBER() OVER (PARTITION BY AccountNumber ORDER BY OrderDate) 
+                        AS RowNumber
+                        FROM AdventureWorks2014.Sales.SalesOrderHeader
+                        ORDER BY AccountNumber;
+                    </code>
+                </pre>
+            </div>
+            <div class="AnswerCode">
+                <div class="pytanie">
+                    <h3></h3>
+                </div>
+                <div class="odpowiedz">
+                    
+                </div>
+            </div>
+        </div>
+    </section>
+
     <section class="slide creamG">
         <span class="shout colors"><span>Dzięki za obecność
         </span></span>
